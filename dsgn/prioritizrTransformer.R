@@ -203,13 +203,13 @@ if(problemFormatDatasheet$dataType == "Tabular"){
   
   # Planning unit
   sim_pu <- data.table::fread(file.path(problemTabularDatasheet$x),
-                              data.table = FALSE)[,-1]
+                              data.table = FALSE)
   # Features
   sim_features <- data.table::fread(file.path(problemTabularDatasheet$features),
-                                    data.table = FALSE)[,-1]
+                                    data.table = FALSE)
   # Planning units vs. Features
   rij <- data.table::fread(file.path(problemTabularDatasheet$rij),
-                           data.table = FALSE)[,-1]
+                           data.table = FALSE)
   
   # Features' names
   featuresDatasheet <- data.frame(Name = sim_features$name)
@@ -337,7 +337,7 @@ for(criteria in criteriaList){
     }
     if(problemFormatDatasheet$dataType == "Tabular"){
       lockedIn <- data.table::fread(file.path(lockedInDatasheet$locked_in),
-                                    data.table = FALSE)[,-1]
+                                    data.table = FALSE)
     }
     criteriaFunction <- function(x) add_locked_in_constraints(x, lockedIn)
   }
@@ -349,7 +349,7 @@ for(criteria in criteriaList){
     }
     if(problemFormatDatasheet$dataType == "Tabular"){
       lockedOut <- data.table::fread(file.path(lockedOutDatasheet$locked_out),
-                                     data.table = FALSE)[,-1]
+                                     data.table = FALSE)
     }
     criteriaFunction <- function(x) add_locked_out_constraints(x, 
                                                                lockedOut)
@@ -366,7 +366,7 @@ for(criteria in criteriaList){
     }
     if(problemFormatDatasheet$dataType == "Tabular"){
       connect_dat <- data.table::fread(file.path(contiguityDatasheet$data),
-                                       data.table = FALSE)[,-1]
+                                       data.table = FALSE)
       criteriaFunction <- function(x) add_contiguity_constraints(
         x, data = connect_dat)
     }
@@ -391,7 +391,7 @@ for(criteria in criteriaList){
       }
       if(problemFormatDatasheet$dataType == "Tabular"){
         bound_dat <- data.table::fread(file.path(boundaryDatasheet$data),
-                                       data.table = FALSE)[,-1]
+                                       data.table = FALSE)
         if(!is.na(boundaryDatasheet$edge_factor)){
           edge_factor <- boundaryDatasheet$edge_factor
           criteriaFunction <- function(x) 
@@ -416,10 +416,9 @@ for(criteria in criteriaList){
                                                            data = linearData)
     }
     if(problemFormatDatasheet$dataType == "Tabular"){
-      linearData <- read.csv(file.path(linearDatasheet$data))[,-1]
-      criteriaFunction <- function(x) add_linear_penalties(x, 
-                                                           penalty = penalty, 
-                                                           data = linearData)
+      linearData <- read.csv(file.path(linearDatasheet$data))
+      criteriaFunction <- function(x) add_linear_penalties(x, penalty = penalty, 
+                                            data = linearData[,1, drop = TRUE])
     }
   }
   
@@ -435,9 +434,9 @@ for(criteria in criteriaList){
   
   # Weights
   if(criteria == "Weights"){
-    weights_dat <- read.csv(file.path(weightsDatasheet$weights), header = F)[,]
+    weights_dat <- read.csv(file.path(weightsDatasheet$weights), header = T)
     criteriaFunction <- function(x) add_feature_weights(x, 
-                                                        weights = weights_dat)
+                                        weights = weights_dat[,1, drop = TRUE])
   }
   
   # Update
@@ -608,11 +607,30 @@ if(importanceDatasheet$eval_replacement_importance){
       eval_replacement_importance(scenarioSolution[,"solution_1", 
                                                    drop = FALSE])
     # Save results
-    replacementTabularOutput <- addRow(replacementTabularOutput,
+    replacementTabularOutput <- rbind(replacementTabularOutput,
                                        as.data.frame(replacementImportance))
     saveDatasheet(ssimObject = myScenario, 
                   data = replacementTabularOutput, 
-                  name = "prioritizr_replacementTabularOutput") 
+                  name = "prioritizr_replacementTabularOutput")
+    if(puVis){
+      # Reclass table between planning unit id & replacement
+      reclassTable <- matrix(c(solutionTabularOutput$id,
+                               replacementTabularOutput$rc),
+                             byrow = FALSE, ncol = 2)
+      # Reclassify raster
+      replacementVis <- reclassify(pu_vis, reclassTable)
+      # Save raster
+      replacementFilename <- file.path(paste0(outputDir, 
+                                              "\\replacementRaster.tif"))
+      writeRaster(replacementVis, filename = replacementFilename,
+                  format = "GTiff", overwrite = TRUE)
+      # Save file path to datasheet
+      temp_replacementSpatialOutput <- data.frame(replacement = replacementFilename)
+      replacementSpatialOutput <- rbind(replacementSpatialOutput, temp_replacementSpatialOutput)
+      saveDatasheet(ssimObject = myScenario, 
+                    data = replacementSpatialOutput, 
+                    name = "prioritizr_replacementSpatialOutput")
+    }
   }
 }
 
