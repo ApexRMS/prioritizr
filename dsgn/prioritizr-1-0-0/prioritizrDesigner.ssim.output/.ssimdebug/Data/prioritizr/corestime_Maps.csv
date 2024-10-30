@@ -1,0 +1,2 @@
+Name,IsReadOnly,Timesteps,Iteration,NumPanesX,NumPanesY,ShowScenarioName,ShowScenarioID,ShowIndicatorLabel,ShowTimestepLabel,ShowTimestepPrefix,ScenarioNameFont,MapLabelFont,ViewExtent,Criteria,LayoutName
+_Map1,No,,,3,3,Yes,Yes,Yes,Yes,Yes,,,,solutionRasterOutput_solution,

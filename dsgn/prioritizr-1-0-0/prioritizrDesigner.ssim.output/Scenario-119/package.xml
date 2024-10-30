@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package name="prioritizr" displayName="Systematic conservation planning" version="1.0.0">
+  <transformers>
+    <transformer name="prioritizrTransformer" isPrimary="True" isPipelineBased="True" transformerSpecificOutput="False" isRunnable="True" programName="RScript" programArguments="prioritizrTransformer.R" condaEnv="prioritizrEnv.yml">
+      <include>
+        <transformer name="corestime_Runtime" />
+      </include>
+      <datafeeds>
+        <datafeed name="projectFeatures" displayName="Features" dataScope="Project">
+          <datasheets>
+            <datasheet name="projectFeatures" displayName="Features" valueMember="projectFeaturesID" displayMember="Name">
+              <columns>
+                <column name="projectFeaturesID" dataType="Integer" isPrimary="True" />
+                <column name="ProjectID" dataType="Integer" />
+                <column name="Name" dataType="String" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="problemFormat" displayName="Input Format" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="problemFormat" displayName="Input Format" isSingleRow="True">
+              <columns>
+                <column name="problemFormatID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="dataType" displayName="Data type" dataType="String" validationType="List" formula1="1:Spatial|2:Tabular" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="objective" displayName="Objective" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="objective" displayName="Objective" isSingleRow="True">
+              <columns>
+                <column name="objectiveID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="addObjective" displayName="Function" dataType="Integer" validationType="List" formula1="1:Maximum cover|2:Maximum features|3:Maximum utility|4:Minimum largest shortfall|5:Minimum set|6:Minimum shortfall" />
+                <column name="budget" displayName="Budget" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="problemSpatial" displayName="Spatial Inputs" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="problemSpatial" displayName="Spatial Inputs" isSingleRow="True">
+              <columns>
+                <column name="problemSpatialID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="x" displayName="Planning units" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+                <column name="features" displayName="Features" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="targets" displayName="Target" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="targets" displayName="Target" isSingleRow="True">
+              <columns>
+                <column name="targetsID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="addTarget" displayName="Function" dataType="Integer" validationType="List" formula1="1:Absolute|2:Relative" />
+                <column name="targets" displayName="Amount" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="problemTabular" displayName="Tabular Inputs" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="problemTabular" displayName="Tabular Inputs" isSingleRow="True">
+              <columns>
+                <column name="problemTabularID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="x" displayName="Planning units" dataType="String" isExternalFile="True" />
+                <column name="features" displayName="Features" dataType="String" isExternalFile="True" />
+                <column name="rij" displayName="Planning units vs. Features" dataType="String" isExternalFile="True" />
+                <column name="cost_column" displayName="Cost column" dataType="String" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="lockedIn" displayName="Locked In" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="lockedIn" displayName="Locked In" isSingleRow="True">
+              <columns>
+                <column name="lockedInID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="add_locked_in_constraints" displayName="Add constraint" dataType="Boolean" />
+                <column name="locked_in" displayName="Data" dataType="String" isExternalFile="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="lockedOut" displayName="Locked Out" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="lockedOut" displayName="Locked Out" isSingleRow="True">
+              <columns>
+                <column name="lockedOutID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="add_locked_out_constraints" displayName="Add constraint" dataType="Boolean" />
+                <column name="locked_out" displayName="Data" dataType="String" isExternalFile="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="neighbor" displayName="Neighbor" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="neighbor" displayName="Neighbor" isSingleRow="True">
+              <columns>
+                <column name="neighborID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="add_neighbor_constraints" displayName="Add constraint" dataType="Boolean" />
+                <column name="k" displayName="Number of neighbors" dataType="Integer" validationType="WholeNumber" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="contiguity" displayName="Contiguity" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="contiguity" displayName="Contiguity" isSingleRow="True">
+              <columns>
+                <column name="contiguityID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="add_contiguity_constraints" displayName="Add constraint" dataType="Boolean" />
+                <column name="data" displayName="Data" dataType="String" isExternalFile="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="featureContiguity" displayName="Feature Contiguity" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="featureContiguity" displayName="Feature Contiguity" isSingleRow="True">
+              <columns>
+                <column name="featureContiguityID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="add_feature_contiguity_constraints" displayName="Add constraint" dataType="Boolean" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="boundaryPenalties" displayName="Boundary" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="boundaryPenalties" displayName="Boundary" isSingleRow="True">
+              <columns>
+                <column name="boundaryPenaltiesID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="add_boundary_penalties" displayName="Add penalty" dataType="Boolean" />
+                <column name="penalty" displayName="Penalty" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="edge_factor" displayName="Edge factor" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="data" displayName="Data" dataType="String" isExternalFile="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="decisionTypes" displayName="Decision Types" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="decisionTypes" displayName="Decision Types" isSingleRow="True">
+              <columns>
+                <column name="decisionTypesID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="addDecision" displayName="Function" dataType="Integer" validationType="List" formula1="1:Default|2:Binary|3:Proportion|4:Semi-continuous" defaultValue="2" />
+                <column name="upper_limit" displayName="Semi-continuous upper limit" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="solver" displayName="Solver" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="solver" displayName="Solver" isSingleRow="True">
+              <columns>
+                <column name="solverID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="solver" displayName="Function" dataType="String" validationType="List" formula1="1:Default|6:Rsymphony" defaultValue="6" />
+                <column name="gap" displayName="Gap" dataType="Double" validationType="Decimal" validationCondition="None" defaultValue="0" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="evaluatePerformance" displayName="Performance" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="evaluatePerformance" displayName="Performance" isSingleRow="True">
+              <columns>
+                <column name="evaluatePerformanceID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="eval_n_summary" displayName="Number summary" dataType="Boolean" />
+                <column name="eval_cost_summary" displayName="Cost summary" dataType="Boolean" />
+                <column name="eval_feature_representation_summary" displayName="Feature representation summary" dataType="Boolean" />
+                <column name="eval_target_coverage_summary" displayName="Target coverage summary" dataType="Boolean" />
+                <column name="eval_boundary_summary" displayName="Boundary summary" dataType="Boolean" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="linearPenalties" displayName="Linear" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="linearPenalties" displayName="Linear" isSingleRow="True">
+              <columns>
+                <column name="linearPenaltiesID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="add_linear_penalties" displayName="Add penalty" dataType="Boolean" />
+                <column name="penalty" displayName="Penalty" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="data" displayName="Data" dataType="String" isExternalFile="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="evaluateImportance" displayName="Relative Importance" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="evaluateImportance" displayName="Relative Importance" isSingleRow="True">
+              <columns>
+                <column name="evaluateImportanceID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="eval_replacement_importance" displayName="Replacement cost" dataType="Boolean" />
+                <column name="eval_ferrier_importance" displayName="Ferrier method" dataType="Boolean" />
+                <column name="eval_rare_richness_importance" displayName="Rarity weighted richness" dataType="Boolean" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="featureWeights" displayName="Feature weights" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="featureWeights" displayName="Feature weights" isSingleRow="True">
+              <columns>
+                <column name="featureWeightsID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="add_feature_weights" displayName="Add feature weights" dataType="Boolean" />
+                <column name="weights" displayName="Weights" dataType="String" isExternalFile="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="solutionRasterOutput" displayName="Solution" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="solutionRasterOutput" displayName="Solution" isSingleRow="True">
+              <columns>
+                <column name="solutionRasterOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="solution" displayName="Output file" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="replacementSpatialOutput" displayName="Replacement Importance" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="replacementSpatialOutput" displayName="Replacement Importance" isSingleRow="True">
+              <columns>
+                <column name="replacementSpatialOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="replacement" displayName="Output file" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="ferrierSpatialOutput" displayName="Ferrier Replacement" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="ferrierSpatialOutput" displayName="Ferrier Replacement" isSingleRow="True">
+              <columns>
+                <column name="ferrierSpatialOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="ferrierMethod" displayName="Output file" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="raritySpatialOutput" displayName="Rarity Weighted Richness" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="raritySpatialOutput" displayName="Rarity Weighted Richness" isSingleRow="True">
+              <columns>
+                <column name="raritySpatialOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="rarityWeightedRichness" displayName="Output file" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="solutionTabularOutput" displayName="Solution" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="solutionTabularOutput" displayName="Solution">
+              <columns>
+                <column name="solutionTabularOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" isCompositeIndex="True" />
+                <column name="id" displayName="Planning Unit ID" dataType="Integer" validationType="WholeNumber" validationCondition="None" />
+                <column name="cost" displayName="Cost" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="status" displayName="Status" dataType="Integer" validationType="WholeNumber" validationCondition="None" />
+                <column name="xloc" displayName="X Location" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="yloc" displayName="Y Location" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="solution_1" displayName="Solution" dataType="Integer" validationType="WholeNumber" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="numberOutput" displayName="Number Summary" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="numberOutput" displayName="Number Summary">
+              <columns>
+                <column name="numberOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" isCompositeIndex="True" />
+                <column name="summary" displayName="Summary" dataType="String" />
+                <column name="n" displayName="Number of Planning Units" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="costOutput" displayName="Cost Summary" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="costOutput" displayName="Cost Summary">
+              <columns>
+                <column name="costOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" isCompositeIndex="True" />
+                <column name="summary" displayName="Summary" dataType="String" />
+                <column name="cost" displayName="Cost" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="featureRepresentationOutput" displayName="Feature Representation" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="featureRepresentationOutput" displayName="Feature Representation">
+              <columns>
+                <column name="featureRepresentationOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" isCompositeIndex="True" />
+                <column name="summary" displayName="Summary" dataType="String" />
+                <column name="projectFeaturesID" displayName="Feature" dataType="Integer" validationType="Datasheet" formula1="projectFeatures" />
+                <column name="total_amount" displayName="Total Amount" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="absolute_held" displayName="Absolute Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="relative_held" displayName="Relative Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="targetCoverageOutput" displayName="Target Coverage" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="targetCoverageOutput" displayName="Target Coverage">
+              <columns>
+                <column name="targetCoverageOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" isCompositeIndex="True" />
+                <column name="projectFeaturesID" displayName="Feature" dataType="Integer" validationType="Datasheet" formula1="projectFeatures" />
+                <column name="met" displayName="Met" dataType="Boolean" />
+                <column name="total_amount" displayName="Total Amount" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="absolute_target" displayName="Absolute Target" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="absolute_held" displayName="Absolute Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="absolute_shortfall" displayName="Absolute Shortfall" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="relative_target" displayName="Relative Target" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="relative_held" displayName="Relative Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="relative_shortfall" displayName="Relative Shortfall" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="boundaryOutput" displayName="Boundary Summary" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="boundaryOutput" displayName="Boundary Summary">
+              <columns>
+                <column name="boundaryOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" isCompositeIndex="True" />
+                <column name="summary" displayName="Summary" dataType="String" />
+                <column name="boundary" displayName="Boundary" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="replacementTabularOutput" displayName="Replacement Importance" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="replacementTabularOutput" displayName="Replacement Importance">
+              <columns>
+                <column name="replacementTabularOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" isCompositeIndex="True" />
+                <column name="rc" displayName="Replacement Cost" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="ferrierTabularOutput" displayName="Ferrier Replacement" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="ferrierTabularOutput" displayName="Ferrier Replacement">
+              <columns>
+                <column name="ferrierTabularOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" isCompositeIndex="True" />
+                <column name="id" displayName="Planning Unit ID" dataType="Integer" validationType="WholeNumber" validationCondition="None" />
+                <column name="projectFeaturesID" displayName="Feature" dataType="String" />
+                <column name="scores" displayName="Ferrier Scores" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="rarityTabularOutput" displayName="Rarity Weighted Richness" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="rarityTabularOutput" displayName="Rarity Weighted Richness">
+              <columns>
+                <column name="rarityTabularOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" isCompositeIndex="True" />
+                <column name="rwr" displayName="Rarity Weighted Richness" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+      </datafeeds>
+    </transformer>
+  </transformers>
+  <layouts>
+    <layout name="coreforms_LibraryDatafeeds">
+      <item name="core_Rconfig" />
+      <item name="core_Backup" />
+      <item name="core_Options" displayName="Options" />
+    </layout>
+    <layout name="coreforms_ProjectDatafeeds">
+      <item name="projectFeatures" />
+    </layout>
+    <layout name="coreforms_ScenarioDatafeeds">
+      <group name="Data" displayName="Data">
+        <item name="problemFormat" />
+        <item name="problemSpatial" />
+        <item name="problemTabular" />
+      </group>
+      <group name="Parameters" displayName="Parameters">
+        <item name="objective" />
+        <item name="targets" />
+        <group name="Constraints" displayName="Constraints">
+          <item name="lockedIn" />
+          <item name="lockedOut" />
+          <item name="neighbor" />
+          <item name="contiguity" />
+          <item name="featureContiguity" />
+        </group>
+        <group name="Penalties" displayName="Penalties">
+          <item name="boundaryPenalties" />
+          <item name="linearPenalties" />
+        </group>
+        <item name="decisionTypes" />
+        <item name="solver" />
+        <group name="Advanced" displayName="Advanced">
+          <item name="featureWeights" />
+        </group>
+      </group>
+      <group name="Output0Options" displayName="Output Options">
+        <item name="evaluatePerformance" />
+        <item name="evaluateImportance" />
+      </group>
+      <group name="Results" displayName="Results">
+        <group name="Spatial" displayName="Spatial">
+          <item name="solutionRasterOutput" />
+          <item name="replacementSpatialOutput" />
+          <item name="ferrierSpatialOutput" />
+          <item name="raritySpatialOutput" />
+        </group>
+        <group name="Tabular" displayName="Tabular">
+          <item name="solutionTabularOutput" />
+          <item name="numberOutput" />
+          <item name="costOutput" />
+          <item name="featureRepresentationOutput" />
+          <item name="targetCoverageOutput" />
+          <item name="boundaryOutput" />
+          <item name="replacementTabularOutput" />
+          <item name="ferrierTabularOutput" />
+          <item name="rarityTabularOutput" />
+        </group>
+      </group>
+    </layout>
+    <layout name="coreforms_ResultTransformers">
+      <item name="corestime_ChartTransformer" />
+      <item name="corestime_MapTransformer" />
+    </layout>
+    <layout name="corestimeforms_Charts">
+      <group name="numberOutput" displayName="Number Summary">
+        <item name="numberOutput_n" displayName="Number of Planning Units" dataSheet="numberOutput" column="n" />
+      </group>
+      <group name="costOutput" displayName="Cost Summary">
+        <item name="costOutput_cost" displayName="Cost" dataSheet="costOutput" column="cost" />
+      </group>
+      <group name="featureRepresentationOutput" displayName="Feature Representation">
+        <item name="featureRepresentationOutput_total_amount" displayName="Total Amount" dataSheet="featureRepresentationOutput" column="total_amount" filter="projectFeaturesID" />
+        <item name="featureRepresentationOutput_absolute_held" displayName="Absolute Held" dataSheet="featureRepresentationOutput" column="absolute_held" filter="projectFeaturesID" />
+        <item name="featureRepresentationOutput_relative_held" displayName="Relative Held" dataSheet="featureRepresentationOutput" column="relative_held" filter="projectFeaturesID" />
+      </group>
+      <group name="targetCoverageOutput" displayName="Target Coverage">
+        <item name="targetCoverageOutput_total_amount" displayName="Total Amount" dataSheet="targetCoverageOutput" column="total_amount" filter="projectFeaturesID" />
+        <item name="targetCoverageOutput_absolute_target" displayName="Absolute Target" dataSheet="targetCoverageOutput" column="absolute_target" filter="projectFeaturesID" />
+        <item name="targetCoverageOutput_absolute_held" displayName="Absolute Held" dataSheet="targetCoverageOutput" column="absolute_held" filter="projectFeaturesID" />
+        <item name="targetCoverageOutput_absolute_shortfall" displayName="Absolute Shortfall" dataSheet="targetCoverageOutput" column="absolute_shortfall" filter="projectFeaturesID" />
+        <item name="targetCoverageOutput_relative_target" displayName="Relative Target" dataSheet="targetCoverageOutput" column="relative_target" filter="projectFeaturesID" />
+        <item name="targetCoverageOutput_relative_held" displayName="Relative Held" dataSheet="targetCoverageOutput" column="relative_held" filter="projectFeaturesID" />
+        <item name="targetCoverageOutput_relative_shortfall" displayName="Relative Shortfall" dataSheet="targetCoverageOutput" column="relative_shortfall" filter="projectFeaturesID" />
+      </group>
+      <group name="boundaryOutput" displayName="Boundary Summary">
+        <item name="boundaryOutput_boundary" displayName="Boundary" dataSheet="boundaryOutput" column="boundary" />
+      </group>
+    </layout>
+    <layout name="corestimeforms_Maps">
+      <group name="solutionRasterOutput" displayName="Solution">
+        <item name="solutionRasterOutput_solution" displayName="Output file" dataSheet="solutionRasterOutput" column="solution" />
+      </group>
+      <group name="replacementSpatialOutput" displayName="Replacement Importance">
+        <item name="replacementSpatialOutput_replacement" displayName="Output file" dataSheet="replacementSpatialOutput" column="replacement" />
+      </group>
+      <group name="ferrierSpatialOutput" displayName="Ferrier Replacement">
+        <item name="ferrierSpatialOutput_ferrierMethod" displayName="Output file" dataSheet="ferrierSpatialOutput" column="ferrierMethod" />
+      </group>
+      <group name="raritySpatialOutput" displayName="Rarity Weighted Richness">
+        <item name="raritySpatialOutput_rarityWeightedRichness" displayName="Output file" dataSheet="raritySpatialOutput" column="rarityWeightedRichness" />
+      </group>
+    </layout>
+  </layouts>
+  <views />
+</package>

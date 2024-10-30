@@ -1,0 +1,5 @@
+# Syncrosim Generated Solution Color Map (QGIS-compatible),,,,,
+INTERPOLATION:DISCRETE
+0.0000,220,220,220,255,Not selected
+1.0000,0,128,0,255,Solution
+-9999.0000,255,255,255,255,NA

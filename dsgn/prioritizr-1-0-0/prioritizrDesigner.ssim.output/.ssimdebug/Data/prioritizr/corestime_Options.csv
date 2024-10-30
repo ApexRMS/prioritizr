@@ -1,0 +1,2 @@
+GeoTiffCompressionType,MultibandGroupingInternal,MultibandGroupingExternal,MultibandUseGdalTranslate,MultibandNumThreads
+Deflate,Single band,Single band,No,

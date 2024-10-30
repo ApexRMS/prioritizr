@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package name="prioritizr" displayName="Systematic conservation planning" version="1.0.0">
+  <transformers>
+    <transformer name="prioritizrTransformer" isPrimary="True" isPipelineBased="True" transformerSpecificOutput="False" isRunnable="True" programName="RScript" programArguments="prioritizrTransformer.R" condaEnv="rsyncrosim.yml">
+      <include>
+        <transformer name="corestime_Runtime" />
+      </include>
+      <datafeeds>
+        <datafeed name="problem" displayName="Problem" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="problem" displayName="Problem" isSingleRow="True">
+              <columns>
+                <column name="problemID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="x" displayName="Planning units" dataType="String" isExternalFile="True" />
+                <column name="features" displayName="Features" dataType="String" isExternalFile="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="features" displayName="Features" dataScope="Project">
+          <datasheets>
+            <datasheet name="features" displayName="Features" valueMember="featuresID" displayMember="Name">
+              <columns>
+                <column name="featuresID" dataType="Integer" isPrimary="True" />
+                <column name="ProjectID" dataType="Integer" />
+                <column name="Name" dataType="String" />
+                <column name="features" displayName="Features" dataType="String" isColor="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="objective" displayName="Add an objective" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="objective" displayName="Add an objective" isSingleRow="True">
+              <columns>
+                <column name="objectiveID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="addObjective" displayName="Objective" dataType="Integer" validationType="List" formula1="1:Minimum set objective" />
+                <column name="budget" displayName="Budget" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="tree" displayName="Tree" dataType="String" isExternalFile="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="targets" displayName="Add targets" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="targets" displayName="Add targets" isSingleRow="True">
+              <columns>
+                <column name="targetsID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="addTarget" displayName="Target" dataType="Integer" validationType="List" formula1="1:Absolute|2:Relative" />
+                <column name="targets" displayName="Target amount" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="lockedIn" displayName="Locked in constraints" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="lockedIn" displayName="Locked in constraints" isSingleRow="True">
+              <columns>
+                <column name="lockedInID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="locked_in" displayName="Amount" dataType="Integer" validationType="WholeNumber" validationCondition="None" />
+                <column name="locked_in_raster" displayName="Raster" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="contiguity" displayName="Contiguity constraints" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="contiguity" displayName="Contiguity constraints" isSingleRow="True">
+              <columns>
+                <column name="contiguityID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="add_contiguity_constraints" displayName="Contiguity constraints" dataType="Boolean" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="boundaryPenalties" displayName="Boundary penalties" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="boundaryPenalties" displayName="Boundary penalties" isSingleRow="True">
+              <columns>
+                <column name="boundaryPenaltiesID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="penalty" displayName="Penalty" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="edge_factor" displayName="Edge factor" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="decisionTypes" displayName="Add the decision types" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="decisionTypes" displayName="Add the decision types" isSingleRow="True">
+              <columns>
+                <column name="decisionTypesID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="addDecision" displayName="Decision type" dataType="Integer" validationType="List" formula1="1:Default|2:Binary|3:Proportion|4:Semi-continuous" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="solver" displayName="Add a solver" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="solver" displayName="Add a solver" isSingleRow="True">
+              <columns>
+                <column name="solverID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="gap" displayName="Gap" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="evaluatePerformance" displayName="Evaluating performance" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="evaluatePerformance" displayName="Evaluating performance" isSingleRow="True">
+              <columns>
+                <column name="evaluatePerformanceID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="eval_cost_summary" displayName="Cost summary" dataType="Boolean" />
+                <column name="eval_target_coverage_summary" displayName="Target coverage summary" dataType="Boolean" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="evaluateImportance" displayName="Evaluating relative performance" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="evaluateImportance" displayName="Evaluating relative performance" isSingleRow="True">
+              <columns>
+                <column name="evaluateImportanceID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="eval_replacement_importance" displayName="Replacement cost" dataType="Boolean" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="solutionOutput" displayName="Solution" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="solutionOutput" displayName="Solution" isSingleRow="True">
+              <columns>
+                <column name="solutionOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="solution" displayName="Solution" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="replacementOutput" displayName="Evaluate replacement importance" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="replacementOutput" displayName="Evaluate replacement importance" isSingleRow="True">
+              <columns>
+                <column name="replacementOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" />
+                <column name="replacement" displayName="Replacement Importance" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="costOutput" displayName="Evaluate cost summary" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="costOutput" displayName="Evaluate cost summary">
+              <columns>
+                <column name="costOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" isCompositeIndex="True" />
+                <column name="summary" displayName="Summary" dataType="String" />
+                <column name="cost" displayName="Cost" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+        <datafeed name="targetCoverageOutput" displayName="Evaluate target coverage" dataScope="Scenario">
+          <datasheets>
+            <datasheet name="targetCoverageOutput" displayName="Evaluate target coverage">
+              <columns>
+                <column name="targetCoverageOutputID" dataType="Integer" isPrimary="True" />
+                <column name="ScenarioID" dataType="Integer" isCompositeIndex="True" />
+                <column name="feature" displayName="Feature" dataType="String" />
+                <column name="met" displayName="Met" dataType="Boolean" />
+                <column name="total_amount" displayName="Total amount" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="absolute_target" displayName="Absolute target" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="absolute_held" displayName="Absolute held" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="absolute_shortfall" displayName="Absolute shortfall" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="relative_target" displayName="Relative target" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="relative_held" displayName="Relative held" dataType="Double" validationType="Decimal" validationCondition="None" />
+                <column name="relative_shortfall" displayName="Relative shortfall" dataType="Double" validationType="Decimal" validationCondition="None" />
+              </columns>
+            </datasheet>
+          </datasheets>
+        </datafeed>
+      </datafeeds>
+    </transformer>
+  </transformers>
+  <layouts>
+    <layout name="coreforms_LibraryDatafeeds">
+      <item name="core_Rconfig" />
+      <item name="core_Backup" />
+      <item name="core_Options" displayName="Options" />
+    </layout>
+    <layout name="coreforms_ProjectDatafeeds">
+      <item name="features" />
+    </layout>
+    <layout name="coreforms_ScenarioDatafeeds">
+      <item name="problem" />
+      <item name="objective" />
+      <item name="targets" />
+      <group name="Add0constraints" displayName="Add constraints">
+        <item name="lockedIn" />
+        <item name="contiguity" />
+      </group>
+      <group name="Add0penalties" displayName="Add penalties">
+        <item name="boundaryPenalties" />
+      </group>
+      <item name="decisionTypes" />
+      <item name="solver" />
+      <group name="Evaluate0the0solution" displayName="Evaluate the solution">
+        <item name="evaluatePerformance" />
+        <item name="evaluateImportance" />
+      </group>
+      <group name="Results" displayName="Results">
+        <group name="Spatial" displayName="Spatial">
+          <item name="solutionOutput" />
+          <item name="replacementOutput" />
+        </group>
+        <group name="Tabular" displayName="Tabular">
+          <item name="costOutput" />
+          <item name="targetCoverageOutput" />
+        </group>
+      </group>
+    </layout>
+    <layout name="coreforms_ResultTransformers">
+      <item name="corestime_ChartTransformer" />
+      <item name="corestime_MapTransformer" />
+    </layout>
+    <layout name="corestimeforms_Charts">
+      <group name="costOutput" displayName="Evaluate cost summary">
+        <item name="costOutput_cost" displayName="Cost" dataSheet="costOutput" column="cost" />
+      </group>
+      <group name="targetCoverageOutput" displayName="Evaluate target coverage">
+        <item name="targetCoverageOutput_total_amount" displayName="Total amount" dataSheet="targetCoverageOutput" column="total_amount" />
+        <item name="targetCoverageOutput_absolute_target" displayName="Absolute target" dataSheet="targetCoverageOutput" column="absolute_target" />
+        <item name="targetCoverageOutput_absolute_held" displayName="Absolute held" dataSheet="targetCoverageOutput" column="absolute_held" />
+        <item name="targetCoverageOutput_absolute_shortfall" displayName="Absolute shortfall" dataSheet="targetCoverageOutput" column="absolute_shortfall" />
+        <item name="targetCoverageOutput_relative_target" displayName="Relative target" dataSheet="targetCoverageOutput" column="relative_target" />
+        <item name="targetCoverageOutput_relative_held" displayName="Relative held" dataSheet="targetCoverageOutput" column="relative_held" />
+        <item name="targetCoverageOutput_relative_shortfall" displayName="Relative shortfall" dataSheet="targetCoverageOutput" column="relative_shortfall" />
+      </group>
+    </layout>
+    <layout name="corestimeforms_Maps">
+      <group name="solutionOutput" displayName="Solution">
+        <item name="solutionOutput_solution" displayName="Solution" dataSheet="solutionOutput" column="solution" />
+      </group>
+      <group name="replacementOutput" displayName="Evaluate replacement importance">
+        <item name="replacementOutput_replacement" displayName="Replacement Importance" dataSheet="replacementOutput" column="replacement" />
+      </group>
+    </layout>
+  </layouts>
+  <views />
+</package>
