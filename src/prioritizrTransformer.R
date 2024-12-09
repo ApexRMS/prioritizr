@@ -33,7 +33,7 @@ if(isTRUE(condaDatasheet$UseConda)){
   syncrosimPath <- str_remove(packagePath, fixed("\\Packages")) %>%
     str_remove(fixed("\\prioritizr"))
   rLibraryPath <- file.path(syncrosimPath, "Conda", "envs", "prioritizr", 
-                            "prioritizrEnv", "lib", "R", "library")
+                            "prioritizrEnv-v2", "lib", "R", "library")
   
   # Check which packages to install
   packagesToCheck <- c("prioritizr", "symphony", "Rsymphony")

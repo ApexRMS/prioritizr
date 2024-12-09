@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<update comment="Update to prioritizr 2.1 to include the linear constraint, ">
+
+    <!-- Create new datasheets -->
+    <action code="Exec" condition="TableNotExists" criteria="prioritizr_linear">
+	<item>CREATE TABLE prioritizr_linear(addLinearConstraints BOOLEAN, threshold DOUBLE, sense INTEGER, data STRING)</item>
+    </action>
+
+</update>
