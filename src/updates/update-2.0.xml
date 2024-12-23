@@ -105,4 +105,8 @@
     <action code="RenameMapVariable" oldVariableName="raritySpatialOutput_rarityWeightedRichness" newVariableName="raritySpatialOutputRarityWeightedRichness">
     </action>
 
+    <!-- Remove column from datasheet -->
+    <action code="DropColumn" tableName="prioritizr_featureRepresentationOutput" dropColumnName="summary">
+	</action>
+
 </update>
