@@ -106,7 +106,8 @@
     </action>
 
     <!-- Remove column from datasheet -->
-    <action code="DropColumn" tableName="prioritizr_featureRepresentationOutput" dropColumnName="summary">
-	</action>
+    <action code="Exec" condition="TableExists" criteria="prioritizr_featureRepresentationOutput">
+        <item> ALTER TABLE prioritizr_costLayerInput DROP COLUMN summary </item>
+    </action>
 
 </update>
