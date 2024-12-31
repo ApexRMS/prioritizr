@@ -1,4 +1,4 @@
-## prioritizr SyncroSim - Simple prioritization transformer
+## prioritizr SyncroSim - Base prioritization transformer
 ##
 ## Written by Carina Rauen Firkowski
 ##

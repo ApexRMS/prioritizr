@@ -1,10 +1,10 @@
-## prioritizr SyncroSim
+## prioritizr SyncroSim - Multi-cost prioritization transformer
 ##
 ## Written by Carina Rauen Firkowski, with support from Jeffrey Hanson
 ##
 ## This script integrates multiple cost layers into the prioritization problem
 ## based on one of two methods: hierarchical or equal approach. It requires a 
-## dependency on a scenario with custom prioritization.
+## dependency on a scenario with base prioritization.
 
 
 
@@ -40,6 +40,8 @@ progressBar(type = "message", message = "Loading data and setting up scenario")
 
 costLayersDatasheet <- datasheet(myScenario, 
                                  name = "prioritizr_costLayersInput")
+costDataDatasheet <- datasheet(myScenario, 
+                                 name = "prioritizr_costLayersData")
 objectiveDatasheet <- datasheet(myScenario, 
                                 name = "prioritizr_objective")
 problemFormatDatasheet <- datasheet(myScenario,
@@ -57,6 +59,8 @@ problemFormulation <- datasheet(myScenario,
                                 name = "prioritizr_problemFormulation")
 solutionObject <- datasheet(myScenario,
                             name = "prioritizr_solutionObject")
+performanceDatasheet <- datasheet(myScenario,
+                                  name = "prioritizr_evaluatePerformance")
 
 
 
@@ -64,13 +68,35 @@ solutionObject <- datasheet(myScenario,
 
 names(problemTabularDatasheet)[4] <- "cost_column"
 names(solutionTabularOutput)[6] <- "solution_1"
+names(performanceDatasheet) <- c("eval_n_summary", "eval_cost_summary",
+                                 "eval_feature_representation_summary",
+                                 "eval_target_coverage_summary",
+                                 "eval_boundary_summary")
+
+
+
+
+# Validation -------------------------------------------------------------------
+
+# If datasheet is not empty, set NA values to FALSE 
+# If datasheet is empty, set all columns to FALSE
+if(dim(performanceDatasheet)[1] != 0){
+  performanceDatasheet[,is.na(performanceDatasheet)] <- FALSE
+} else {
+  performanceDatasheet <- data.frame(
+    eval_n_summary = FALSE,
+    eval_cost_summary = FALSE,
+    eval_feature_representation_summary = FALSE,
+    eval_target_coverage_summary = FALSE,
+    eval_boundary_summary = FALSE)
+}
 
 
 
 # Load data --------------------------------------------------------------------
 
 # Cost layers
-costLayers <- read.csv(file.path(costLayersDatasheet$costLayers))
+costLayers <- read.csv(file.path(costDataDatasheet$costLayers))
 
 # Extract number of cost layers
 n_cost_layers <- dim(costLayers)[2]-1
@@ -92,17 +118,17 @@ if(problemFormatDatasheet$dataType == "Tabular"){
   
   # Planning unit
   sim_pu <- data.table::fread(file.path(problemTabularDatasheet$x),
-                              data.table = FALSE)
+                              data.table = FALSE)[,-1]
   
   # Features
   sim_features <- data.table::fread(file.path(problemTabularDatasheet$features),
-                                    data.table = FALSE)
+                                    data.table = FALSE)[,-1]
   # Set features' names
   featuresDatasheet <- data.frame(Name = sim_features$name)
   
   # Planning units vs. Features
   rij <- data.table::fread(file.path(problemTabularDatasheet$rij),
-                           data.table = FALSE)
+                           data.table = FALSE)[,-1]
   
   # Spatial data for visualization
   if(dim(problemSpatialDatasheet)[1] != 0){
@@ -118,7 +144,7 @@ if(problemFormatDatasheet$dataType == "Tabular"){
 }
 
 # Merge planning unit data with cost layers
-sim_pu <- cbind(sim_pu, costLayers[,-1])
+sim_pu <- merge(sim_pu, costLayers, "id")
 
 
 
@@ -137,7 +163,7 @@ if(costLayersDatasheet$method == "Hierarchical"){
   costs <- numeric(n_cost_layers)
 
   # For each cost layer
-  for (i in seq_len(n_cost_layers)) {
+  for(i in seq_len(n_cost_layers)) {
     
     # Problem formulation
     curr_p <-
@@ -145,8 +171,8 @@ if(costLayersDatasheet$method == "Hierarchical"){
               rij = rij, cost_column = costsDatasheet$Name[i]) %>%
       add_min_set_objective() %>%                         
       add_absolute_targets(obj_val) %>% 
-      add_linear_constraints(threshold = objectiveDatasheet$budget,
-                            sense = "=", data = sim_pu$cost) %>%
+      add_linear_constraints(threshold = objectiveDatasheet$budget, sense = "=", 
+                             data = problemTabularDatasheet$cost_column) %>%
       add_binary_decisions() %>%
       add_default_solver()
     
@@ -161,7 +187,7 @@ if(costLayersDatasheet$method == "Hierarchical"){
             threshold = costs[[j]] + (costs[[j]] * 
                                         costLayersDatasheet$costOptimalityGap),
             sense = "<=",
-            data = paste0("cost_", j)
+            data = costsDatasheet$Name[j]
           )
       }
     }
@@ -228,9 +254,9 @@ if(costLayersDatasheet$method == "Hierarchical"){
     if(isTRUE(puVis)){
       
       # Reclass table between planning unit id & solution
-      reclassTable <- matrix(c(1:17,
+      reclassTable <- matrix(c(1:length(scenarioSolution$solution_1),
                               scenarioSolution$solution_1),
-                            byrow = FALSE, ncol = 2)
+                             byrow = FALSE, ncol = 2)
       # Reclassify raster
       solutionVis <- classify(pu_vis, reclassTable)
       
@@ -276,11 +302,11 @@ if(costLayersDatasheet$method == "Hierarchical"){
   rij_costs <- data.frame(pu = as.numeric(), 
                           species = as.numeric(), 
                           amount = as.numeric())
-  for(i in 1:3){
+  for(i in 1:n_cost_layers){
     speciesID <- costs_features$id[i]
     rij_temp <- data.frame(pu = sim_pu$id,
-                          species = speciesID,
-                          amount = sim_pu[,i+2])
+                           species = speciesID,
+                           amount = sim_pu[,i+2])
     rij_costs <- rbind(rij_costs, rij_temp)
   }
   
@@ -296,12 +322,13 @@ if(costLayersDatasheet$method == "Hierarchical"){
     p_cost, scenarioSolution[,"solution_1", drop = FALSE])
 
   # Save results
-  names(featureRepresentation)[1:2] <- c("projectSolutionsId", "projectCostsId")
+  names(featureRepresentation)[2] <- "projectCostsId"
   costsRepresentationOutput <- as.data.frame(featureRepresentation)
   names(costsRepresentationOutput)[3:5] <- c("totalAmount", "absoluteHeld",
                                               "relativeHeld") 
-  costsRepresentationOutput$projectSolutionsId <- "Scenario solution"
-
+  saveDatasheet(ssimObject = myScenario, 
+                data = costsRepresentationOutput[,-1], 
+                name = "prioritizr_baseCostRepresentationOutput")
 
   # Solution file name
   solutionFilename <- solutionObject$solution
@@ -314,29 +341,27 @@ if(costLayersDatasheet$method == "Hierarchical"){
     p_cost, initialSolution[,"solution_1", drop = FALSE])
 
   # Save results
-  names(featureRepresentation)[1:2] <- c("projectSolutionsId", "projectCostsId")
+  names(featureRepresentation)[2] <- "projectCostsId"
   costsRepresentationOutput2 <- as.data.frame(featureRepresentation)
   names(costsRepresentationOutput2)[3:5] <- c("totalAmount", "absoluteHeld",
                                             "relativeHeld") 
-  costsRepresentationOutput2$projectSolutionsId <- "Initial solution"
-
-  # Combine
-  costsRepresentationOutput <- rbind(costsRepresentationOutput, 
-                                    costsRepresentationOutput2)
-
-  # Solutions names
-  solutionsDatasheet <- data.frame(Name = c("Scenario solution", 
-                                            "Initial solution"))
-
-  # Save features to project scope
-  saveDatasheet(ssimObject = myProject, 
-                data = solutionsDatasheet, 
-                name = "prioritizr_projectSolutions")
-
   saveDatasheet(ssimObject = myScenario, 
-                data = costsRepresentationOutput, 
-                name = "prioritizr_costRepresentationOutput")
-
+                data = costsRepresentationOutput2[,-1], 
+                name = "prioritizr_optimizedCostRepresentationOutput")
+  
+  # Calculate solution number
+  if(isTRUE(performanceDatasheet$eval_n_summary)){
+    
+    if(class(scenarioSolution) != "data.frame"){
+      n <- eval_n_summary(curr_p, scenarioSolution) }
+    if(class(scenarioSolution) == "data.frame"){
+      n <- eval_n_summary(curr_p, scenarioSolution[,"solution_1", drop = FALSE]) }
+    # Save results
+    numberOutput <- as.data.frame(n)
+    saveDatasheet(ssimObject = myScenario, 
+                  data = numberOutput, 
+                  name = "prioritizr_numberOutput")
+  }
 
 }
 
@@ -359,10 +384,10 @@ if(costLayersDatasheet$method == "Equal"){
       problem(x = sim_pu, features = sim_features,
               rij = rij, cost_column = costsDatasheet$Name[i]) %>%
       add_min_set_objective() %>%
-      add_absolute_targets(featureRepresentationOutput$absoluteHeld*0.55) %>%
+      add_absolute_targets(featureRepresentationOutput$absoluteHeld*0.85) %>%
       add_linear_constraints(
         threshold = objectiveDatasheet$budget,
-        sense = "<=",
+        sense = "=",
         data = problemTabularDatasheet$cost_column
       ) %>%
       add_binary_decisions() %>%
@@ -378,7 +403,8 @@ if(costLayersDatasheet$method == "Equal"){
 
   # Calculate new targets
   t1 <- featureRepresentationOutput
-  t1$new_target <- t1$absoluteHeld * (1 - objectiveDatasheet$budget)
+  t1$new_target <- t1$absoluteHeld * 
+    (1 - costLayersDatasheet$initialOptimalityGap)
 
   # Generate budget increments
   budget_increments <- lapply(
@@ -398,7 +424,7 @@ if(costLayersDatasheet$method == "Equal"){
       add_absolute_targets(t1$new_target) %>%
       add_linear_constraints(
         threshold = objectiveDatasheet$budget,
-        sense = "<=",
+        sense = "=",
         data = problemTabularDatasheet$cost_column
       ) %>%
       add_binary_decisions() %>%
@@ -421,11 +447,11 @@ if(costLayersDatasheet$method == "Equal"){
     # If scenarioSolution is a feasible solution, then end loop
     if (!inherits(scenarioSolution, "try-error")) break() 
   }
-  if (inherits(scenarioSolution)) {
-    stop(
-      "Could not find feasible multi-objective solution. Try increasing the parameter `Budget padding`."
-    )
-  }
+  # if (inherits(scenarioSolution)) {
+  #   stop(
+  #     "Could not find feasible multi-objective solution. Try increasing the parameter `Budget padding`."
+  #   )
+  # }
   
   # Save raster
   if(class(scenarioSolution) != "data.frame"){
@@ -479,7 +505,7 @@ if(costLayersDatasheet$method == "Equal"){
     if(isTRUE(puVis)){
       
       # Reclass table between planning unit id & solution
-      reclassTable <- matrix(c(1:17,
+      reclassTable <- matrix(c(1:length(scenarioSolution$solution_1),
                                scenarioSolution$solution_1),
                              byrow = FALSE, ncol = 2)
       # Reclassify raster
@@ -528,7 +554,7 @@ if(costLayersDatasheet$method == "Equal"){
   rij_costs <- data.frame(pu = as.numeric(), 
                           species = as.numeric(), 
                           amount = as.numeric())
-  for(i in 1:3){
+  for(i in 1:n_cost_layers){
     speciesID <- costs_features$id[i]
     rij_temp <- data.frame(pu = sim_pu$id,
                           species = speciesID,
@@ -588,7 +614,20 @@ if(costLayersDatasheet$method == "Equal"){
   saveDatasheet(ssimObject = myScenario, 
                 data = costsRepresentationOutput, 
                 name = "prioritizr_costRepresentationOutput")
+  
+  # Calculate solution number
+  if(isTRUE(performanceDatasheet$eval_n_summary)){
+    
+    if(class(scenarioSolution) != "data.frame"){
+      n <- eval_n_summary(p1, scenarioSolution) }
+    if(class(scenarioSolution) == "data.frame"){
+      n <- eval_n_summary(p1, scenarioSolution[,"solution_1", drop = FALSE]) }
+    # Save results
+    numberOutput <- as.data.frame(n)
+    saveDatasheet(ssimObject = myScenario, 
+                  data = numberOutput, 
+                  name = "prioritizr_numberOutput")
+  }
 
 }
-
 
