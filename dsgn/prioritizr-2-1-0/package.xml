@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<package name="prioritizr" displayName="Prioritizr" description="Systematic conservation planning" version="2.1.0">
+  
+  <dataSheet name="projectFeatures" displayName="Features" displayMember="Name" dataScope="Project">
+    <column name="Name" dataType="String" />
+  </dataSheet>
+
+  <dataSheet name="projectCosts" displayName="Cost variables" displayMember="Name" dataScope="Project">
+    <column name="Name" dataType="String" />
+  </dataSheet>
+
+  <dataSheet name="problemFormat" displayName="Input Format" isSingleRow="True">
+    <column name="dataType" displayName="Data type" dataType="String" validationType="List" formula1="1:Spatial|2:Tabular" />
+  </dataSheet>
+
+  <dataSheet name="objective" displayName="Objective" isSingleRow="True">
+    <column name="addObjective" displayName="Function" dataType="Integer" validationType="List" formula1="1:Maximum cover|2:Maximum features|3:Maximum utility|4:Minimum largest shortfall|5:Minimum set|6:Minimum shortfall" />
+    <column name="budget" displayName="Budget" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="problemSpatial" displayName="Spatial Inputs" isSingleRow="True">
+    <column name="x" displayName="Planning units" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+    <column name="features" displayName="Features" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+  </dataSheet>
+
+  <dataSheet name="targets" displayName="Target" isSingleRow="True">
+    <column name="addTarget" displayName="Function" dataType="Integer" validationType="List" formula1="1:Absolute|2:Relative" />
+    <column name="targets" displayName="Amount" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="problemTabular" displayName="Tabular Inputs" isSingleRow="True">
+    <column name="x" displayName="Planning units" dataType="String" isExternalFile="True" />
+    <column name="features" displayName="Features" dataType="String" isExternalFile="True" />
+    <column name="rij" displayName="Planning units vs. Features" dataType="String" isExternalFile="True" />
+    <column name="costColumn" displayName="Cost column" dataType="String" />
+  </dataSheet>
+
+  <dataSheet name="contiguity" displayName="Contiguity" isSingleRow="True">
+    <column name="addContiguityConstraints" displayName="Add constraint" dataType="Boolean" />
+    <column name="data" displayName="Data" dataType="String" isExternalFile="True" />
+  </dataSheet>
+  
+  <dataSheet name="featureContiguity" displayName="Feature Contiguity" isSingleRow="True">
+    <column name="addFeatureContiguityConstraints" displayName="Add constraint" dataType="Boolean" />
+  </dataSheet>
+
+  <dataSheet name="linear" displayName="Linear" isSingleRow="False">
+    <column name="addLinearConstraints" displayName="Add constraint" dataType="Boolean" />
+    <column name="threshold" displayName="Threshold" dataType="Double" />
+    <column name="sense" displayName="Sense" dataType="Integer" validationType="List" formula1="1:Larger or equal|2:Smaller or equal|3:Equal"/>
+    <column name="data" displayName="Data" dataType="String" isExternalFile="True" />
+  </dataSheet>
+
+  <dataSheet name="lockedIn" displayName="Locked In" isSingleRow="True">
+    <column name="addLockedInConstraints" displayName="Add constraint" dataType="Boolean" />
+    <column name="lockedIn" displayName="Data" dataType="String" isExternalFile="True" />
+  </dataSheet>
+
+  <dataSheet name="lockedOut" displayName="Locked Out" isSingleRow="True">
+    <column name="addLockedOutConstraints" displayName="Add constraint" dataType="Boolean" />
+    <column name="lockedOut" displayName="Data" dataType="String" isExternalFile="True" />
+  </dataSheet>
+
+  <dataSheet name="neighbor" displayName="Neighbor" isSingleRow="True">
+    <column name="addNeighborConstraints" displayName="Add constraint" dataType="Boolean" />
+    <column name="k" displayName="Number of neighbors" dataType="Integer" validationType="WholeNumber" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="boundaryPenalties" displayName="Boundary" isSingleRow="True">
+    <column name="addBoundaryPenalties" displayName="Add penalty" dataType="Boolean" />
+    <column name="penalty" displayName="Penalty" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="edgeFactor" displayName="Edge factor" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="data" displayName="Data" dataType="String" isExternalFile="True" />
+  </dataSheet>
+
+  <dataSheet name="decisionTypes" displayName="Decision Types" isSingleRow="True">
+    <column name="addDecision" displayName="Function" dataType="Integer" validationType="List" formula1="1:Default|2:Binary|3:Proportion|4:Semi-continuous" defaultValue="2" />
+    <column name="upperLimit" displayName="Semi-continuous upper limit" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="solver" displayName="Solver" isSingleRow="True">
+    <column name="solver" displayName="Function" dataType="String" validationType="List" formula1="1:Default|6:Rsymphony" defaultValue="6" />
+    <column name="gap" displayName="Gap" dataType="Double" validationType="Decimal" validationCondition="None" defaultValue="0" />
+  </dataSheet>
+
+  <dataSheet name="evaluatePerformance" displayName="Performance" isSingleRow="True">
+    <column name="evalNsummary" displayName="Number summary" dataType="Boolean" />
+    <column name="evalCostSummary" displayName="Cost summary" dataType="Boolean" />
+    <column name="evalFeatureRepresentationSummary" displayName="Feature representation summary" dataType="Boolean" />
+    <column name="evalTargetCoverageSummary" displayName="Target coverage summary" dataType="Boolean" />
+    <column name="evalBoundarySummary" displayName="Boundary summary" dataType="Boolean" />
+  </dataSheet>
+
+  <dataSheet name="linearPenalties" displayName="Linear" isSingleRow="True">
+    <column name="addLinearPenalties" displayName="Add penalty" dataType="Boolean" />
+    <column name="penalty" displayName="Penalty" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="data" displayName="Data" dataType="String" isExternalFile="True" />
+  </dataSheet>
+
+  <dataSheet name="evaluateImportance" displayName="Importance" isSingleRow="True">
+    <column name="evalReplacementImportance" displayName="Replacement cost" dataType="Boolean" />
+    <column name="evalFerrierImportance" displayName="Ferrier method" dataType="Boolean" />
+    <column name="evalRareRichnessImportance" displayName="Rarity weighted richness" dataType="Boolean" />
+  </dataSheet>
+
+  <dataSheet name="featureWeights" displayName="Feature weights" isSingleRow="True">
+    <column name="addFeatureWeights" displayName="Add feature weights" dataType="Boolean" />
+    <column name="weights" displayName="Weights" dataType="String" isExternalFile="True" />
+  </dataSheet>
+
+  <dataSheet name="problemFormulation" displayName="Problem formulation" isSingleRow="True">
+    <column name="problem" displayName="Output file" dataType="String" isExternalFile="True" />
+  </dataSheet>
+
+  <dataSheet name="solutionRasterOutput" displayName="Solution" isSingleRow="True">
+    <column name="solution" displayName="Output file" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+  </dataSheet>
+
+  <dataSheet name="replacementSpatialOutput" displayName="Replacement Importance" isSingleRow="True">
+    <column name="replacement" displayName="Output file" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+  </dataSheet>
+
+  <dataSheet name="ferrierSpatialOutput" displayName="Ferrier Replacement" isSingleRow="True">
+    <column name="ferrierMethod" displayName="Output file" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+  </dataSheet>
+
+  <dataSheet name="raritySpatialOutput" displayName="Rarity Weighted Richness" isSingleRow="True">
+    <column name="rarityWeightedRichness" displayName="Output file" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+  </dataSheet>
+
+  <dataSheet name="solutionTabularOutput" displayName="Solution">
+    <column name="id" displayName="Planning Unit ID" dataType="Integer" validationType="WholeNumber" validationCondition="None" />
+    <column name="cost" displayName="Cost" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="status" displayName="Status" dataType="Integer" validationType="WholeNumber" validationCondition="None" />
+    <column name="xloc" displayName="X Location" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="yloc" displayName="Y Location" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="solution1" displayName="Solution" dataType="Integer" validationType="WholeNumber" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="solutionObject">
+    <column name="solution" dataType="String" isExternalFile="True" />
+  </dataSheet>
+
+  <dataSheet name="numberOutput" displayName="Number Summary">
+    <column name="summary" displayName="Summary" dataType="String" />
+    <column name="n" displayName="Number of Planning Units" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="costOutput" displayName="Cost Summary">
+    <column name="summary" displayName="Summary" dataType="String" />
+    <column name="cost" displayName="Cost" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="featureRepresentationOutput" displayName="Feature Representation">
+    <column name="projectFeaturesId" displayName="Feature" dataType="Integer" validationType="Datasheet" formula1="projectFeatures" allowDbNull="False" />
+    <column name="totalAmount" displayName="Total Amount" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="absoluteHeld" displayName="Absolute Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="relativeHeld" displayName="Relative Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="baseCostRepresentationOutput" displayName="Base Solution">
+    <column name="projectCostsId" displayName="Cost" dataType="Integer" validationType="Datasheet" formula1="projectCosts" allowDbNull="False" />
+    <column name="totalAmount" displayName="Total Amount" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="absoluteHeld" displayName="Absolute Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="relativeHeld" displayName="Relative Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="optimizedCostRepresentationOutput" displayName="Cost-Optimized Solution">
+    <column name="projectCostsId" displayName="Cost" dataType="Integer" validationType="Datasheet" formula1="projectCosts" allowDbNull="False" />
+    <column name="totalAmount" displayName="Total Amount" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="absoluteHeld" displayName="Absolute Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="relativeHeld" displayName="Relative Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="diffCostRepresentationOutput" displayName="Difference">
+    <column name="projectCostsId" displayName="Cost" dataType="Integer" validationType="Datasheet" formula1="projectCosts" allowDbNull="False" />
+    <column name="totalAmount" displayName="Total Amount" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="absoluteHeld" displayName="Absolute Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="relativeHeld" displayName="Relative Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="targetCoverageOutput" displayName="Target Coverage">
+    <column name="projectFeaturesId" displayName="Feature" dataType="Integer" validationType="Datasheet" formula1="projectFeatures" allowDbNull="False" />
+    <column name="met" displayName="Met" dataType="Boolean" />
+    <column name="totalAmount" displayName="Total Amount" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="absoluteTarget" displayName="Absolute Target" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="absoluteHeld" displayName="Absolute Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="absoluteShortfall" displayName="Absolute Shortfall" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="relativeTarget" displayName="Relative Target" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="relativeHeld" displayName="Relative Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="relativeShortfall" displayName="Relative Shortfall" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="boundaryOutput" displayName="Boundary Summary">
+    <column name="summary" displayName="Summary" dataType="String" />
+    <column name="boundary" displayName="Boundary" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="replacementTabularOutput" displayName="Replacement Importance">
+    <column name="rc" displayName="Replacement Cost" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="ferrierTabularOutput" displayName="Ferrier Replacement">
+    <column name="id" displayName="Planning Unit ID" dataType="Integer" validationType="WholeNumber" validationCondition="None" />
+    <column name="projectFeaturesId" displayName="Feature" dataType="String" />
+    <column name="scores" displayName="Ferrier Scores" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="rarityTabularOutput" displayName="Rarity Weighted Richness">
+    <column name="rwr" displayName="Rarity Weighted Richness" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="costLayersInput" displayName="Parameters" isSingleRow="True">
+    <column name="method" displayName="Prioritization method" dataType="String" validationType="List" formula1="1:Hierarchical|2:Equal" />
+    <column name="initialOptimalityGap" displayName="Initial optimality gap" dataType="Double" validationType="Decimal" validationCondition="None" defaultValue="0.2" />
+    <column name="costOptimalityGap" displayName="Cost optimality gap" dataType="Double" validationType="Decimal" validationCondition="None" defaultValue="0.1" />
+    <column name="budgetIncrements" displayName="Budget increments" dataType="Integer" validationType="WholeNumber" validationCondition="None" defaultValue="125" />
+    <column name="budgetPadding" displayName="Budget padding" dataType="Double" validationType="Decimal" validationCondition="None" defaultValue="0.25" />
+  </dataSheet>
+
+  <dataSheet name="costLayersData" displayName="Data" isSingleRow="True">
+    <column name="costLayers" displayName="Cost-layers" dataType="String" isExternalFile="True" />
+  </dataSheet>
+
+ <transformer 
+  name="basePrioritization" 
+  displayName="Base Prioritization"
+  transformerSpecificOutput="False" 
+  isRunnable="True" 
+  programName="RScript" 
+  programArguments="basePrioritization.R" 
+  condaEnv="prioritizrEnv.yml"
+  condaEnvVersion="1">
+    <dataSheet name="problemFormat" type="Input" />
+    <dataSheet name="objective" type="Both" />
+    <dataSheet name="problemSpatial" type="Input" />
+    <dataSheet name="targets" type="Input" />
+    <dataSheet name="problemTabular" type="Input" />
+    <dataSheet name="linear" type="Input" />
+    <dataSheet name="lockedIn" type="Input" />
+    <dataSheet name="lockedOut" type="Input" />
+    <dataSheet name="neighbor" type="Input" />
+    <dataSheet name="contiguity" type="Input" />
+    <dataSheet name="featureContiguity" type="Input" />
+    <dataSheet name="boundaryPenalties" type="Input" />
+    <dataSheet name="decisionTypes" type="Input" />
+    <dataSheet name="solver" type="Input" />
+    <dataSheet name="linearPenalties" type="Input" />
+    <dataSheet name="featureWeights" type="Input" />
+    <dataSheet name="problemFormulation" type="Both" />
+    <dataSheet name="solutionRasterOutput" type="Output" />
+    <dataSheet name="solutionTabularOutput" type="Output" />
+    <dataSheet name="solutionObject" type="Both" />
+    <dataSheet name="evaluatePerformance" type="Input" />
+    <dataSheet name="numberOutput" type="Output" />
+    <dataSheet name="costOutput" type="Output" />
+    <dataSheet name="featureRepresentationOutput" type="Both" />
+    <dataSheet name="targetCoverageOutput" type="Output" />
+    <dataSheet name="boundaryOutput" type="Output" />
+    <dataSheet name="evaluateImportance" type="Input" />
+    <dataSheet name="replacementSpatialOutput" type="Output" />
+    <dataSheet name="ferrierSpatialOutput" type="Output" />
+    <dataSheet name="raritySpatialOutput" type="Output" />
+    <dataSheet name="replacementTabularOutput" type="Output" />
+    <dataSheet name="ferrierTabularOutput" type="Output" />
+    <dataSheet name="rarityTabularOutput" type="Output" />
+  </transformer>
+
+  <transformer 
+  name="multicostPrioritization" 
+  displayName="Multi-Cost Prioritization"
+  transformerSpecificOutput="False" 
+  isRunnable="True" 
+  programName="RScript" 
+  programArguments="multicostPrioritization.R" 
+  condaEnv="prioritizrEnv.yml"
+  condaEnvVersion="1">
+    <dataSheet name="problemFormat" type="Input" />
+    <dataSheet name="objective" type="Both" />
+    <dataSheet name="problemSpatial" type="Input" />
+    <dataSheet name="targets" type="Input" />
+    <dataSheet name="problemTabular" type="Input" />
+    <dataSheet name="linear" type="Input" />
+    <dataSheet name="lockedIn" type="Input" />
+    <dataSheet name="lockedOut" type="Input" />
+    <dataSheet name="neighbor" type="Input" />
+    <dataSheet name="contiguity" type="Input" />
+    <dataSheet name="featureContiguity" type="Input" />
+    <dataSheet name="boundaryPenalties" type="Input" />
+    <dataSheet name="decisionTypes" type="Input" />
+    <dataSheet name="solver" type="Input" />
+    <dataSheet name="linearPenalties" type="Input" />
+    <dataSheet name="featureWeights" type="Input" />
+    <dataSheet name="problemFormulation" type="Both" />
+    <dataSheet name="solutionRasterOutput" type="Output" />
+    <dataSheet name="solutionTabularOutput" type="Output" />
+    <dataSheet name="solutionObject" type="Both" />
+    <dataSheet name="featureRepresentationOutput" type="Both" />
+    <dataSheet name="baseCostRepresentationOutput" type="Output" />
+    <dataSheet name="optimizedCostRepresentationOutput" type="Output" />
+    <dataSheet name="diffCostRepresentationOutput" type="Output" />
+    <dataSheet name="costLayersInput" type="Input" />
+    <dataSheet name="costLayersData" type="Input" />
+    <dataSheet name="evaluatePerformance" type="Input" />
+  </transformer>
+
+  <layout type="Project">
+    <item name="projectFeatures" />
+    <item name="projectCosts" />
+  </layout>
+
+  <layout type="Scenario"> 
+    <group name="Base0Prioritization" displayName="Base Prioritization">
+      <group name="Data" displayName="Data">
+        <item name="problemFormat" />
+        <item name="problemSpatial" />
+        <item name="problemTabular" />
+      </group>   
+      <group name="Parameters" displayName="Parameters">
+        <item name="objective" />
+        <item name="targets" />
+        <item name="decisionTypes" />
+        <item name="solver" />
+        <group name="Advanced" displayName="Advanced">
+          <group name="Constraints" displayName="Constraints">
+            <item name="contiguity" />
+            <item name="featureContiguity" />
+            <item name="linear" />
+            <item name="lockedIn" />
+            <item name="lockedOut" />
+            <item name="neighbor" />
+          </group>
+          <group name="Penalties" displayName="Penalties">
+            <item name="boundaryPenalties" />
+            <item name="linearPenalties" />
+          </group>
+          <item name="featureWeights" /> 
+        </group>
+      </group> 
+      <group name="Output0Options" displayName="Output Options">
+        <item name="evaluatePerformance" />
+        <item name="evaluateImportance" />
+      </group>
+    </group> 
+    <group name="multicostPrioritization" displayName="Multi-Cost Prioritization">
+      <item name="costLayersData" />
+      <item name="costLayersInput" />
+    </group>  
+    <group name="Results" displayName="Results" >
+      <group name="Spatial" displayName="Spatial">
+        <item name="solutionRasterOutput" showIf="isResult" />
+        <item name="replacementSpatialOutput" showIf="isResult" />
+        <item name="ferrierSpatialOutput" showIf="isResult" />
+        <item name="raritySpatialOutput" showIf="isResult" />
+      </group>
+      <group name="Tabular" displayName="Tabular">
+        <item name="problemFormulation" showIf="isResult" />
+        <item name="solutionTabularOutput" showIf="isResult" />
+        <item name="numberOutput" showIf="isResult" />
+        <item name="costOutput" showIf="isResult" />
+        <item name="featureRepresentationOutput" showIf="isResult" />
+        <group name="costRepresentationOutput" displayName="Cost Representation">
+          <item name="baseCostRepresentationOutput" showIf="isResult" />
+          <item name="optimizedCostRepresentationOutput" showIf="isResult" />
+          <item name="diffCostRepresentationOutput" showIf="isResult" />
+        </group>
+        <item name="targetCoverageOutput" showIf="isResult" />
+        <item name="boundaryOutput" showIf="isResult" />
+        <item name="replacementTabularOutput" showIf="isResult" />
+        <item name="ferrierTabularOutput" showIf="isResult" />
+        <item name="rarityTabularOutput" showIf="isResult" />
+      </group>
+    </group>
+  </layout>
+  
+  <layout type="Chart">
+    <group name="numberOutput" displayName="Number Summary">
+      <item name="numberOutputN" displayName="Number of Planning Units" dataSheet="numberOutput" column="n" />
+    </group>
+    <group name="costOutput" displayName="Cost Summary">
+      <item name="costOutputCost" displayName="Cost" dataSheet="costOutput" column="cost" />
+    </group>
+    <group name="featureRepresentationOutput" displayName="Feature Representation">
+      <item name="featureRepresentationOutputTotalAmount" displayName="Total Amount" dataSheet="featureRepresentationOutput" column="totalAmount" filter="projectFeaturesId" />
+      <item name="featureRepresentationOutputAbsoluteHeld" displayName="Absolute Held" dataSheet="featureRepresentationOutput" column="absoluteHeld" filter="projectFeaturesId" />
+      <item name="featureRepresentationOutputRelativeHeld" displayName="Relative Held" dataSheet="featureRepresentationOutput" column="relativeHeld" filter="projectFeaturesId" />
+    </group>
+    <group name="costRepresentationOutput" displayName="Cost Representation">
+      <group name="baseCostRepresentationOutput" displayName="Base Solution">
+        <item name="baseCostRepresentationOutputTotalAmount" displayName="Total Amount" dataSheet="baseCostRepresentationOutput" column="totalAmount" filter="projectCostsId" />
+        <item name="baseCostRepresentationOutputAbsoluteHeld" displayName="Absolute Held" dataSheet="baseCostRepresentationOutput" column="absoluteHeld" filter="projectCostsId" />
+        <item name="baseCostRepresentationOutputRelativeHeld" displayName="Relative Held" dataSheet="baseCostRepresentationOutput" column="relativeHeld" filter="projectCostsId" />
+      </group>
+      <group name="optimizedCostRepresentationOutput" displayName="Cost-Optimized Solution">
+        <item name="optimizedCostRepresentationOutputTotalAmount" displayName="Total Amount" dataSheet="optimizedCostRepresentationOutput" column="totalAmount" filter="projectCostsId" />
+        <item name="optimizedCostRepresentationOutputAbsoluteHeld" displayName="Absolute Held" dataSheet="optimizedCostRepresentationOutput" column="absoluteHeld" filter="projectCostsId" />
+        <item name="optimizedCostRepresentationOutputRelativeHeld" displayName="Relative Held" dataSheet="optimizedCostRepresentationOutput" column="relativeHeld" filter="projectCostsId" />
+      </group>
+      <group name="diffCostRepresentationOutput" displayName="Difference">
+        <item name="diffCostRepresentationOutputTotalAmount" displayName="Total Amount" dataSheet="diffCostRepresentationOutput" column="totalAmount" filter="projectCostsId" />
+        <item name="diffCostRepresentationOutputAbsoluteHeld" displayName="Absolute Held" dataSheet="diffCostRepresentationOutput" column="absoluteHeld" filter="projectCostsId" />
+        <item name="diffCostRepresentationOutputRelativeHeld" displayName="Relative Held" dataSheet="diffCostRepresentationOutput" column="relativeHeld" filter="projectCostsId" />
+      </group>
+    </group>
+    <group name="targetCoverageOutput" displayName="Target Coverage">
+      <item name="targetCoverageOutputTotalAmount" displayName="Total Amount" dataSheet="targetCoverageOutput" column="totalAmount" filter="projectFeaturesId" />
+      <item name="targetCoverageOutputAbsoluteTarget" displayName="Absolute Target" dataSheet="targetCoverageOutput" column="absoluteTarget" filter="projectFeaturesId" />
+      <item name="targetCoverageOutputAbsoluteHeld" displayName="Absolute Held" dataSheet="targetCoverageOutput" column="absoluteHeld" filter="projectFeaturesId" />
+      <item name="targetCoverageOutputAbsoluteShortfall" displayName="Absolute Shortfall" dataSheet="targetCoverageOutput" column="absoluteShortfall" filter="projectFeaturesId" />
+      <item name="targetCoverageOutputRelativeTarget" displayName="Relative Target" dataSheet="targetCoverageOutput" column="relativeTarget" filter="projectFeaturesId" />
+      <item name="targetCoverageOutputRelativeHeld" displayName="Relative Held" dataSheet="targetCoverageOutput" column="relativeHeld" filter="projectFeaturesId" />
+      <item name="targetCoverageOutputRelativeShortfall" displayName="Relative Shortfall" dataSheet="targetCoverageOutput" column="relativeShortfall" filter="projectFeaturesId" />
+    </group>
+    <group name="boundaryOutput" displayName="Boundary Summary">
+      <item name="boundaryOutputBoundary" displayName="Boundary" dataSheet="boundaryOutput" column="boundary" />
+    </group>
+  </layout>
+
+  <layout type="Map">
+    <group name="outputs" displayName="Outputs">
+      <item name="solutionRasterOutputSolution" displayName="Solution" dataSheet="solutionRasterOutput" column="solution" />
+      <item name="replacementSpatialOutputReplacement" displayName="Replacement Importance" dataSheet="replacementSpatialOutput" column="replacement" />
+      <item name="ferrierSpatialOutputFerrierMethod" displayName="Ferrier Replacement" dataSheet="ferrierSpatialOutput" column="ferrierMethod" />
+      <item name="raritySpatialOutputRarityWeightedRichness" displayName="Rarity Weighted Richness" dataSheet="raritySpatialOutput" column="rarityWeightedRichness" />
+    </group>
+  </layout>
+
+  <updateProvider
+    className="SyncroSim.Core.XMLUpdateProvider"
+    classAssembly="SyncroSim.Core">
+  </updateProvider>
+
+</package>
