@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<package name="prioritizr" displayName="Systematic conservation planning" version="2.0.0">
+<package name="prioritizr" displayName="Prioritizr" description="Systematic conservation planning" version="2.1.0">
   
   <dataSheet name="projectFeatures" displayName="Features" displayMember="Name" dataScope="Project">
     <column name="Name" dataType="String" />
   </dataSheet>
 
-  <dataSheet name="projectCosts" displayName="Costs" displayMember="Name" dataScope="Project">
-    <column name="Name" dataType="String" />
-  </dataSheet>
-
-  <dataSheet name="projectSolutions" displayName="Solutions" displayMember="Name" dataScope="Project">
+  <dataSheet name="projectCosts" displayName="Cost variables" displayMember="Name" dataScope="Project">
     <column name="Name" dataType="String" />
   </dataSheet>
 
@@ -163,8 +159,21 @@
     <column name="relativeHeld" displayName="Relative Held" dataType="Double" validationType="Decimal" validationCondition="None" />
   </dataSheet>
 
-  <dataSheet name="costRepresentationOutput" displayName="Cost Representation">
-    <column name="projectSolutionsId" displayName="Solution" dataType="Integer" validationType="Datasheet" formula1="projectSolutions" allowDbNull="False" />
+  <dataSheet name="baseCostRepresentationOutput" displayName="Base Solution">
+    <column name="projectCostsId" displayName="Cost" dataType="Integer" validationType="Datasheet" formula1="projectCosts" allowDbNull="False" />
+    <column name="totalAmount" displayName="Total Amount" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="absoluteHeld" displayName="Absolute Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="relativeHeld" displayName="Relative Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="optimizedCostRepresentationOutput" displayName="Cost-Optimized Solution">
+    <column name="projectCostsId" displayName="Cost" dataType="Integer" validationType="Datasheet" formula1="projectCosts" allowDbNull="False" />
+    <column name="totalAmount" displayName="Total Amount" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="absoluteHeld" displayName="Absolute Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <column name="relativeHeld" displayName="Relative Held" dataType="Double" validationType="Decimal" validationCondition="None" />
+  </dataSheet>
+
+  <dataSheet name="diffCostRepresentationOutput" displayName="Difference">
     <column name="projectCostsId" displayName="Cost" dataType="Integer" validationType="Datasheet" formula1="projectCosts" allowDbNull="False" />
     <column name="totalAmount" displayName="Total Amount" dataType="Double" validationType="Decimal" validationCondition="None" />
     <column name="absoluteHeld" displayName="Absolute Held" dataType="Double" validationType="Decimal" validationCondition="None" />
@@ -202,22 +211,25 @@
     <column name="rwr" displayName="Rarity Weighted Richness" dataType="Double" validationType="Decimal" validationCondition="None" />
   </dataSheet>
 
-  <dataSheet name="costLayersInput" displayName="Multi-Costs Prioritization" isSingleRow="True">
+  <dataSheet name="costLayersInput" displayName="Parameters" isSingleRow="True">
     <column name="method" displayName="Prioritization method" dataType="String" validationType="List" formula1="1:Hierarchical|2:Equal" />
-    <column name="costLayers" displayName="Cost-layers" dataType="String" isExternalFile="True" />
     <column name="initialOptimalityGap" displayName="Initial optimality gap" dataType="Double" validationType="Decimal" validationCondition="None" defaultValue="0.2" />
     <column name="costOptimalityGap" displayName="Cost optimality gap" dataType="Double" validationType="Decimal" validationCondition="None" defaultValue="0.1" />
     <column name="budgetIncrements" displayName="Budget increments" dataType="Integer" validationType="WholeNumber" validationCondition="None" defaultValue="125" />
     <column name="budgetPadding" displayName="Budget padding" dataType="Double" validationType="Decimal" validationCondition="None" defaultValue="0.25" />
   </dataSheet>
 
+  <dataSheet name="costLayersData" displayName="Data" isSingleRow="True">
+    <column name="costLayers" displayName="Cost-layers" dataType="String" isExternalFile="True" />
+  </dataSheet>
+
  <transformer 
-  name="customPrioritization" 
-  displayName="Custom Prioritization"
+  name="basePrioritization" 
+  displayName="Base Prioritization"
   transformerSpecificOutput="False" 
   isRunnable="True" 
   programName="RScript" 
-  programArguments="customPrioritization.R" 
+  programArguments="basePrioritization.R" 
   condaEnv="prioritizrEnv.yml"
   condaEnvVersion="1">
     <dataSheet name="problemFormat" type="Input" />
@@ -244,7 +256,6 @@
     <dataSheet name="numberOutput" type="Output" />
     <dataSheet name="costOutput" type="Output" />
     <dataSheet name="featureRepresentationOutput" type="Both" />
-    <dataSheet name="costRepresentationOutput" type="Output" />
     <dataSheet name="targetCoverageOutput" type="Output" />
     <dataSheet name="boundaryOutput" type="Output" />
     <dataSheet name="evaluateImportance" type="Input" />
@@ -257,12 +268,12 @@
   </transformer>
 
   <transformer 
-  name="multicostsPrioritization" 
-  displayName="Multi-Costs Prioritization"
+  name="multicostPrioritization" 
+  displayName="Multi-Cost Prioritization"
   transformerSpecificOutput="False" 
   isRunnable="True" 
   programName="RScript" 
-  programArguments="multicostsPrioritization.R" 
+  programArguments="multicostPrioritization.R" 
   condaEnv="prioritizrEnv.yml"
   condaEnvVersion="1">
     <dataSheet name="problemFormat" type="Input" />
@@ -286,18 +297,21 @@
     <dataSheet name="solutionTabularOutput" type="Output" />
     <dataSheet name="solutionObject" type="Both" />
     <dataSheet name="featureRepresentationOutput" type="Both" />
-    <dataSheet name="costRepresentationOutput" type="Output" />
+    <dataSheet name="baseCostRepresentationOutput" type="Output" />
+    <dataSheet name="optimizedCostRepresentationOutput" type="Output" />
+    <dataSheet name="diffCostRepresentationOutput" type="Output" />
     <dataSheet name="costLayersInput" type="Input" />
+    <dataSheet name="costLayersData" type="Input" />
+    <dataSheet name="evaluatePerformance" type="Input" />
   </transformer>
 
   <layout type="Project">
     <item name="projectFeatures" />
     <item name="projectCosts" />
-    <item name="projectSolutions" />
   </layout>
 
   <layout type="Scenario"> 
-    <group name="Custom0Prioritization" displayName="Custom Prioritization">
+    <group name="Base0Prioritization" displayName="Base Prioritization">
       <group name="Data" displayName="Data">
         <item name="problemFormat" />
         <item name="problemSpatial" />
@@ -306,31 +320,33 @@
       <group name="Parameters" displayName="Parameters">
         <item name="objective" />
         <item name="targets" />
-        <group name="Constraints" displayName="Constraints">
-          <item name="contiguity" />
-          <item name="featureContiguity" />
-          <item name="linear" />
-          <item name="lockedIn" />
-          <item name="lockedOut" />
-          <item name="neighbor" />
-        </group>
-        <group name="Penalties" displayName="Penalties">
-          <item name="boundaryPenalties" />
-          <item name="linearPenalties" />
-        </group>
         <item name="decisionTypes" />
         <item name="solver" />
         <group name="Advanced" displayName="Advanced">
-          <item name="featureWeights" />
-          
+          <group name="Constraints" displayName="Constraints">
+            <item name="contiguity" />
+            <item name="featureContiguity" />
+            <item name="linear" />
+            <item name="lockedIn" />
+            <item name="lockedOut" />
+            <item name="neighbor" />
+          </group>
+          <group name="Penalties" displayName="Penalties">
+            <item name="boundaryPenalties" />
+            <item name="linearPenalties" />
+          </group>
+          <item name="featureWeights" /> 
         </group>
       </group> 
       <group name="Output0Options" displayName="Output Options">
         <item name="evaluatePerformance" />
         <item name="evaluateImportance" />
       </group>
-    </group>   
-    <item name="costLayersInput" />
+    </group> 
+    <group name="multicostPrioritization" displayName="Multi-Cost Prioritization">
+      <item name="costLayersData" />
+      <item name="costLayersInput" />
+    </group>  
     <group name="Results" displayName="Results" >
       <group name="Spatial" displayName="Spatial">
         <item name="solutionRasterOutput" showIf="isResult" />
@@ -344,7 +360,11 @@
         <item name="numberOutput" showIf="isResult" />
         <item name="costOutput" showIf="isResult" />
         <item name="featureRepresentationOutput" showIf="isResult" />
-        <item name="costRepresentationOutput" showIf="isResult" />
+        <group name="costRepresentationOutput" displayName="Cost Representation">
+          <item name="baseCostRepresentationOutput" showIf="isResult" />
+          <item name="optimizedCostRepresentationOutput" showIf="isResult" />
+          <item name="diffCostRepresentationOutput" showIf="isResult" />
+        </group>
         <item name="targetCoverageOutput" showIf="isResult" />
         <item name="boundaryOutput" showIf="isResult" />
         <item name="replacementTabularOutput" showIf="isResult" />
@@ -367,9 +387,21 @@
       <item name="featureRepresentationOutputRelativeHeld" displayName="Relative Held" dataSheet="featureRepresentationOutput" column="relativeHeld" filter="projectFeaturesId" />
     </group>
     <group name="costRepresentationOutput" displayName="Cost Representation">
-      <item name="costRepresentationOutputTotalAmount" displayName="Total Amount" dataSheet="costRepresentationOutput" column="totalAmount" filter="projectCostsId|projectSolutionsId" />
-      <item name="costRepresentationOutputAbsoluteHeld" displayName="Absolute Held" dataSheet="costRepresentationOutput" column="absoluteHeld" filter="projectCostsId|projectSolutionsId" />
-      <item name="costRepresentationOutputRelativeHeld" displayName="Relative Held" dataSheet="costRepresentationOutput" column="relativeHeld" filter="projectCostsId|projectSolutionsId" />
+      <group name="baseCostRepresentationOutput" displayName="Base Solution">
+        <item name="baseCostRepresentationOutputTotalAmount" displayName="Total Amount" dataSheet="baseCostRepresentationOutput" column="totalAmount" filter="projectCostsId" />
+        <item name="baseCostRepresentationOutputAbsoluteHeld" displayName="Absolute Held" dataSheet="baseCostRepresentationOutput" column="absoluteHeld" filter="projectCostsId" />
+        <item name="baseCostRepresentationOutputRelativeHeld" displayName="Relative Held" dataSheet="baseCostRepresentationOutput" column="relativeHeld" filter="projectCostsId" />
+      </group>
+      <group name="optimizedCostRepresentationOutput" displayName="Cost-Optimized Solution">
+        <item name="optimizedCostRepresentationOutputTotalAmount" displayName="Total Amount" dataSheet="optimizedCostRepresentationOutput" column="totalAmount" filter="projectCostsId" />
+        <item name="optimizedCostRepresentationOutputAbsoluteHeld" displayName="Absolute Held" dataSheet="optimizedCostRepresentationOutput" column="absoluteHeld" filter="projectCostsId" />
+        <item name="optimizedCostRepresentationOutputRelativeHeld" displayName="Relative Held" dataSheet="optimizedCostRepresentationOutput" column="relativeHeld" filter="projectCostsId" />
+      </group>
+      <group name="diffCostRepresentationOutput" displayName="Difference">
+        <item name="diffCostRepresentationOutputTotalAmount" displayName="Total Amount" dataSheet="diffCostRepresentationOutput" column="totalAmount" filter="projectCostsId" />
+        <item name="diffCostRepresentationOutputAbsoluteHeld" displayName="Absolute Held" dataSheet="diffCostRepresentationOutput" column="absoluteHeld" filter="projectCostsId" />
+        <item name="diffCostRepresentationOutputRelativeHeld" displayName="Relative Held" dataSheet="diffCostRepresentationOutput" column="relativeHeld" filter="projectCostsId" />
+      </group>
     </group>
     <group name="targetCoverageOutput" displayName="Target Coverage">
       <item name="targetCoverageOutputTotalAmount" displayName="Total Amount" dataSheet="targetCoverageOutput" column="totalAmount" filter="projectFeaturesId" />
