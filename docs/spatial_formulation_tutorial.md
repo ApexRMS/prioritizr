@@ -1,9 +1,8 @@
 ---
 layout: default
 title: Tutorials
-permalink: /spatial_formulation 
+permalink: /spatial_formulation
 ---
-<!--what is the correct permalink path?-->
 
 <style>
   .indentation {
@@ -37,41 +36,25 @@ b. Select the <b>Spatial Formulation Example</b> template library. If desired, y
 </div>
 
 <!--Insert image of template library window-->
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot8.png"-->
+<!--img align="center" style="padding: 13px" width="500" src=".assets/images/screenshot8.png"-->
 
 A new library has been created based on the selected template. SyncroSim will automatically open and display it in the Explorer window.
 
 3\.	Double-click on the library name, **Spatial Formulation Example**, to open the library properties window. You may also right-click on the library name and select **Open** from the context menu.
 
-<!--Insert image of spatial formulation example context menu highlighting Open-->
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot9.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot9.png">
 
 4\.	The *Summary* datasheet contains the metadata for the library.
 
-<!--Insert image of spatial formulation example Summary datasheet window-->
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot10.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot10.png">
 
-<!-- Does prioritizr use Julia?-->
-<!--5\.	Navigate to the **Julia Configuration tab**.
+6\.	Next, navigate to the **Options** tab.
 
 <div class=indentation> 
-The path to the <b>Julia executable</b> file must be specified to run <b>omniscape</b> SyncroSim. To do so, click on the folder icon and navigate to where Julia is installed in your computer. Its default location is <b>C:\Users\[User_Name]\AppData\Local\Programs\Julia-[version]\bin\julia.exe</b>. 
-</div>-->
+Under the <i>General</i>, mark the checkbox for <b>Use conda</b>.
+</div>
 
-<!--Insert image of Julia Configuration window-->
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot11.png"-->
-
-<!-- >> **Note:** The AppData folder is sometimes hidden. To see it, in File Explorer, select View > Show > Hidden items.-->
-
-<!-- Is there a conda env for this package?-->
-<!--6\.	Next, navigate to the **Options** tab.
-
-<div class=indentation> 
-In the <i>General</i> datasheet, mark the checkbox for <b>Use conda</b>.
-</div>-->
-
-<!--Insert image of Options > General window with conda env on-->
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot12.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot12.png">
 
 7\.	Close the library properties window.
 
@@ -79,8 +62,7 @@ In the <i>General</i> datasheet, mark the checkbox for <b>Use conda</b>.
 
 Next, you will review the conservation feature data by right-clicking on **Definitions** and selecting **Open**. Under the **Prioritizr** tab, select **Features**. Here, our feature data corresponds to different bird species.
 
-<!--Insert image of Features datasheet -->
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot13.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot13.png">
 
 <br>
 
@@ -90,8 +72,7 @@ Now, you will review the inputs of each scenario in the **Spatial Formulation Ex
 
 This scenario sets up our initial problem. In this example, we will use a minimum shortfall objective, with relative targets of 20%, binary decisions, and specify that we want near-optimal solutions.
 
-<!--insert image highlighting Open in context menu of scenario-->
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot14.png"-->
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot14.png">
 
 <br>
 
@@ -99,13 +80,13 @@ This scenario sets up our initial problem. In this example, we will use a minimu
 
 <br>
 
-3\. Navigate to the **Prioritizr** tab, and expand the **Base Prioritization | Data** node. 
+3\. Navigate to the **Prioritizr** tab, and expand the **Base Prioritization > Data** node. 
 
 <div class=indentation>
   a. Click on the <i>Input Format</i> node and notice that <i>Data Type</i> is set to <i>Spatial</i> in order to generate a spatial prioritization.
 </div>
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot15.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot15.png">
 
 <div class=indentation>
   b. Navigate to the <i>Spatial Inputs</i> node, and review the following inputs:
@@ -117,11 +98,11 @@ This scenario sets up our initial problem. In this example, we will use a minimu
   </div>
 </div>
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot16.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot16.png">
 
 <br>
 
-4\. Expand the **Base Prioritization | Parameters** node. 
+4\. Expand the **Base Prioritization > Parameters** node. 
 
 <div class=indentation>
   a. Click on the <i>Objective</i> node, and review the following inputs:
@@ -131,9 +112,11 @@ This scenario sets up our initial problem. In this example, we will use a minimu
     <br><br>
     ii. <i>Budget</i> - this number represents the total cost of the prioritization. Specifically, this value is set to <i>$8,748.4910</i> which represents 5% of the total land value in the study area.
   </div>
+</div>
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot17.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot17.png">
 
+<div class=indentation>
   b. Click on the <i>Target</i> node, and review the following inputs:
   <br>
   <div class=indentation>
@@ -141,17 +124,21 @@ This scenario sets up our initial problem. In this example, we will use a minimu
     <br><br>
     ii. <i>Amount</i> - specifies the proportion. In this example, it is set to <i>0.2</i>.
   </div>
+</div>
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot18.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot18.png">
 
+<div class=indentation>
   c. Click on the <i>Decision Types</i> node, and review the following input:
   <br>
   <div class=indentation>
     i. <i>Function</i> - is set to <i>Binary</i>. Here, we are adding a binary decision to a conservation planning problem (<i>i.e.</i>, to prioritize or not prioritize a planning unit). 
   </div>
+</div>
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot19.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot19.png">
 
+<div class=indentation>
   d. Click on the <i>Solver</i> node, and review the following inputs:
   <br>
   <div class=indentation>
@@ -161,7 +148,7 @@ This scenario sets up our initial problem. In this example, we will use a minimu
   </div>
 </div>
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot20.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot20.png">
 
 <br>
 
@@ -177,8 +164,9 @@ This scenario sets up our initial problem. In this example, we will use a minimu
     <br><br>
     iii. <i>Target Coverage Summary</i> - calculates how well feature representation targets are met by a solution to the conservation planning problem 
   </div>
+</div>
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot21.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot21.png">
 
 <br>
 
@@ -190,15 +178,13 @@ The **Add locked in constraints** scenario addresses this issue by importing spa
 
 6\.	In the *Explorer* window, select the pre-configured scenario **Add locked in constraints** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot22.png"-->
+> *Note: the **Add locked in constraints** scenario is dependent on the **Initial problem** scenario. We can see this in the Explorer window by expanding the **Add locked in constrains > Dependencies** node.*
 
-> *Note: the **Add locked in constraints** scenario is dependent on the **Initial problem** scenario. We can see this in the Explorer window by expanding the **Add locked in constrains | Dependencies** node.*
-
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot23.png"-->
+<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot22.png">
 
 <br>
 
-7\. Navigate to the **Prioritizr** tab and expand the **Parameters | Advanced | Constraints** node. Open the **Locked In** window to review the following inputs:
+7\. Navigate to the **Prioritizr** tab and expand the **Parameters > Advanced > Constraints** node. Open the **Locked In** window to review the following inputs:
 
 <div class=indentation>
   i. <i>Add constraint</i> - must be set to *Yes* in order to add constraints to the conservation planning problem to ensure specific planning units area selected (or allocated to a specific zone) in the solution.
@@ -206,7 +192,7 @@ The **Add locked in constraints** scenario addresses this issue by importing spa
   ii. <i>Data</i> - contains the spatial data (<i>i.e.</i>, raster) specifying locations of areas to be locked in (<i>e.g.</i>, protected areas).
   </div>
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot24.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot23.png">
 
 <br>
 
@@ -220,15 +206,13 @@ The **Add locked out constraints** scenario addresses this issue by importing sp
 
 8\.	In the *Explorer* window, select the pre-configured scenario **Add locked out constraints** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot25.png"-->
+> *Note: the **Add locked out constraints** scenario is dependent on the **Add locked in constraints** scenario. We can see this in the Explorer window by expanding the **Add locked out constrains > Dependencies** node.*
 
-> *Note: the **Add locked out constraints** scenario is dependent on the **Add locked in constraints** scenario. We can see this in the Explorer window by expanding the **Add locked out constrains | Dependencies** node.*
-
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot26.png"-->
+<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot24.png">
 
 <br>
 
-9\. Navigate to the **Prioritizr** tab and expand the **Parameters | Advanced | Constraints** node. Open the **Locked Out** window to review the following inputs:
+9\. Navigate to the **Prioritizr** tab and expand the **Parameters > Advanced > Constraints** node. Open the **Locked Out** window to review the following inputs:
 
 <div class=indentation>
   i. <i>Add constraint</i> - must be set to *Yes* in order to add constraints to the conservation planning problem to ensure specific planning units area selected (or allocated to a specific zone) in the solution.
@@ -236,7 +220,7 @@ The **Add locked out constraints** scenario addresses this issue by importing sp
   ii. <i>Data</i> - contains the spatial data (<i>i.e.</i>, raster) specifying locations of areas to be locked out (<i>e.g.</i>, areas not available for protection).
   </div>
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot27.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot25.png">
 
 <br>
 
@@ -250,15 +234,13 @@ The **Add boundary penalties** scenario addresses this final issue by adding pen
 
 10\.	In the *Explorer* window, select the pre-configured scenario **Add boundary penalties** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot28.png"-->
+> *Note: the **Add boundary penalties** scenario is dependent on the **Add locked out constraints** scenario. We can see this in the Explorer window by expanding the **Add bounary penalties > Dependencies** node.*
 
-> *Note: the **Add boundary penalties** scenario is dependent on the **Add locked out constraints** scenario. We can see this in the Explorer window by expanding the **Add bounary penalties | Dependencies** node.*
-
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot29.png"-->
+<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot26.png">
 
 <br>
 
-11\. Navigate to the **Prioritizr** tab and expand the **Parameters | Advanced | Penalties** node. Open the **Boundary** window to review the following inputs:
+11\. Navigate to the **Prioritizr** tab and expand the **Parameters > Advanced > Penalties** node. Open the **Boundary** window to review the following inputs:
 
 <div class=indentation>
   i. <i>Add penalty</i> - must be set to *Yes* in order to add boundary penalties to the conservation problem to favour solutions that spatially clump planning units together based on the overall boundary length (<i>i.e.</i>, total perimeter).
@@ -268,7 +250,7 @@ The **Add boundary penalties** scenario addresses this final issue by adding pen
   iii. <i>Edge factor</i> - a value used to specify the proportion to scale planning unit edges (borders) that do not have any neighboring planning units. In this example, the edge factor is set to *0.5*.
   </div>
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot30.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot27.png">
 
 <br>
 
@@ -280,24 +262,23 @@ The **Spatial Formulation Example** template library already contains the result
 
 1\. Navigate to the **Charts** tab, and double-click on the first pre-configured chart: **Number of planning units**. 
 
-<!-- insert image of chart window>
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot31.png"-->
+<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot28.png">
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot32.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot29.png">
 
 2\. Next, double-click on the second pre-configured chart: **Solution cost**.
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot33.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot30.png">
 
 3\. Now, double-click on the third pre-configured chart: **Target coverage**
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot34.png"-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot31.png">
 
 4\. Nagivate to the **Maps** tab, and double click on the pre-configured **Solution** map.
 
-<!-- insert image of map window>
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot35.png"-->
+<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot32.png">
 
 These map display areas of *Selected* (purple), and *Not selected* (yellow) planning units in our study area (Washington, USA).
 
-<!--img align="center" style="padding: 13px" width="500" src="./images/screenshot36.png"-->
+<img align="center" style="padding: 13px" width="1000" src="assets/images/screenshot33.png">
+
