@@ -215,7 +215,7 @@ The **Add locked out constraints** scenario addresses this issue by importing sp
 9\. Navigate to the **Prioritizr** tab and expand the **Parameters > Advanced > Constraints** node. Open the **Locked Out** window to review the following inputs:
 
 <div class=indentation>
-  i. <i>Add constraint</i> - must be set to *Yes* in order to add constraints to the conservation planning problem to ensure specific planning units area selected (or allocated to a specific zone) in the solution.
+  i. <i>Add constraint</i> - must be set to <i>Yes</i> in order to add constraints to the conservation planning problem to ensure specific planning units area selected (or allocated to a specific zone) in the solution.
   <br><br>
   ii. <i>Data</i> - contains the spatial data (<i>i.e.</i>, raster) specifying locations of areas to be locked out (<i>e.g.</i>, areas not available for protection).
   </div>
