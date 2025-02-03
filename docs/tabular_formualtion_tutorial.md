@@ -51,7 +51,7 @@ A new library has been created based on the selected template. SyncroSim will au
 5\.	Next, navigate to the **Systems > Options** node.
 
 <div class=indentation> 
-Under the <i>General</i>, mark the checkbox for <i>Use conda</i>.
+Under <i>General</i>, mark the checkbox for <i>Use conda</i>.
 </div>
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot37.png">
@@ -62,7 +62,7 @@ Under the <i>General</i>, mark the checkbox for <i>Use conda</i>.
 
 Next, you will review the conservation feature data by right-clicking on **Definitions** and selecting **Open** in the context menu. Under the **Prioritizr** tab, select **Features**. Here, our feature data corresponds to <!--different bird species?-->.
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot38.png">
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot38.png">
 
 <br>
 
@@ -72,7 +72,7 @@ Now, you will review the inputs of each scenario in the **Tabular Formulation Ex
 
 This scenario sets up our initial problem. In this example, we will <!--use a minimum shortfall objective, with relative targets of 20%, binary decisions, and specify that we want near-optimal solutions-->.
 
-<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot39.png">
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot39.png">
 
 <br>
 
@@ -157,7 +157,7 @@ This scenario sets up our initial problem. In this example, we will <!--use a mi
 5\. Exapnd the **Output Options** node and click on **Performance** to review the following inputs:
 
 <div class=indentation>
-  a. Click on the <b>Objective</b> node, and review the following inputs set to *Yes*:
+  a. Click on the <b>Performance</b> node, and review the following inputs set to *Yes*:
   <br>
   <div class=indentation>
     i. <i>Number Summary</i> - calculates the number of planning units selected within a solution to a the conservation planning problem.
@@ -182,7 +182,7 @@ By running the **Budget $5,000** scenario, we generate a solution that helps mee
 
 7\. Navigate to the **Prioritizr** tab, and expand the **Results > Tabular** node. Select the **Solution** node to analyse the results table. To view which planning units were selected (1), and their associated costs, click on the *Solution* column to reorder the table's contents.
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot48.png">
+<img align="center" style="padding: 13px" width="900" src="assets/images/screenshot48.png">
 
 <br>
 
@@ -192,7 +192,7 @@ The **Budget $10,000** scenario is a copy of the **Budget $5,000** scenario; the
 
 By running the **Budget $10,000** scenario, we generate another solution that helps meet the representation targets, although with a larger budget.
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot50.png">
+<img align="center" style="padding: 13px" width="900" src="assets/images/screenshot50.png">
 
 <p id="step-2"> <h3><b>Step 2. Visualizing and comparing results across scenarios</b></h3> </p>
 
@@ -200,14 +200,14 @@ The **Tabular Formulation Example** template library already contains the result
 
 1\. Navigate to the **Charts** tab, and double-click on the first pre-configured chart: **Number of selected planning units**. 
 
-<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot51.png">
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot51.png">
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot52.png">
+<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot52.png">
 
 2\. Next, double-click on the second pre-configured chart: **Solution cost**.
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot53.png">
+<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot53.png">
 
-3\. Now, double-click on the third pre-configured chart: **Target coverage**
+3\. Now, double-click on the third pre-configured chart: **Target coverage**.
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot54.png">
+<img align="center" style="padding: 13px" width="900" src="assets/images/screenshot54.png">
