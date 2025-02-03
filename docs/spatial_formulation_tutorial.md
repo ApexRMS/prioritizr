@@ -44,23 +44,23 @@ A new library has been created based on the selected template. SyncroSim will au
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot9.png">
 
-4\.	The *Summary* datasheet contains the metadata for the library.
+4\.	The **Summary** datasheet contains the metadata for the library.
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot10.png">
 
-6\.	Next, navigate to the **Options** tab.
+5\.	Next, navigate to the **Systems > Options** node.
 
 <div class=indentation> 
-Under the <i>General</i>, mark the checkbox for <b>Use conda</b>.
+Under the <i>General</i>, mark the checkbox for <i>Use conda</i>.
 </div>
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot12.png">
 
-7\.	Close the library properties window.
+6\.	Close the library properties window.
 
 <br>
 
-Next, you will review the conservation feature data by right-clicking on **Definitions** and selecting **Open**. Under the **Prioritizr** tab, select **Features**. Here, our feature data corresponds to different bird species.
+Next, you will review the conservation feature data by right-clicking on **Definitions** and selecting **Open** in the context menu. Under the **Prioritizr** tab, select **Features**. Here, our feature data corresponds to different bird species.
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot13.png">
 
@@ -76,23 +76,23 @@ This scenario sets up our initial problem. In this example, we will use a minimu
 
 <br>
 
-2\.	Navigate to the **Pipeline** datasheet. Pipeline stages call on a transformer (*i.e.*, script) which takes the inputs from SyncroSim, runs a model, and returns the results to SyncroSim. Under the *Stage* column, note that a single pipeline stage is set called *Base Prioritization*. This stage <!--Explain what this stage does-->
+2\.	Navigate to the **Pipeline** datasheet. Pipeline stages call on a transformer (*i.e.*, script) which takes the inputs from SyncroSim, runs a model, and returns the results to SyncroSim. Under the *Stage* column, note that a single pipeline stage is set called *Base Prioritization*.
 
 <br>
 
 3\. Navigate to the **Prioritizr** tab, and expand the **Base Prioritization > Data** node. 
 
 <div class=indentation>
-  a. Click on the <i>Input Format</i> node and notice that <i>Data Type</i> is set to <i>Spatial</i> in order to generate a spatial prioritization.
+  a. Click on the <b>Input Format</b> node and notice that <i>Data Type</i> is set to <i>Spatial</i> in order to generate a spatial prioritization.
 </div>
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot15.png">
 
 <div class=indentation>
-  b. Navigate to the <i>Spatial Inputs</i> node, and review the following inputs:
+  b. Navigate to the <b>Spatial Inputs</b> node, and review the following inputs:
   <br>
   <div class=indentation>
-    i. <i>Planning Units</i> - a raster file of Washington, USA in which each cell represents a different planning unit, and cell values denote land acquistition costs. Specifically, there are 10,757 planning units in total (<i>i.e.</i>, cells with non-missing values) <!-- confirm this makes sense -->
+    i. <i>Planning Units</i> - a raster file of Washington, USA in which each cell represents a different planning unit, and cell values denote land acquistition costs. Specifically, there are 10,757 planning units in total (<i>i.e.</i>, cells with non-missing values).
     <br><br>
     ii. <i>Features</i> - a multi-layer raster file of the conservation feature data. Each layer describes the spatial distribution of a feature. Here, our feature data correspond to different bird species. To account for migratory patterns, the breeding and non-breeding distributions of species are represented as different features. Specifically, the cell values denote the relative abundance of individuals, with higher values indicating greater abundance.
   </div>
@@ -105,7 +105,7 @@ This scenario sets up our initial problem. In this example, we will use a minimu
 4\. Expand the **Base Prioritization > Parameters** node. 
 
 <div class=indentation>
-  a. Click on the <i>Objective</i> node, and review the following inputs:
+  a. Click on the <b>Objective</b> node, and review the following inputs:
   <br>
   <div class=indentation>
     i. <i>Function</i> - this input sets the objective of a conservation planning problem. In this example, it is set to <i>Minimum shortfall</i> which aims to minimize the overall shortfall for as many targets as possible while ensuring that the cost of a solution does not exceed a budget.
@@ -117,7 +117,7 @@ This scenario sets up our initial problem. In this example, we will use a minimu
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot17.png">
 
 <div class=indentation>
-  b. Click on the <i>Target</i> node, and review the following inputs:
+  b. Click on the <b>Target</b> node, and review the following inputs:
   <br>
   <div class=indentation>
     i. <i>Function</i> - since this input is set to <i>Relative</i>, the targets are set as a proportion (between 0 and 1) of the maximum level of representations of features in the study area.
@@ -129,7 +129,7 @@ This scenario sets up our initial problem. In this example, we will use a minimu
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot18.png">
 
 <div class=indentation>
-  c. Click on the <i>Decision Types</i> node, and review the following input:
+  c. Click on the <b>Decision Types</b> node, and review the following input:
   <br>
   <div class=indentation>
     i. <i>Function</i> - is set to <i>Binary</i>. Here, we are adding a binary decision to a conservation planning problem (<i>i.e.</i>, to prioritize or not prioritize a planning unit). 
@@ -139,7 +139,7 @@ This scenario sets up our initial problem. In this example, we will use a minimu
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot19.png">
 
 <div class=indentation>
-  d. Click on the <i>Solver</i> node, and review the following inputs:
+  d. Click on the <b>Solver</b> node, and review the following inputs:
   <br>
   <div class=indentation>
     i. <i>Function</i> - is set to <i>Default</i>. This specifies that the best solver currently available should be used to solve a conservation planning problem. 
@@ -155,7 +155,7 @@ This scenario sets up our initial problem. In this example, we will use a minimu
 5\. Exapnd the **Output Options** node and click on **Performance** to review the following inputs:
 
 <div class=indentation>
-  a. Click on the <i>Objective</i> node, and review the following inputs set to *Yes*:
+  a. Click on the <b>Objective</b> node, and review the following inputs set to *Yes*:
   <br>
   <div class=indentation>
     i. <i>Number Summary</i> - calculates the number of planning units selected within a solution to a the conservation planning problem.
@@ -170,7 +170,7 @@ This scenario sets up our initial problem. In this example, we will use a minimu
 
 <br>
 
-By running the **Initial problem** scenario, we generate a solution that helps meet the representation targets. However, it does not account for existing protected areas inside the study area. Therefore, it does not account for the possibility that some features could be paritally - or even fully - represented by existing protected areas and, in turn, might fail to identify meaningful priorities for new protected areas. 
+By running the **Initial problem** scenario, we generate a solution that helps meet the representation targets.
 
 <br>
 
@@ -243,11 +243,11 @@ The **Add boundary penalties** scenario addresses this final issue by adding pen
 11\. Navigate to the **Prioritizr** tab and expand the **Parameters > Advanced > Penalties** node. Open the **Boundary** window to review the following inputs:
 
 <div class=indentation>
-  i. <i>Add penalty</i> - must be set to *Yes* in order to add boundary penalties to the conservation problem to favour solutions that spatially clump planning units together based on the overall boundary length (<i>i.e.</i>, total perimeter).
+  i. <i>Add penalty</i> - must be set to <i>Yes</i> in order to add boundary penalties to the conservation problem to favour solutions that spatially clump planning units together based on the overall boundary length (<i>i.e.</i>, total perimeter).
   <br><br>
-  ii. <i>Penalty</i> - a value used to scale the importance of selecting planning units that are spatially clumped together compared to the main problem objective. Higher penalty values prefer solutions with a higher degree of spatial clumping, whereas smaller penalty values prefer solutions that are more spread out. In this example, the penalty is set to *0.003*.
+  ii. <i>Penalty</i> - a value used to scale the importance of selecting planning units that are spatially clumped together compared to the main problem objective. Higher penalty values prefer solutions with a higher degree of spatial clumping, whereas smaller penalty values prefer solutions that are more spread out. In this example, the penalty is set to <i>0.003</i>.
   <br><br>
-  iii. <i>Edge factor</i> - a value used to specify the proportion to scale planning unit edges (borders) that do not have any neighboring planning units. In this example, the edge factor is set to *0.5*.
+  iii. <i>Edge factor</i> - a value used to specify the proportion to scale planning unit edges (borders) that do not have any neighboring planning units. In this example, the edge factor is set to <i>0.5</i>.
   </div>
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot27.png">
@@ -257,8 +257,6 @@ The **Add boundary penalties** scenario addresses this final issue by adding pen
 <p id="step-2"> <h3><b>Step 2. Visualizing and comparing results across scenarios</b></h3> </p>
 
 The **Spatial Formulation Example** template library already contains the results for each scenario. In SyncroSim, the results for a scenario are organized into a *Results* folder, nested within its parent scenario.
-
-<!-- Go into each scenario's results folder? Or just the Add boundary penalties results?-->
 
 1\. Navigate to the **Charts** tab, and double-click on the first pre-configured chart: **Number of planning units**. 
 
