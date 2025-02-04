@@ -14,7 +14,7 @@ permalink: /climate_refugia_prioritization
 
 ## **Climate Refugia Prioritization with prioritizr SyncroSim**
 
-This tutorial provides an overview of working with **prioritizr** in SyncroSim Studio to prioritize climate refugia in aquatic systems - specifically, applied to cold-water species for a subset of 5 lakes within the Muskoka watershed, Ontario, Canada. It covers the following steps:
+This tutorial provides an overview of working with **prioritizr** in SyncroSim Studio to prioritize climate refugia in aquatic systems - specifically, applied to cold-water species for a subset of lakes within the Muskoka watershed, Ontario, Canada. It covers the following steps:
 
 1. <A href="#step-1">Creating and configuring the **Climate Refugia Prioritization (Muskoka, Ontario)** SyncroSim library using **prioritizr**</A>
 2. <A href="#step-2">Visualizing and comparing results across scenarios</A>
@@ -234,20 +234,28 @@ The **Climate Refugia Prioritization (Muskoka, Ontario)** template library alrea
 
 1\. Navigate to the **Charts** tab, and double-click on the first pre-configured chart: **Feature representation**. 
 
+This chart displays the proportion of each feature secured within the solution.
+
 <img align="center" style="padding: 13px" width="400" src="assets/images/screenshot73.png">
 
-<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot74.png">
+<img align="center" style="padding: 13px" width="800" src="assets/images/screenshot74.png">
 
 2\. Next, double-click on the second pre-configured chart: **Number of planning units**.
 
-<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot75.png">
+This chaty displays the total number of planning units per scenario. In this example, there are 5 lakes.
+
+<img align="center" style="padding: 13px" width="800" src="assets/images/screenshot75.png">
 
 3\. Next, navigate to the **Maps** tab, and double-click on the first pre-configured map: **Replacement importance**.
 
+This map displays the importance scores for each lake sleected in the solution based on the replacement cost method. <!--cite Cabeza and Moilanen, 2006?-->
+
 <img align="center" style="padding: 13px" width="400" src="assets/images/screenshot76.png">
 
-<img align="center" style="padding: 13px" width="900" src="assets/images/screenshot77.png">
+<img align="center" style="padding: 13px" width="1000" src="assets/images/screenshot77.png">
 
 4\. Finally, double-click on the second pre-configured map: **Solution**.
 
-<img align="center" style="padding: 13px" width="900" src="assets/images/screenshot78.png">
+This map displays the lakes that were selected within a solution to the conservation planning problem. 
+
+<img align="center" style="padding: 13px" width="1000" src="assets/images/screenshot78.png">
