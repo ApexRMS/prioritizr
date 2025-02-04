@@ -14,7 +14,7 @@ permalink: /climate_refugia_prioritization
 
 ## **Climate Refugia Prioritization with prioritizr SyncroSim**
 
-This tutorial provides an overview of working with **prioritizr** SyncroSim in SyncroSim Studio to prioritize climate refugia in aquatic systems - specifically, applied to cold-water species for a subset of 5 lakes within the Muskoka, Ontario watershed. It covers the following steps:
+This tutorial provides an overview of working with **prioritizr** in SyncroSim Studio to prioritize climate refugia in aquatic systems - specifically, applied to cold-water species for a subset of 5 lakes within the Muskoka watershed, Ontario, Canada. It covers the following steps:
 
 1. <A href="#step-1">Creating and configuring the **Climate Refugia Prioritization (Muskoka, Ontario)** SyncroSim library using **prioritizr**</A>
 2. <A href="#step-2">Visualizing and comparing results across scenarios</A>
@@ -132,7 +132,7 @@ This scenario provides a baseline under which all features have the same weight,
   b. Click on the <b>Target</b> node, and review the following inputs:
   <br>
   <div class=indentation>
-    i. <i>Function</i> - since this input is set to <i>Relative</i>, the targets are set as a proportion (between 0 and 1) of the maximum level of representations of features in the study area.
+    i. <i>Function</i> - since this input is set to <i>Relative</i>, the targets are set as a proportion (between 0 and 1) of the maximum level of representations of features (<i>i.e.</i>, species presence and lake properties) in the Muskoka. Ontario.
     <br><br>
     ii. <i>Amount</i> - specifies the proportion. In this example, it is set to <i>1.0</i>.
   </div>
@@ -144,7 +144,7 @@ This scenario provides a baseline under which all features have the same weight,
   c. Click on the <b>Decision Types</b> node, and review the following input:
   <br>
   <div class=indentation>
-    i. <i>Function</i> - is set to <i>Binary</i>. Here, we are adding a binary decision to the conservation planning problem (<i>i.e.</i>, to prioritize or not prioritize a planning unit). 
+    i. <i>Function</i> - is set to <i>Binary</i>. Here, we are adding a binary decision to the conservation planning problem (<i>i.e.</i>, to prioritize or not prioritize a lake). 
   </div>
 </div>
 
@@ -170,16 +170,16 @@ This scenario provides a baseline under which all features have the same weight,
   a. Click on the <b>Performance</b> node, and review the following inputs set to *Yes*:
   <br>
   <div class=indentation>
-    i. <i>Number Summary</i> - calculates the number of planning units selected within a solution to a the conservation planning problem.
+    i. <i>Number Summary</i> - calculates the number of lakes selected within a solution to a the conservation planning problem.
     <br><br>
-    ii. <i>Feature representation summary</i> - calculates how well features are represented by a solution to the conservation planning problem.
+    ii. <i>Feature representation summary</i> - calculates how well features (<i>i.e.</i>, species presence, and lake properies) are represented by a solution to the conservation planning problem.
   </div>
 </div>
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot68.png">
 
 <div class=indentation>
-  b. Click on the <b>Importance</b> node, and review the following input set to *Yes*:
+  b. Click on the <b>Importance</b> node, and review the following input set to <i>Yes</i>:
   <br>
   <div class=indentation>
     i. <i>Replacement cost</i> - calculates importance scores for the lakes selected in the solution based on the replacement cost method. <!--cite Caseza and Moilanen, 2006?-->
@@ -190,7 +190,7 @@ This scenario provides a baseline under which all features have the same weight,
 
 <br>
 
-By running the **Equal weight** scenario, we generate a baseline solution <!--that helps meet the representation targets?-->.
+By running the **Equal weight** scenario, we generate a baseline solution<!--that helps meet the representation targets?-->.
 
 6\. In the *Explorer* window, expand the **Equal weight > Results** folder and double-click the results scenario to open it. 
 
@@ -202,7 +202,7 @@ By running the **Equal weight** scenario, we generate a baseline solution <!--th
 
 <br>
 
-The **Species presence weight** scenario is a copy of the **Equal weight** scenario; the only difference is the inclusion of **Feature weights** (all other inputs remain the same). 
+The **Species presence weight** scenario is a copy of the **Equal weight** scenario; the only difference is the inclusion of **Feature weights** (all other inputs remain the same). Open the **Species presence weight** scenario and navigate to the **Prioritizr** tab.
 
 1\. Expand the **Advanced** node and select **Feature weights** to review the following inputs: 
 
@@ -216,7 +216,7 @@ The **Species presence weight** scenario is a copy of the **Equal weight** scena
 
 <br>
 
-Similarily, the **Lake properties weight** scenario is a copy of the **Equal weight** scenario; the only difference is the inclusion of **Feature weights** as well (all other inputs remain the same).
+Similarily, the **Lake properties weight** scenario is a copy of the **Equal weight** scenario; the only difference is the inclusion of **Feature weights** as well (all other inputs remain the same). Open the **Lake properties weights** scenario and navigate to the **Prioritizr** tab.
 
 1\. Expand the **Advanced** node and select **Feature weights** to review the following inputs: 
 
