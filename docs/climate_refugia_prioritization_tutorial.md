@@ -108,7 +108,7 @@ This scenario provides a baseline under which all features have the same weight,
     <br><br>
     iii. <i>Planning units vs. Features</i> - a data table of the species presence, and lake property features associated with each lake.
     <br><br>
-    iv. <i>Cost column</i> - <!--is this simply an empty column in which the cost is input in the results?-->
+    iv. <i>Cost column</i> - a column in which the cost is input <!--not sure if this makes sense - is this simply an empty column in which the cost is input in the results?-->
   </div>
 </div>
 
@@ -236,7 +236,7 @@ The **Climate Refugia Prioritization (Muskoka, Ontario)** template library alrea
 
 This chart displays the proportion of each feature secured within the solution.
 
-<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot73.png">
+<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot73.png">
 
 <img align="center" style="padding: 13px" width="800" src="assets/images/screenshot74.png">
 
@@ -250,7 +250,7 @@ This chaty displays the total number of planning units per scenario. In this exa
 
 This map displays the importance scores for each lake sleected in the solution based on the replacement cost method. <!--cite Cabeza and Moilanen, 2006?-->
 
-<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot76.png">
+<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot76.png">
 
 <img align="center" style="padding: 13px" width="1000" src="assets/images/screenshot77.png">
 

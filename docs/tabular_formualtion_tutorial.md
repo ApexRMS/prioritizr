@@ -30,7 +30,7 @@ In SyncroSim, a library is a file with extension *.ssim* that stores all the mod
 2\. Select **File > New > From Online Template...**
 
 <div class=indentation>
-a. From the list of packages, select <b>prioritizr</b>. Three template library options will be available: 1.) Spatial Formulation Example, 2.) Tabular Formulation Example, and 3.) Muskoka Prioritization Example.
+a. From the list of packages, select <b>prioritizr</b>. Three template library options will be available: 1.) Spatial Formulation Example, 2.) Tabular Formulation Example, and 3.) Climate Refugia Prioritization (Muskoka, Ontario).
 <br><br>
 b. Select the <b>Tabular Formulation Example</b> template library. If desired, you may edit the <i>File name</i>, and change the <i>Folder</i> by clicking on the <b>Browse</b> button. Click <b>OK</b>.
 </div>
