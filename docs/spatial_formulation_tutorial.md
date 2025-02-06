@@ -25,7 +25,7 @@ This tutorial provides an overview of working with **prioritizr** SyncroSim in S
 
 In SyncroSim, a library is a file with extension *.ssim* that stores all the model's inputs and outputs in a format specific to a given package. To create a new prioritizr library:
 
-1\. Open SynrcoSim Studio.
+1\. Open SyncroSim Studio.
 
 2\. Select **File > New > From Online Template...**
 
@@ -92,7 +92,7 @@ This scenario sets up our initial problem. In this example, we will use a minimu
   b. Navigate to the <b>Spatial Inputs</b> node, and review the following inputs:
   <br>
   <div class=indentation>
-    i. <i>Planning Units</i> - a raster file of Washington, USA in which each cell represents a different planning unit, and cell values denote land acquistition costs. Specifically, there are 10,757 planning units in total (<i>i.e.</i>, cells with non-missing values).
+    i. <i>Planning Units</i> - a raster file of Washington, USA in which each cell represents a different planning unit, and cell values denote land acquisition costs. Specifically, there are 10,757 planning units in total (<i>i.e.</i>, cells with non-missing values).
     <br><br>
     ii. <i>Features</i> - a multi-layer raster file of the conservation feature data. Each layer describes the spatial distribution of a feature. Here, our feature data correspond to different bird species. To account for migratory patterns, the breeding and non-breeding distributions of species are represented as different features. Specifically, the cell values denote the relative abundance of individuals, with higher values indicating greater abundance.
   </div>
@@ -152,7 +152,7 @@ This scenario sets up our initial problem. In this example, we will use a minimu
 
 <br>
 
-5\. Exapnd the **Output Options** node and click on **Performance** to review the following inputs:
+5\. Expand the **Output Options** node and click on **Performance** to review the following inputs:
 
 <div class=indentation>
   a. Click on the <b>Objective</b> node, and review the following inputs set to *Yes*:
@@ -196,7 +196,7 @@ The **Add locked in constraints** scenario addresses this issue by importing spa
 
 <br>
 
-By running the **Add locked in constrains** scenario, we generate an improved solution. However, there are some places in the study area that are not available for protected area estalishment (*e.g.*, due to land tenure). Consequently, the solution might not be practical for implementation because it might select some places that are not available for protection. 
+By running the **Add locked in constrains** scenario, we generate an improved solution. However, there are some places in the study area that are not available for protected area establishment (*e.g.*, due to land tenure). Consequently, the solution might not be practical for implementation because it might select some places that are not available for protection. 
 
 <br>
 
@@ -234,7 +234,7 @@ The **Add boundary penalties** scenario addresses this final issue by adding pen
 
 10\.	In the *Explorer* window, select the pre-configured scenario **Add boundary penalties** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
 
-> *Note: the **Add boundary penalties** scenario is dependent on the **Add locked out constraints** scenario. We can see this in the Explorer window by expanding the **Add bounary penalties > Dependencies** node.*
+> *Note: the **Add boundary penalties** scenario is dependent on the **Add locked out constraints** scenario. We can see this in the Explorer window by expanding the **Add boundary penalties > Dependencies** node.*
 
 <img align="center" style="padding: 13px" width="300" src="assets/images/screenshot26.png">
 
@@ -272,7 +272,7 @@ The **Spatial Formulation Example** template library already contains the result
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot31.png">
 
-4\. Nagivate to the **Maps** tab, and double click on the pre-configured **Solution** map.
+4\. Navigate to the **Maps** tab, and double click on the pre-configured **Solution** map.
 
 <img align="center" style="padding: 13px" width="300" src="assets/images/screenshot32.png">
 

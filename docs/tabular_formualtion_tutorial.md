@@ -25,7 +25,7 @@ This tutorial provides an overview of working with **prioritizr** SyncroSim in S
 
 In SyncroSim, a library is a file with extension *.ssim* that stores all the model's inputs and outputs in a format specific to a given package. To create a new prioritizr library:
 
-1\. Open SynrcoSim Studio.
+1\. Open SyncroSim Studio.
 
 2\. Select **File > New > From Online Template...**
 
@@ -154,7 +154,7 @@ This scenario sets up our initial problem. In this example, we will <!--use a mi
 
 <br>
 
-5\. Exapnd the **Output Options** node and click on **Performance** to review the following inputs:
+5\. Expand the **Output Options** node and click on **Performance** to review the following inputs:
 
 <div class=indentation>
   a. Click on the <b>Performance</b> node, and review the following inputs set to *Yes*:

@@ -25,7 +25,7 @@ This tutorial provides an overview of working with **prioritizr** in SyncroSim S
 
 In SyncroSim, a library is a file with extension *.ssim* that stores all the model's inputs and outputs in a format specific to a given package. To recreate the **Climate Refugia Prioritization (Muskoka, Ontario)** library:
 
-1\. Open SynrcoSim Studio.
+1\. Open SyncroSim Studio.
 
 2\. Select **File > New > From Online Template...**
 
@@ -164,7 +164,7 @@ This scenario provides a baseline under which all features have the same weight,
 
 <br>
 
-5\. Exapnd the **Output Options** node and click on **Performance** to review the following inputs:
+5\. Expand the **Output Options** node and click on **Performance** to review the following inputs:
 
 <div class=indentation>
   a. Click on the <b>Performance</b> node, and review the following inputs set to *Yes*:
@@ -172,7 +172,7 @@ This scenario provides a baseline under which all features have the same weight,
   <div class=indentation>
     i. <i>Number Summary</i> - calculates the number of lakes selected within a solution to a the conservation planning problem.
     <br><br>
-    ii. <i>Feature representation summary</i> - calculates how well features (<i>i.e.</i>, species presence, and lake properies) are represented by a solution to the conservation planning problem.
+    ii. <i>Feature representation summary</i> - calculates how well features (<i>i.e.</i>, species presence, and lake properties) are represented by a solution to the conservation planning problem.
   </div>
 </div>
 
@@ -182,7 +182,7 @@ This scenario provides a baseline under which all features have the same weight,
   b. Click on the <b>Importance</b> node, and review the following input set to <i>Yes</i>:
   <br>
   <div class=indentation>
-    i. <i>Replacement cost</i> - calculates importance scores for the lakes selected in the solution based on the replacement cost method. <!--cite Caseza and Moilanen, 2006?-->
+    i. <i>Replacement cost</i> - calculates importance scores for the lakes selected in the solution based on the replacement cost method. <!--cite Cabeza and Moilanen, 2006?-->
   </div>
 </div>
 
@@ -216,7 +216,7 @@ The **Species presence weight** scenario is a copy of the **Equal weight** scena
 
 <br>
 
-Similarily, the **Lake properties weight** scenario is a copy of the **Equal weight** scenario; the only difference is the inclusion of **Feature weights** as well (all other inputs remain the same). Open the **Lake properties weights** scenario and navigate to the **Prioritizr** tab.
+Similarly, the **Lake properties weight** scenario is a copy of the **Equal weight** scenario; the only difference is the inclusion of **Feature weights** as well (all other inputs remain the same). Open the **Lake properties weights** scenario and navigate to the **Prioritizr** tab.
 
 1\. Expand the **Advanced** node and select **Feature weights** to review the following inputs: 
 
@@ -242,13 +242,13 @@ This chart displays the proportion of each feature secured within the solution.
 
 2\. Next, double-click on the second pre-configured chart: **Number of planning units**.
 
-This chaty displays the total number of planning units per scenario. In this example, there are 5 lakes.
+This chart displays the total number of planning units per scenario. In this example, there are 5 lakes.
 
 <img align="center" style="padding: 13px" width="800" src="assets/images/screenshot75.png">
 
 3\. Next, navigate to the **Maps** tab, and double-click on the first pre-configured map: **Replacement importance**.
 
-This map displays the importance scores for each lake sleected in the solution based on the replacement cost method. <!--cite Cabeza and Moilanen, 2006?-->
+This map displays the importance scores for each lake selected in the solution based on the replacement cost method. <!--cite Cabeza and Moilanen, 2006?-->
 
 <img align="center" style="padding: 13px" width="300" src="assets/images/screenshot76.png">
 
