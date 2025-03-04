@@ -14,31 +14,39 @@ permalink: /tabular_formulation
 
 ## **Tabular Formulation example with prioritizr SyncroSim**
 
-This tutorial provides an overview of working with **prioritizr** SyncroSim in SyncroSim Studio. It covers the following steps:
+This tutorial provides an overview of working with **prioritizr** in SyncroSim Studio to create and solve a tabular conservation problem. It covers the following steps:
 
-1. <A href="#step-1">Creating and configuring a **prioritizr** SyncroSim library</A>
-2. <A href="#step-2">Visualizing and comparing results across scenarios</A>
+1. <a href="#step-1">Creating a prioritizr SyncroSim library</a>
+2. <a href="#step-2">Visualizing and comparing results across scenarios</a>
 
 <br>
 
-<p id="step-1"> <h3><b>Step 1. Creating and configuring a prioritizr SyncroSim library</b></h3> </p>
+<p id="step-1"> <h3><b>Step 1. Creating a prioritizr SyncroSim library</b></h3> </p>
 
-In SyncroSim, a library is a file with extension *.ssim* that stores all the model's inputs and outputs in a format specific to a given package. To create a new prioritizr library:
+In SyncroSim, a library is a file with extension *.ssim* that stores all the model's inputs and outputs in a format specific to a given package. To create a new **prioritizr** library:
 
 1\. Open SyncroSim Studio.
 
-2\. Select **File > New > From Online Template...**
+2\. In this example, you will review a pre-configured library. To do so, select **File > New > From Online Template...**
+
+<!-- Add screenshot of step 2 !-->
 
 <div class=indentation>
-a. From the list of packages, select <b>prioritizr</b>. Three template library options will be available: 1.) Spatial Formulation Example, 2.) Tabular Formulation Example, and 3.) Climate Refugia Prioritization (Muskoka, Ontario).
+a. From the list of packages, select <b>prioritizr</b>. 
 <br><br>
-b. Select the <b>Tabular Formulation Example</b> template library. If desired, you may edit the <i>File name</i>, and change the <i>Folder</i> by clicking on the <b>Browse</b> button. Click <b>OK</b>.
+b. Three template library options will be available: Spatial Formulation Example, Tabular Formulation Example, and Climate Refugia Prioritization (Muskoka, Ontario). Select the <b>Tabular Formulation Example</b> template library.
+<br><br>
+c.  If desired, you may edit the <i>File name</i>, and change the <i>Folder</i> by clicking on the <b>Browse</b> button. 
+<br><br>
+d. When done, click <b>OK</b>.
 </div>
 
 <!--Insert image of template library window-->
-<!--img align="center" style="padding: 13px" width="500" src=".assets/images/screenshot34.png"-->
+<!--img align="center" style="padding: 13px" width="500" src=".assets/images/screenshot8.png"-->
 
-A new library has been created based on the selected template. SyncroSim will automatically open and display it in the Explorer window.
+<br>
+
+A new library has been created based on the selected template and SyncroSim will have automatically opened and displayed it in the *Explorer* window. Data for this example was derived from the [prioritizr R package](https://prioritizr.net){:target="_blank"}. 
 
 3\.	Double-click on the library name, **Tabular Formulation Example**, to open the library properties window. You may also right-click on the library name and select **Open** from the context menu.
 
@@ -48,11 +56,7 @@ A new library has been created based on the selected template. SyncroSim will au
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot36.png">
 
-5\.	Next, navigate to the **Systems > Options** node.
-
-<div class=indentation> 
-Under <i>General</i>, mark the checkbox for <i>Use conda</i>.
-</div>
+5\.	Next, navigate to the **System** tab, **Options** node, **General** datasheet, and mark the checkbox for <i>Use conda</i>.
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot37.png">
 
@@ -60,7 +64,11 @@ Under <i>General</i>, mark the checkbox for <i>Use conda</i>.
 
 <br>
 
-Next, you will review the conservation feature data by right-clicking on **Definitions** and selecting **Open** in the context menu. Under the **Prioritizr** tab, select **Features**. Here, our feature data corresponds to <!--different bird species?-->.
+Next, you will review the target feature data for the conservation prioritization problem. 
+
+7\. From the *Explorer* window, right-click on **Definitions** and select **Open** from the context menu. 
+
+8\. Under the **Prioritizr** tab, select the **Features** datasheet, describing the variables that will be taken into account in the prioritization process. 
 
 <img align="center" style="padding: 13px" width="400" src="assets/images/screenshot38.png">
 
@@ -172,6 +180,8 @@ This scenario sets up our initial problem. In this example, we will <!--use a mi
 
 <br>
 
+<p id="step-2"> <h3><b>Step 2. Visualizing and comparing results across scenarios</b></h3> </p>
+
 By running the **Budget $5,000** scenario, we generate a solution that helps meet the representation targets.
 
 6\. In the *Explorer* window, expand the **Budget $5,000 > Results** folder and double-click the results scenario to open it. 
@@ -193,8 +203,6 @@ The **Budget $10,000** scenario is a copy of the **Budget $5,000** scenario; the
 By running the **Budget $10,000** scenario, we generate another solution that helps meet the representation targets, although with a larger budget.
 
 <img align="center" style="padding: 13px" width="900" src="assets/images/screenshot50.png">
-
-<p id="step-2"> <h3><b>Step 2. Visualizing and comparing results across scenarios</b></h3> </p>
 
 The **Tabular Formulation Example** template library already contains the results for each scenario. In SyncroSim, the results for a scenario are organized into a *Results* folder, nested within its parent scenario.
 
