@@ -29,26 +29,24 @@ Running **prioritizr** requires that SyncroSim be installed on your computer. Do
 
 3\. The *Local Packages* window will open, listing all the SyncroSim packages installed on your computer. If you do not have any packages installed yet, this window will be empty. To install a new package from the Package Server, click on **Install from Server...**. 
 
-<!--Add image here of red box around Install from Server... in Local Packages window-->
+<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot2.png">
 
 4\. A new window will open listing the packages available to install from the Package Server. To install **prioritizr**, click the checkbox beside the package name and select **OK**. 
 
-<!--Add image here of red box around checkbox beside prioritizr package name, and OK button-->
+<!--Once prioritizr is on the server --- Add image here of red box around checkbox beside prioritizr package name, and OK button-->
 
 5\. The **prioritizr** SyncroSim package uses Conda to manage the package dependencies. Upon installing the package, you will be prompted to install Conda if it is not already installed on your computer. Then, you will be prompted to create or update the Conda environment for **prioritzr**. Click **Yes**.
 
 <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot4.png">
-<!-- Update screenshot so the window is active and "Status" doesn't show in the bottom of the screenshot -->
 
 6\. Return to the *Local Packages* window. **prioritizr** will now be listed along with the other installed packages and the Conda checkbox will be marked.
 
 <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot5.png">
-<!-- Update screenshot so only the Local Packages tab is shown, without the top toolbar and bottom status bar -->
 
 ## **Next steps**
 
 Once the requirements have been installed, the following tutorials will cover the basics of **prioritizr** SyncroSim for building and solving conservation planning problems. 
-1. <a href="./tutorials/spatial_formulation_tutorial">Spatial formulation with prioritizr SyncroSim/a>
+1. <a href="./tutorials/spatial_formulation_tutorial">Spatial formulation with prioritizr SyncroSim<a>
 2. <a href="./tutorials/tabular_formulation_tutorial">Tabular formulation with prioritizr SyncroSim</a>
 3. <a href="./tutorials/climate_refugia_prioritization_tutorial">Climate Refugia Prioritization with prioritizr SyncroSim</a>
 <!-- Update list with new tutorial(s) when all tutorials are done (next week) -->
