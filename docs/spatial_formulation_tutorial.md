@@ -31,7 +31,7 @@ In SyncroSim, a library is a file with extension *.ssim* that stores all the mod
 
 2\. In this example, you will review a pre-configured library. To do so, select **File > New > From Online Template...**
 
-<!-- Add screenshot of step 2 !-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot7.png">
 
 <div class=indentation>
 a. From the list of packages, select <b>prioritizr</b>. 
@@ -43,8 +43,7 @@ c.  If desired, you may edit the <i>File name</i>, and change the <i>Folder</i> 
 d. When done, click <b>OK</b>.
 </div>
 
-<!--Insert image of template library window-->
-<!--img align="center" style="padding: 13px" width="500" src=".assets/images/screenshot8.png"-->
+<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot8.png">
 
 <br>
 
@@ -84,7 +83,7 @@ Now, you will review the inputs for the *Initial problem* scenario, which sets u
 
 10\.	Navigate to the **Pipeline** datasheet. Pipeline stages call on a transformer (*i.e.*, script) which takes the inputs from SyncroSim, runs a model, and returns the results to SyncroSim. Under the *Stage* column, note that a single pipeline stage is set, called *Base Prioritization*.
 
-<!-- Add screenshot !-->
+<img align="center" style="padding: 13px" width="800" src="assets/images/screenshot14-2.png">
 
 11\. Navigate to the **Prioritizr** tab, and expand the **Base Prioritization > Data** nodes. 
 
@@ -101,10 +100,12 @@ Now, you will review the inputs for the *Initial problem* scenario, which sets u
 
   <div class=indentation>
     i. <i>Planning Units</i> – a raster file of Washington (USA) in which each cell represents a different planning unit, and cell values denote land acquisition costs.
-    <!-- Add screenshot of raster, which can be taken from the prioritizr R documentation !-->
+    <br><br>
+  <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot16-2.png">
     <br><br>
     ii. <i>Features</i> – a multi-layer raster file of the conservation feature data (i.e., bird species). Layers describe the spatial distribution of each bird species, where cell values denote the relative abundance of individuals.
-    <!-- Add screenshot of raster, which can be taken from the prioritizr R documentation !-->
+    <br><br>
+  <img align="center" style="padding: 13px" width="800" src="assets/images/screenshot16-3.png">
   </div>
 </div>
 
@@ -176,14 +177,13 @@ Now, you will review the inputs for the *Initial problem* scenario, which sets u
 
 The *Spatial Formulation Example* template library already contains the results for each scenario. Before exploring additional scenarios, you will view the main results for the **Initial problem** scenario. 
 
-<!-- Turn this into a actionable item and add screenshot of the expanded results folder !-->
-1\. In SyncroSim, the results for a scenario are organized into a *Results* folder, nested within its parent scenario.
+1\. In the *Explorer* window, expand the **Initial Problem > Results** node to reveal the **Inital Problem** results scenario.
 
 2\. Collapse the scenario node by clicking on the downward facing arrow beside the scenario name.
 
 3\. Navigate to the **Maps** tab, and double click on the pre-configured **Solution** map.
 
-<!-- Add screenshot !-->
+<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot21-2.png">
 
 The *Solution* map shows which planning units have been selected for prioritization given the input data and parameters. Although this solution helps meet the representation targets, it does not account for existing protected areas inside the study area.
 
@@ -193,17 +193,17 @@ The *Solution* map shows which planning units have been selected for prioritizat
 
 Now, you will review the additional scenarios and explore how they differ from the *Initial problem*.
 
-<!-- Turn this item into an actionable step !-->
-5\. In the *Explorer* window, ... The **Add locked in constraints** scenario is dependent on the **Initial problem** scenario. We can see this in the Explorer window by expanding the **Add locked in constrains > Dependencies** node.*
+5\. In the *Explorer* window, expand the **Add locked in constraints > Dependencies** node to reveal the **Initial problem** scenario dependency.
 
 <img align="center" style="padding: 13px" width="300" src="assets/images/screenshot22.png">
 
 6\.	Select the pre-configured scenario **Add locked in constraints** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
 
-<!-- First, add an instruction to view the Input Format datasheet to show the information is greyed out and the "Inherit values..." checkbox is marked, explaining what it means (with screenshot to illustrate) !-->
-7\. 
+7\. Navigate to the **Prioritizr** tab, expand the **Base Prioritization > Data** node, and open the **Input Format** datasheet. Notice that this information cannot be edited (<i>i.e.</i>, greyed out) and the *"Inherit values from '[9] Initial Problem'"* checkbox in the bottom left corner is marked. This indicates that values within this datasheet are derived from the **Initial Problem** result scenario acting as a dependency.
 
-8\. Navigate to the **Prioritizr** tab, expand the **Parameters > Advanced > Constraints** nodes, and open the **Locked In** datasheet to review the following inputs:
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot22-2.png">
+
+8\.  Navigate to the **Prioritizr** tab, expand the **Parameters > Advanced > Constraints** nodes, and open the **Locked In** datasheet to review the following inputs:
 
 <div class=indentation>
   i. <i>Add constraint</i> – set to <i>Yes</i>, ensuring that specific planning units area selected in the solution.
@@ -213,9 +213,13 @@ Now, you will review the additional scenarios and explore how they differ from t
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot23.png">
 
-9\. <!-- Add to results, with screenshot !-->
+9\. In the *Explorer* window, right-click on the **Add locked in constraints** scenario, and select **Add to Results** from the context menu. 
 
-10\. <!-- View and comment on results, with screenshot !-->
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot23-2.png">
+
+10\. Navigate to the **Maps** tab, and double click on the pre-configured **Solution** map. Notice that the **Add locked in constrains** results were added. This solution now accounts for existing protected areas inside the study area.
+
+<img align="center" style="padding: 13px" width="900" src="assets/images/screenshot23-3.png">
 
 <br>
 
@@ -228,15 +232,19 @@ The **Add locked out constraints** scenario addresses this issue by importing sp
 
 <br>
 
-16\.	In the *Explorer* window, select the pre-configured scenario **Add locked out constraints** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
-
-> *Note: the **Add locked out constraints** scenario is dependent on the **Add locked in constraints** scenario. We can see this in the Explorer window by expanding the **Add locked out constrains > Dependencies** node.*
+11\.	In the *Explorer* window, expand the **Add locked out constraints > Dependencies** node to reveal the **Add locked in constraints** scenario dependency.
 
 <img align="center" style="padding: 13px" width="300" src="assets/images/screenshot24.png">
 
 <br>
 
-17\. Navigate to the **Prioritizr** tab and expand the **Parameters > Advanced > Constraints** node. Open the **Locked Out** window to review the following inputs:
+12\.  Select the pre-configured scenario **Add locked out constraints** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
+
+13\.  Navigate to the **Prioritizr** tab, expand the **Base Prioritization > Data** node, and open the **Input Format** datasheet. Notice that this information cannot be edited (i.e., greyed out) and the *“Inherit values from ‘[10] Add locked in constraints’”* checkbox in the bottom left corner is marked. This indicates that values within this datasheet are derived from the **Add locked in constraints** result scenario acting as a dependency.
+
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot24-2.png">
+
+14\.  Navigate to the **Prioritizr** tab, expand the **Parameters > Advanced > Constraints** node, and open the **Locked Out** datasheet to review the following inputs:
 
 <div class=indentation>
   i. <i>Add constraint</i> - must be set to <i>Yes</i> in order to add constraints to the conservation planning problem to ensure specific planning units area selected (or allocated to a specific zone) in the solution.
@@ -245,6 +253,14 @@ The **Add locked out constraints** scenario addresses this issue by importing sp
   </div>
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot25.png">
+
+15\.  In the **Explorer** window, right-click on the **Add locked out constraints** scenario, and select **Add to Results** from the context menu.
+
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot25-2.png">
+
+16\.  Navigate to the **Maps** tab, and double click on the pre-configured **Solution** map. Notice that the **Add locked out constraints** results were added. This solution now accounts for existing areas that are *not* available for protection inside the study area.
+
+<img align="center" style="padding: 13px" width="900" src="assets/images/screenshot25-3.png">
 
 <br>
 
@@ -256,15 +272,19 @@ The **Add boundary penalties** scenario addresses this final issue by adding pen
 
 <br>
 
-18\.	In the *Explorer* window, select the pre-configured scenario **Add boundary penalties** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
-
-> *Note: the **Add boundary penalties** scenario is dependent on the **Add locked out constraints** scenario. We can see this in the Explorer window by expanding the **Add boundary penalties > Dependencies** node.*
+17\.	In the *Explorer* window, expand the **Add boundary penalties > Dependencies** node to reveal the **Add locked out constraints** scenario dependency.
 
 <img align="center" style="padding: 13px" width="300" src="assets/images/screenshot26.png">
 
 <br>
 
-19\. Navigate to the **Prioritizr** tab and expand the **Parameters > Advanced > Penalties** node. Open the **Boundary** window to review the following inputs:
+18\.  Select the pre-configured scenario **Add boundary penalties** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu. 
+
+19\.  Navigate to the **Prioritizr** tab, expand the **Base Prioritization > Data** node, and open the **Input Format** datasheet. Notice that this information cannot be edited (i.e., greyed out) and the *“Inherit values from ‘[11] Add locked in constraints’”* checkbox in the bottom left corner is marked. This indicates that values within this datasheet are derived from the **Add locked out constraints** result scenario acting as a dependency.
+
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot26-2.png">
+
+20\.  Navigate to the **Prioritizr** tab, expand the **Parameters > Advanced > Penalties** node, and open the **Boundary** datasheet to review the following inputs:
 
 <div class=indentation>
   i. <i>Add penalty</i> - must be set to <i>Yes</i> in order to add boundary penalties to the conservation problem to favour solutions that spatially clump planning units together based on the overall boundary length (<i>i.e.</i>, total perimeter).
@@ -276,27 +296,37 @@ The **Add boundary penalties** scenario addresses this final issue by adding pen
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot27.png">
 
+21\. In the **Explorer** window, right-click on the **Add boundary penalties** scenario, and select **Add to Results** from the context menu. 
+
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot27-2.png">
+
+22\.  Navigate to the **Maps** tab, and double click on the pre-configured **Solution** map. Notice that the **Add boundary penalties** results were added. This solution now accounts for highly fragmented areas inside the study area.
+
+<img align="center" style="padding: 13px" width="900" src="assets/images/screenshot27-3.png">
+
 <br>
 
 <!-- Update numbers  and add a bit more of explanation/commentry !-->
-1\. Navigate to the **Charts** tab, and double-click on the first pre-configured chart: **Number of planning units**. 
+23\. Navigate to the **Charts** tab, and double-click on the first pre-configured chart: **Number of planning units**. Note that the number of planning units increases until we add the boundary penalties. 
 
 <img align="center" style="padding: 13px" width="300" src="assets/images/screenshot28.png">
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot29.png">
 
-2\. Next, double-click on the second pre-configured chart: **Solution cost**.
+24\. Next, double-click on the second pre-configured chart: **Solution cost**. Here, the solution cost is equal across scenarios since the budget was set at $8,748.4910.
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot30.png">
 
-3\. Now, double-click on the third pre-configured chart: **Target coverage**
+25\. Now, double-click on the third pre-configured chart: **Target coverage**. Here, the target coverage is equal across scenarios.
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot31.png">
 
-4\. Navigate to the **Maps** tab, and double click on the pre-configured **Solution** map.
+26\. Navigate to the **Maps** tab, and double click on the pre-configured **Solution** map.
 
 <img align="center" style="padding: 13px" width="300" src="assets/images/screenshot32.png">
 
 <br>
 
-<!-- Add plug for next tutorial !-->
+This tutorial demonstrates how *prioritizr* can be used to build and customize conservation problems, and the solve them to generate solutions. Although we explored a few different scenarios for modifying a conservation problem, this package can specify objectives, constraints, penalties, and decision variables in order to build and customize conservation planning problems to suit your planning scenario.
+
+To create and solve a tabular conservation problem, see the next tutorial <a href="/tabular_formulation">Tabular Formulation Example with prioritizr SyncroSim</a>. 
