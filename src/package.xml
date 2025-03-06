@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<package name="prioritizr" displayName="Prioritizr" description="Systematic conservation planning" version="2.1.0">
+<package name="prioritizr" displayName="Prioritizr" description="Systematic conservation planning" version="2.2.0">
   
   <dataSheet name="projectFeatures" displayName="Features" displayMember="Name" dataScope="Project">
     <column name="Name" dataType="String" />
@@ -115,6 +115,12 @@
 
   <dataSheet name="solutionRasterOutput" displayName="Solution" isSingleRow="True">
     <column name="solution" displayName="Output file" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+  </dataSheet>
+
+  <dataSheet name="solutionDiffRasterOutput" displayName="Solution Comparison" isSingleRow="True">
+    <column name="initial" displayName="Base only" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+    <column name="optimized" displayName="Cost-optimized only" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
+    <column name="both" displayName="Consensus" dataType="String" isExternalFile="True" externalFileFilter="GeoTIFF Files (*.tif)|*.tif|All Files (*.*)|*.*" isRaster="True" />
   </dataSheet>
 
   <dataSheet name="replacementSpatialOutput" displayName="Replacement Importance" isSingleRow="True">
@@ -294,6 +300,7 @@
     <dataSheet name="featureWeights" type="Input" />
     <dataSheet name="problemFormulation" type="Both" />
     <dataSheet name="solutionRasterOutput" type="Output" />
+    <dataSheet name="solutionDiffRasterOutput" type="Output" />
     <dataSheet name="solutionTabularOutput" type="Output" />
     <dataSheet name="solutionObject" type="Both" />
     <dataSheet name="featureRepresentationOutput" type="Both" />
@@ -353,6 +360,7 @@
         <item name="replacementSpatialOutput" showIf="isResult" />
         <item name="ferrierSpatialOutput" showIf="isResult" />
         <item name="raritySpatialOutput" showIf="isResult" />
+        <item name="solutionDiffRasterOutput" showIf="isResult" />
       </group>
       <group name="Tabular" displayName="Tabular">
         <item name="problemFormulation" showIf="isResult" />
@@ -423,6 +431,11 @@
       <item name="replacementSpatialOutputReplacement" displayName="Replacement Importance" dataSheet="replacementSpatialOutput" column="replacement" />
       <item name="ferrierSpatialOutputFerrierMethod" displayName="Ferrier Replacement" dataSheet="ferrierSpatialOutput" column="ferrierMethod" />
       <item name="raritySpatialOutputRarityWeightedRichness" displayName="Rarity Weighted Richness" dataSheet="raritySpatialOutput" column="rarityWeightedRichness" />
+      <group name="solutionsComparison" displayName="Solutions Comparison">
+        <item name="solutionDiffInitialRasterOutputSolution" displayName="Base only" dataSheet="solutionDiffRasterOutput" column="initial" />
+        <item name="solutionDiffOptimizedRasterOutputSolution" displayName="Cost-optimized only" dataSheet="solutionDiffRasterOutput" column="optimized" />
+        <item name="solutionDiffBothRasterOutputSolution" displayName="Consensus" dataSheet="solutionDiffRasterOutput" column="both" />
+      </group>
     </group>
   </layout>
 

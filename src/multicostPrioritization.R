@@ -118,17 +118,17 @@ if(problemFormatDatasheet$dataType == "Tabular"){
   
   # Planning unit
   sim_pu <- data.table::fread(file.path(problemTabularDatasheet$x),
-                              data.table = FALSE)[,-1]
+                              data.table = FALSE)
   
   # Features
   sim_features <- data.table::fread(file.path(problemTabularDatasheet$features),
-                                    data.table = FALSE)[,-1]
+                                    data.table = FALSE)
   # Set features' names
   featuresDatasheet <- data.frame(Name = sim_features$name)
   
   # Planning units vs. Features
   rij <- data.table::fread(file.path(problemTabularDatasheet$rij),
-                           data.table = FALSE)[,-1]
+                           data.table = FALSE)
   
   # Spatial data for visualization
   if(dim(problemSpatialDatasheet)[1] != 0){
@@ -285,7 +285,7 @@ if(costLayersDatasheet$method == "Hierarchical"){
     problem(x = sim_pu, features = sim_features,
             rij = rij, cost_column = problemTabularDatasheet$cost_column)
 
-  # Calculate representation by cost optimized solution
+  # Calculate representation by cost-optimized solution
   featureRepresentation <- eval_feature_representation_summary(
     initialProblem, scenarioSolution[,"solution_1", drop = FALSE])
 
@@ -323,12 +323,12 @@ if(costLayersDatasheet$method == "Hierarchical"){
 
   # Save results
   names(featureRepresentation)[2] <- "projectCostsId"
-  costsRepresentationOutput <- as.data.frame(featureRepresentation)
-  names(costsRepresentationOutput)[3:5] <- c("totalAmount", "absoluteHeld",
+  costsRepresentationOutput <- as.data.frame(featureRepresentation)[,-1]
+  names(costsRepresentationOutput)[2:4] <- c("totalAmount", "absoluteHeld",
                                               "relativeHeld") 
   saveDatasheet(ssimObject = myScenario, 
-                data = costsRepresentationOutput[,-1], 
-                name = "prioritizr_baseCostRepresentationOutput")
+                data = costsRepresentationOutput, 
+                name = "prioritizr_optimizedCostRepresentationOutput")
 
   # Solution file name
   solutionFilename <- solutionObject$solution
@@ -336,18 +336,31 @@ if(costLayersDatasheet$method == "Hierarchical"){
   # Read tabular solution
   initialSolution <- readRDS(file = solutionFilename)
 
-  # Calculate representation by cost optimized solution
+  # Calculate representation by base solution
   featureRepresentation <- eval_feature_representation_summary(
     p_cost, initialSolution[,"solution_1", drop = FALSE])
-
+  
   # Save results
-  names(featureRepresentation)[2] <- "projectCostsId"
-  costsRepresentationOutput2 <- as.data.frame(featureRepresentation)
-  names(costsRepresentationOutput2)[3:5] <- c("totalAmount", "absoluteHeld",
-                                            "relativeHeld") 
+  names(featureRepresentation)[2] <- c("projectCostsId")
+  costsRepresentationOutputBase <- as.data.frame(featureRepresentation[,-1])
+  names(costsRepresentationOutputBase)[2:4] <- c("totalAmount", "absoluteHeld",
+                                                 "relativeHeld") 
+  
+  # Save cost representation for base solution
   saveDatasheet(ssimObject = myScenario, 
-                data = costsRepresentationOutput2[,-1], 
-                name = "prioritizr_optimizedCostRepresentationOutput")
+                data = costsRepresentationOutputBase, 
+                name = "prioritizr_baseCostRepresentationOutput")
+  
+  # Calculate cost representation difference
+  costsRepresentationOutputDiff <- data.frame(projectCostsId = costsRepresentationOutputBase$projectCostsId,
+                                              totalAmount = (costsRepresentationOutput$totalAmount - costsRepresentationOutputBase$totalAmount),
+                                              absoluteHeld = (costsRepresentationOutput$absoluteHeld - costsRepresentationOutputBase$absoluteHeld),
+                                              relativeHeld = (costsRepresentationOutput$relativeHeld - costsRepresentationOutputBase$relativeHeld))
+  
+  # Save cost representation for base solution
+  saveDatasheet(ssimObject = myScenario, 
+                data = costsRepresentationOutputDiff, 
+                name = "prioritizr_diffCostRepresentationOutput")
   
   # Calculate solution number
   if(isTRUE(performanceDatasheet$eval_n_summary)){
@@ -363,6 +376,68 @@ if(costLayersDatasheet$method == "Hierarchical"){
                   name = "prioritizr_numberOutput")
   }
 
+  
+  # Compare spatial solutions --------------------------------------------------
+  
+  # Create spatial visualization of initial solution
+  if(isTRUE(puVis)){
+    
+    # Reclass table between planning unit id & solution
+    reclassTable <- matrix(c(1:length(initialSolution$solution_1),
+                             initialSolution$solution_1),
+                           byrow = FALSE, ncol = 2)
+    # Reclassify raster
+    initialSolutionVis <- classify(pu_vis, reclassTable)
+    
+    # Calculate difference in selected planning units between solutions
+    # 1 - 1 = 0   present in both
+    # 0 - 0 = 0   present in neither
+    # 1 - 0 = 1   present in target only
+    # 0 - 1 = -1  present in other only
+    initialOnlyVis <- optimizedOnlyVis <- initialSolutionVis - solutionVis
+    # Planning units only in initial solution
+    initialOnlyVis[initialOnlyVis == -1] <- 0
+    # Planning units only in initial solution
+    optimizedOnlyVis[optimizedOnlyVis == 1] <- 0
+    optimizedOnlyVis[optimizedOnlyVis == -1] <- 1
+    
+    # Calculate planning units in both solutions
+    bothSolutionsVis <- initialSolutionVis + solutionVis
+    bothSolutionsVis[bothSolutionsVis == 1] <- 0
+    bothSolutionsVis[bothSolutionsVis == 2] <- 1
+    
+    # Define file path
+    solutionDiffFilepath <- paste0(dataPath, 
+                                   "\\prioritizr_solutionDiffRasterOutput")
+    bothSolutionsFilename <- file.path(paste0(solutionDiffFilepath,
+                                              "\\consensusRaster.tif"))
+    initialOnlyFilename <- file.path(paste0(solutionDiffFilepath,
+                                            "\\baseOnlyRaster.tif"))
+    optimizedOnlyFilename <- file.path(paste0(solutionDiffFilepath,
+                                              "\\optimizedOnlyRaster.tif"))
+    # Create directory if it does not exist
+    ifelse(!dir.exists(file.path(solutionDiffFilepath)), 
+           dir.create(file.path(solutionDiffFilepath)), FALSE)
+    
+    # Save raster files
+    writeRaster(bothSolutionsVis, filename = bothSolutionsFilename, 
+                overwrite = TRUE)
+    writeRaster(initialOnlyVis, filename = initialOnlyFilename,
+                overwrite = TRUE)
+    writeRaster(optimizedOnlyVis, filename = optimizedOnlyFilename,
+                overwrite = TRUE)
+    
+    # Save file path to datasheet
+    solutionDiffRasterOutput <- data.frame(initial = initialOnlyFilename,
+                                           optimized = optimizedOnlyFilename,
+                                           both = bothSolutionsFilename)
+    saveDatasheet(ssimObject = myScenario, 
+                  data = solutionDiffRasterOutput, 
+                  name = "prioritizr_solutionDiffRasterOutput")
+    
+    
+  }
+  
 }
 
 
@@ -384,7 +459,7 @@ if(costLayersDatasheet$method == "Equal"){
       problem(x = sim_pu, features = sim_features,
               rij = rij, cost_column = costsDatasheet$Name[i]) %>%
       add_min_set_objective() %>%
-      add_absolute_targets(featureRepresentationOutput$absoluteHeld*0.85) %>%
+      add_absolute_targets(featureRepresentationOutput$absoluteHeld*0.1) %>%
       add_linear_constraints(
         threshold = objectiveDatasheet$budget,
         sense = "=",
@@ -428,7 +503,7 @@ if(costLayersDatasheet$method == "Equal"){
         data = problemTabularDatasheet$cost_column
       ) %>%
       add_binary_decisions() %>%
-      add_default_solver(gap = 0, verbose = FALSE)
+      add_default_solver(gap = 0.1, verbose = FALSE)
     
     # Add constraints for each cost layer and the j'th budget
     for (i in seq_len(n_cost_layers)) {
@@ -569,17 +644,20 @@ if(costLayersDatasheet$method == "Equal"){
       cost_column = problemTabularDatasheet$cost_column
     )
 
-  # Calculate representation by cost optimized solution
+  # Calculate representation by cost-optimized solution
   featureRepresentation <- eval_feature_representation_summary(
     p_cost, scenarioSolution[,"solution_1", drop = FALSE])
 
   # Save results
-  names(featureRepresentation)[1:2] <- c("projectSolutionsId", "projectCostsId")
-  costsRepresentationOutput <- as.data.frame(featureRepresentation)
-  names(costsRepresentationOutput)[3:5] <- c("totalAmount", "absoluteHeld",
+  names(featureRepresentation)[2] <- c("projectCostsId")
+  costsRepresentationOutput <- as.data.frame(featureRepresentation[,-1])
+  names(costsRepresentationOutput)[2:4] <- c("totalAmount", "absoluteHeld",
                                               "relativeHeld") 
-  costsRepresentationOutput$projectSolutionsId <- "Scenario solution"
-
+  
+  # Save cost representation for cost-optimized solution
+  saveDatasheet(ssimObject = myScenario, 
+                data = costsRepresentationOutput, 
+                name = "prioritizr_optimizedCostRepresentationOutput")
 
   # Solution file name
   solutionFilename <- solutionObject$solution
@@ -587,33 +665,31 @@ if(costLayersDatasheet$method == "Equal"){
   # Read tabular solution
   initialSolution <- readRDS(file = solutionFilename)
 
-  # Calculate representation by cost optimized solution
+  # Calculate representation by base solution
   featureRepresentation <- eval_feature_representation_summary(
     p_cost, initialSolution[,"solution_1", drop = FALSE])
 
   # Save results
-  names(featureRepresentation)[1:2] <- c("projectSolutionsId", "projectCostsId")
-  costsRepresentationOutput2 <- as.data.frame(featureRepresentation)
-  names(costsRepresentationOutput2)[3:5] <- c("totalAmount", "absoluteHeld",
+  names(featureRepresentation)[2] <- c("projectCostsId")
+  costsRepresentationOutputBase <- as.data.frame(featureRepresentation[,-1])
+  names(costsRepresentationOutputBase)[2:4] <- c("totalAmount", "absoluteHeld",
                                             "relativeHeld") 
-  costsRepresentationOutput2$projectSolutionsId <- "Initial solution"
 
-  # Combine
-  costsRepresentationOutput <- rbind(costsRepresentationOutput, 
-                                     costsRepresentationOutput2)
-
-  # Solutions names
-  solutionsDatasheet <- data.frame(Name = c("Scenario solution", 
-                                            "Initial solution"))
-
-  # Save features to project scope
-  saveDatasheet(ssimObject = myProject, 
-                data = solutionsDatasheet, 
-                name = "prioritizr_projectSolutions")
-
+  # Save cost representation for base solution
   saveDatasheet(ssimObject = myScenario, 
-                data = costsRepresentationOutput, 
-                name = "prioritizr_costRepresentationOutput")
+                data = costsRepresentationOutputBase, 
+                name = "prioritizr_baseCostRepresentationOutput")
+  
+  # Calculate cost representation difference
+  costsRepresentationOutputDiff <- data.frame(projectCostsId = costsRepresentationOutputBase$projectCostsId,
+                                              totalAmount = (costsRepresentationOutput$totalAmount - costsRepresentationOutputBase$totalAmount),
+                                              absoluteHeld = (costsRepresentationOutput$absoluteHeld - costsRepresentationOutputBase$absoluteHeld),
+                                              relativeHeld = (costsRepresentationOutput$relativeHeld - costsRepresentationOutputBase$relativeHeld))
+  
+  # Save cost representation for base solution
+  saveDatasheet(ssimObject = myScenario, 
+                data = costsRepresentationOutputDiff, 
+                name = "prioritizr_diffCostRepresentationOutput")
   
   # Calculate solution number
   if(isTRUE(performanceDatasheet$eval_n_summary)){
@@ -628,6 +704,68 @@ if(costLayersDatasheet$method == "Equal"){
                   data = numberOutput, 
                   name = "prioritizr_numberOutput")
   }
-
+  
+  
+  # Compare spatial solutions --------------------------------------------------
+  
+  # Create spatial visualization of initial solution
+  if(isTRUE(puVis)){
+    
+    # Reclass table between planning unit id & solution
+    reclassTable <- matrix(c(1:length(initialSolution$solution_1),
+                             initialSolution$solution_1),
+                           byrow = FALSE, ncol = 2)
+    # Reclassify raster
+    initialSolutionVis <- classify(pu_vis, reclassTable)
+  
+    # Calculate difference in selected planning units between solutions
+    # 1 - 1 = 0   present in both
+    # 0 - 0 = 0   present in neither
+    # 1 - 0 = 1   present in target only
+    # 0 - 1 = -1  present in other only
+    initialOnlyVis <- optimizedOnlyVis <- initialSolutionVis - solutionVis
+    # Planning units only in initial solution
+    initialOnlyVis[initialOnlyVis == -1] <- 0
+    # Planning units only in initial solution
+    optimizedOnlyVis[optimizedOnlyVis == 1] <- 0
+    optimizedOnlyVis[optimizedOnlyVis == -1] <- 1
+    
+    # Calculate planning units in both solutions
+    bothSolutionsVis <- initialSolutionVis + solutionVis
+    bothSolutionsVis[bothSolutionsVis == 1] <- 0
+    bothSolutionsVis[bothSolutionsVis == 2] <- 1
+    
+    # Define file path
+    solutionDiffFilepath <- paste0(dataPath, 
+                                   "\\prioritizr_solutionDiffRasterOutput")
+    bothSolutionsFilename <- file.path(paste0(solutionDiffFilepath,
+                                         "\\consensusRaster.tif"))
+    initialOnlyFilename <- file.path(paste0(solutionDiffFilepath,
+                                             "\\baseOnlyRaster.tif"))
+    optimizedOnlyFilename <- file.path(paste0(solutionDiffFilepath,
+                                             "\\optimizedOnlyRaster.tif"))
+    # Create directory if it does not exist
+    ifelse(!dir.exists(file.path(solutionDiffFilepath)), 
+           dir.create(file.path(solutionDiffFilepath)), FALSE)
+    
+    # Save raster files
+    writeRaster(bothSolutionsVis, filename = bothSolutionsFilename, 
+                overwrite = TRUE)
+    writeRaster(initialOnlyVis, filename = initialOnlyFilename,
+                overwrite = TRUE)
+    writeRaster(optimizedOnlyVis, filename = optimizedOnlyFilename,
+                overwrite = TRUE)
+    
+    # Save file path to datasheet
+    solutionDiffRasterOutput <- data.frame(initial = initialOnlyFilename,
+                                           optimized = optimizedOnlyFilename,
+                                           both = bothSolutionsFilename)
+    saveDatasheet(ssimObject = myScenario, 
+                  data = solutionDiffRasterOutput, 
+                  name = "prioritizr_solutionDiffRasterOutput")
+    
+    
+  }
+  
 }
 
