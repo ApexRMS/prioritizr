@@ -75,7 +75,7 @@ Next, you will review the target feature data for the conservation prioritizatio
 
 <br>
 
-Now, you will review the inputs for the *Initial problem* scenario, which sets up the initial problem formulation out of which the other scenarios are built. In SyncroSim, each scenario contains the model inputs and outputs associated with a model run. 
+Now, you will review the inputs for the **Initial problem** scenario, which sets up the initial problem formulation out of which the other scenarios are built. In SyncroSim, each scenario contains the model inputs and outputs associated with a model run. 
 
 9\.	In the *Explorer* window, select the pre-configured scenario **Initial problem** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
 
@@ -124,10 +124,10 @@ Now, you will review the inputs for the *Initial problem* scenario, which sets u
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot17.png">
 
 <div class=indentation>
-  b. Open on the <b>Target</b> datasheet, and review the following inputs:
+  b. Open the <b>Target</b> datasheet, and review the following inputs:
   <br>
   <div class=indentation>
-    i. <i>Function</i> – is set to <i>Relative</i>, so that the target may be defined as a proportion (between 0 and 1) of the desired level of feature representation in the study area.
+    i. <i>Function</i> – is set to <i>Relative</i> so that the target may be defined as a proportion (between 0 and 1) of the desired level of feature representation in the study area.
     <br><br>
     ii. <i>Amount</i> – specifies the desired level of feature representation in the study area. In this example, it is set to <i>0.2</i>, so that each feature would have 20% of its distribution covered by the prioritization.
   </div>
@@ -223,7 +223,6 @@ Now, you will review the additional scenarios and explore how they differ from t
 
 <br>
 
-<!-- Follow the same pattern as above to update the following sections, remembering to update item numbers !-->
 By running the **Add locked in constrains** scenario, we generate an improved solution. However, there are some places in the study area that are not available for protected area establishment (*e.g.*, due to land tenure). Consequently, the solution might not be practical for implementation because it might select some places that are not available for protection. 
 
 <br>
