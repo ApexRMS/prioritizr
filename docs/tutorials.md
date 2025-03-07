@@ -10,4 +10,5 @@ description: "List of tutorials for prioritizr SyncroSim"
 Here we provide the following tutorials to cover the basics of working with **prioritizr** SyncroSim:
 1. <a href="/spatial_formulation">Spatial Formulation Example with prioritizr SyncroSim</a>
 2. <a href="/tabular_formulation">Tabular Formulation Example with prioritizr SyncroSim</a>
-2. <a href="/climate_refugia_prioritization">Climate Refugia Prioritization with prioritizr SyncroSim</a>
+3. <a href="/climate_refugia_prioritization">Climate Refugia Prioritization with prioritizr SyncroSim</a>
+3. <a href="/multicost_prioritization">Multi-cost Prioritization with prioritizr SyncroSim</a>

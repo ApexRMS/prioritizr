@@ -29,7 +29,7 @@ In SyncroSim, a library is a file with extension *.ssim* that stores all the mod
 
 1\. Open SyncroSim Studio.
 
-2\. In this example, you will review a pre-configured library. To do so, select **File > New > From Online Template...**
+2\. In this example, you will review a pre-configured library. To do so, select **File > New > From Online Template...**.
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot7.png">
 

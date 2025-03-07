@@ -79,7 +79,7 @@ Next, you will review the target feature data for the conservation prioritizatio
 
 7\. From the *Explorer* window, right-click on **Definitions** and select **Open** from the context menu.
 
-8\. Under the **Prioritizr** tab, select the **Features** datasheet, describing the variables that will be taken into account in the prioritization process. Here, our feature data corresponds to different conversation interests including species presence (*i.e.*, Brook Trout and Lake Trout), and lake properties (*i.e.*, Epi-benthic Habitat, Mean Depth, and Surface Area).
+8\. Under the **Prioritizr** tab, select the **Features** datasheet, describing the variables that will be taken into account in the prioritization process. Here, our feature data corresponds to different conservation interests including species presence (*i.e.*, Brook Trout and Lake Trout), and lake properties (*i.e.*, Epi-benthic Habitat, Mean Depth, and Surface Area).
 
 <img align="center" style="padding: 13px" width="400" src="assets/images/screenshot59.png">
 
@@ -97,7 +97,7 @@ This scenario provides a baseline under which all features have the same weight,
 
 10\.	Navigate to the **Pipeline** datasheet. Pipeline stages call on a transformer (*i.e.*, script) which takes the inputs from SyncroSim, runs a model, and returns the results to SyncroSim. Under the *Stage* column, note that a single pipeline stage is set called *Base Prioritization*.
 
-<img align="center" style="padding: 13px" width="900" src="assets/images/screenshot14-2.png">
+<img align="center" style="padding: 13px" width="900" src="assets/images/screenshot60-2.png">
 
 <br>
 
