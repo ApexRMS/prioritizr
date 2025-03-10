@@ -1,0 +1,385 @@
+---
+layout: default
+title: Tutorials
+permalink: /multicost_prioritization
+---
+
+<style>
+  .indentation {
+    margin-left: 1rem;
+    margin-top: 1rem; 
+    margin-bottom: 1rem; 
+  }
+</style>
+
+## **Multi-cost Prioritization with prioritizr SyncroSim**
+
+This tutorial provides an overview of working with **prioritizr** in SyncroSim Studio to demonstrate how to integrate multiple cost-layers into a lake conservation problem in Ontario, Canada. It covers the following steps:
+
+1. <a href="#step-1">Creating and configuring the prioritizr **Multi-cost prioritization for FMZ10 lakes (Ontario, Canada)** SyncroSim library</a>
+2. <a href="#step-2">Visualizing and comparing results across scenarios</a>
+
+<br>
+
+<p id="step-1"> <h3><b>Step 1. Creating and configuring the Multi-cost Lake Prioritiation (Ontario, Canada) library</b></h3> </p>
+
+In SyncroSim, a library is a file with extension *.ssim* that stores all the model's inputs and outputs in a format specific to a given package. To recreate the **Multi-cost Lake Prioritization (Ontario, Canada)** library:
+
+1\. Open SyncroSim Studio.
+
+2\. In this example, you will review a pre-configured library. To do so, select **File > New > From Online Template...**
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot7.png">
+
+<div class=indentation>
+a. From the list of packages, select <b>prioritizr</b>. 
+
+<br><br>
+
+b. Four template library options will be available: Spatial Formulation Example, Tabular Formulation Example, Climate Refugia Prioritization (Muskoka, Ontario), and Multi-cost Lake Prioritization (Ontario, Canada). Select the <b>Multi-cost Lake Prioritization (Ontario, Canada)</b> template library.
+
+<br><br>
+
+c. If desired, you may edit the <i>File name</i>, and change the <i>Folder</i> by clicking on the <b>Browse</b> button. 
+
+<br><br>
+
+d. When done, click <b>OK</b>.
+</div>
+
+<img align="center" style="padding: 13px" width="800" src="assets/images/screenshot79.png">
+
+<br>
+
+A new library has been created based on the selected template and SyncroSim will have automatically opened and displayed it in the *Explorer* window.
+
+3\.	Double-click on the library name, **Multi-cost Lake Prioritization (Ontario, Canada)**, to open the library properties window. You may also right-click on the library name and select **Open** from the context menu.
+
+<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot80.png">
+
+<br>
+
+4\.	The **Summary** datasheet contains the metadata for the library.
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot81.png">
+
+<br>
+
+5\.	Next, navigate to the **Systems** tab, **Options** node, **General** datasheet, and mark the checkbox for *Use conda*.
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot82.png">
+
+<br>
+
+6\.	Close the library properties window.
+
+<br>
+
+Next, you will review the target feature data for the conservation prioritization problem.
+
+7\. From the *Explorer* window, right-click on **Definitions** and select **Open** from the context menu.
+
+8\. Under the **Prioritizr** tab, select the **Features** datasheet, describing the variables that will be taken into account in the prioritization process. Here, our feature data corresponds to different conservation interests including mean lake depth (*i.e.*, MeanDepth), and lake surface area (*i.e.*, SurfaceArea).
+
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot83.png">
+
+<br>
+
+9\. Open the **Cost variables** datasheet to review the binary variables that represent whether a lake (*i.e.*, planning unit) has a protection cost (1) or not (0).
+
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot84.png">
+
+<br>
+
+Now you will review the inputs for the **No costs** scenario. In SyncroSim, scenarios contain the model inputs and outputs associated with a model run.
+
+9\.	In the *Explorer* window, select the pre-configured scenario **No costs** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
+
+This scenario provides a baseline for prioritizing 30% of lakes in Ontario, Canada based on the mean depth and surface area, and using a minimum shortfall objective. Note that, in this scenario, *no* cost layers are considered.
+
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot85.png">
+
+<br>
+
+10\.	Navigate to the **Pipeline** datasheet. Pipeline stages call on a transformer (*i.e.*, script) which takes the inputs from SyncroSim, runs a model, and returns the results to SyncroSim. Under the *Stage* column, note that a single pipeline stage is set called *Base Prioritization*.
+
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot86.png">
+
+<br>
+
+11\. Navigate to the **Prioritizr** tab, and expand the **Base Prioritization > Data** nodes. 
+
+<div class=indentation>
+  a. Open the <b>Input Format</b> node and notice that <i>Data Type</i> is set to <i>Tabular</i> in order to generate a tabular prioritization.
+</div>
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot87.png">
+
+<div class=indentation>
+  b. Open the <b>Spatial Inputs</b> datasheet, and review the following input:
+  <br>
+  <div class=indentation>
+    i. <i>Planning Units</i> - a raster of the different lakes of interest in Ontario, Canada.
+  </div>
+</div>
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot88.png">
+
+<div class=indentation>
+  c. Open the <b>Tabular Inputs</b> datasheet, and review the following inputs:
+  <br>
+  <div class=indentation>
+    i. <i>Planning Units</i> - a data table of the different lakes of interest in Ontario, Canada.
+    <br><br>
+      <img align="center" style="padding: 13px" width="250" src="assets/images/screenshot89.png">
+    <br><br>
+    ii. <i>Features</i> - a data table of the conservation feature data including mean depth, and surface area.
+    <br><br>
+      <img align="center" style="padding: 13px" width="250" src="assets/images/screenshot90.png">
+    <br><br>
+    iii. <i>Planning units vs. Features</i> - a data table of mean depth and surface area features associated with each lake.
+    <br><br>
+      <img align="center" style="padding: 13px" width="300" src="assets/images/screenshot91.png">
+    <br><br>
+    iv. <i>Cost column</i> - a column in which the cost is input. <!--not sure if this makes sense - is this simply an empty column in which the cost is input in the results?-->
+  </div>
+</div>
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot92.png">
+
+<br>
+
+12\. Expand the **Parameters** node. 
+
+<div class=indentation>
+  a. Open the <b>Objective</b> datasheet, and review the following inputs:
+  <br>
+  <div class=indentation>
+    i. <i>Function</i> - this input sets the objective of the conservation planning problem. In this example, it is set to <i>Minimum shortfall</i> which aims to minimize the fraction of each target that remains unmet for as many features as possible while staying within a fixed budget.
+    <br><br>
+    ii. <i>Budget</i> - this number represents the maximum allowed cost of the prioritization. Specifically, this value is set to <i>$226</i>.
+  </div>
+</div>
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot93.png">
+
+<div class=indentation>
+  b. Open the <b>Target</b> datasheet, and review the following inputs:
+  <br>
+  <div class=indentation>
+    i. <i>Function</i> - this input is set to <i>Relative</i> so that the target may be defines as a proportion (between 0 and 1) of the desired level of feature representation (<i>i.e.</i>, mean depth, and surface area) in Ontario, Canada.
+    <br><br>
+    ii. <i>Amount</i> - specifies the desired level of feature representation in the study area. In this example, it is set to 1.0, so that each feature would have 100% of its distribution covered by the prioritization.
+  </div>
+</div>
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot94.png">
+
+<div class=indentation>
+  c. Open the <b>Decision Types</b> datasheet, and review the following input:
+  <br>
+  <div class=indentation>
+    i. <i>Function</i> - the decision type is set to <i>Binary</i>, so that planning units are either selected or not for prioritization (<i>i.e.</i>, to prioritize or not prioritize a lake). 
+  </div>
+</div>
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot95.png">
+
+<div class=indentation>
+  d. Open the <b>Solver</b> datasheet, and review the following inputs:
+  <br>
+  <div class=indentation>
+    i. <i>Function</i> - is set to <i>Default</i>. This specifies that the best solver currently available in your computer should be used to solve the conservation planning problem. 
+    <br><br>
+    ii. <i>Gap</i> - represents the gap to optimality and is set to a value of <i>0</i>. This gap is relative and expresses the acceptable deviance from the optimal objective. In this example, a value of 0 will result in the solver stopping when it has found a solution within 0% of optimality. <!-- does this make sense?-->
+  </div>
+</div>
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot96.png">
+
+<br>
+
+13\. Expand the **Output Options** node and open the **Performance** datasheet to review the following inputs set to *Yes*:
+
+  <div class=indentation>
+    i. <i>Number Summary</i> - calculates the number of lakes selected within a solution to the conservation planning problem.
+    <br><br>
+    ii. <i>Feature representation summary</i> - calculates how well features (<i>i.e.</i>, lake depth, and surface area) are represented by a solution to the conservation planning problem.
+  </div>
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot97.png">
+
+<br>
+
+<p id="step-2"> <h3><b>Step 2. Visualizing and comparing results across scenarios</b></h3> </p>
+
+The **Multi-cost Lake Prioritization (Ontario, Canada)** template library already contains the results for each scenario. Before exploring additional scenarios, you will view the main results for the **No costs** scenario.
+
+By running the **No costs** scenario, we generate a baseline solution that prioritizes 30% of lakes in Ontario, Canada based on mean depth and surface area, and using a minimum shortfall objective, without cost layers.
+
+1\. In the *Explorer* window, expand the **No costs > Results** node to reveal the **No costs** result scenario. Double-click it to open its properties. You may also right-click on the result scenario name and select **Open** from the context menu.
+
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot97-2.png">
+
+<br>
+
+2\. Collapse the scenario node by clicking on the downward facing arrow beside the scenario name.
+
+3\. Navigate to the **Maps** tab, and double click on the pre-configured **Solution** map.
+
+<img align="center" style="padding: 13px" width="800" src="assets/images/screenshot98.png">
+
+The *Solution* map shows which planning units have been selected for prioritization given the input data and parameters. Although this solution helps meet the representation targets, it does not account for any additional cost layers (*i.e.*, equal or hierarchical).
+
+4\. Close the chart results panel.
+
+5\. Navigate to the **Charts** tab, and double click on the pre-configured **Feature representation** chart.
+
+<img align="center" style="padding: 13px" width="800" src="assets/images/screenshot99.png">
+
+The *Feature representation* chart shows the proportion of mean depth, and surface area represented in the **No costs** scenario solution. For instance, 51% of all the lakes' mean depth, and 83% of all the lakes' surface area is represented in the solution.
+
+6\. Close the chart results panel.
+
+<br>
+
+Now, you will review the additional scenarios and explore how they differ from the **No costs** solution.
+
+The **No costs** scenario acts as a dependency for the **All costs, Equal** scenario which integrates five cost layers into the prioritization process while treating all cost layers with equal importance. 
+
+7\. In the *Explorer* window, expand the **All costs, Equal > Dependencies** node to reveal the **No costs** scenario dependency.
+
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot100.png">
+
+<br>
+
+8\. Select the pre-configured scenario **All costs, Equal** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
+
+9\.  Navigate to the **Prioritizr** tab, expand the **Base Prioritization > Data** node, and open the **Input Format** datasheet. Notice that this information cannot be edited (i.e., greyed out) and the *“Inherit values from ‘[2] No costs’”* checkbox in the bottom left corner is marked. This indicates that values within this datasheet are derived from the **No costs** result scenario acting as a dependency.
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot101.png">
+
+<br>
+
+10\.  Expand the **Multi-Cost Prioritization** node, and open the **Data** datasheet to review the following input:
+
+<div class=indentation>
+  i. <i>Cost-layers</i> - a data table of the cost layers where 1 represents cost, and 0 represents no cost.
+</div>
+
+<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot102-2.png">
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot102.png">
+
+<br>
+
+11\.  Next, open the **Parameters** datasheet to review the following inputs:
+
+<div class=indentation>
+  i. <i>Prioritization method</i> - specifies how the cost layers will be integrated into the prioritization process. In this case, the prioritization method is set to <i>Equal</i> meaning that each cost layer is of equal importance.
+  <br><br>
+  ii. <i>Initial optimality gap</i> - this number represents the <!-- Carina to explain-->. Here, the default value is set to <i>0.9</i>.
+  <br><br>
+  iii. <i>Cost optimality gap</i> - this number represents the <!-- Carina to explain-->. Here, the default value is set to <i>0.9</i>.
+  <br><br>
+  iv. <i>Budget increments</i> - this number represents the <!-- Carina to explain-->. Here, the default value is set to <i>125</i>.
+  <br><br>
+  v. <i>Budget padding</i> - this number represents the <!-- Carina to explain-->. Here, the default value is set to <i>0.25</i>.
+  <br><br>
+</div>
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot103.png">
+
+<br>
+
+12\. Close the results panel.
+
+Similarly, the **No costs** scenario also acts as a dependency for the **All costs, Hierarchical** scenario which integrates five cost layers into the prioritization process based on the following hierarchy of cost-reduction importance, from most to least important: protected area, lakeshore capacity, sanctuary, Brook Trout regulation, and Lake Trout regulation.
+
+13\. In the *Explorer* window, expand the **All costs, Hierarchical > Dependencies** node to reveal the **No costs** scenario dependency.
+
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot104.png">
+
+<br><br>
+
+14\.  Select the pre-configured scenario **All costs, Hierarchical** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
+
+15\.  Navigate to the **Prioritizr** tab, expand the **Base Prioritization > Data** node, and open the **Input Format** datasheet. Notice that this information cannot be edited (i.e., greyed out) and the *“Inherit values from ‘[2] No costs’”* checkbox in the bottom left corner is marked. This indicates that values within this datasheet are derived from the **No costs** result scenario acting as a dependency.
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot105.png">
+
+<br>
+
+16\.  Expand the **Multi-Cost Prioritization** node, and open the **Data** datasheet to review the following input:
+
+<div class=indentation>
+  i. <i>Cost-layers</i> - a data table of the cost layers where 1 represents cost, and 0 represents no cost.
+</div>
+
+<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot102-2.png">
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot106.png">
+
+17\.  Next, open the **Parameters** datasheet to review the following inputs:
+
+<div class=indentation>
+  i. <i>Prioritization method</i> - specifies how the cost layers will be integrated into the prioritization process. In this case, the prioritization method is set to <i>Hierarchical</i> meaning that each cost layer has a unique level of importance.
+  <br><br>
+  ii. <i>Initial optimality gap</i> - this number represents the <!-- Carina to explain-->. Here, the default value is set to <i>0.9</i>.
+  <br><br>
+  iii. <i>Cost optimality gap</i> - this number represents the <!-- Carina to explain-->. Here, the default value is set to <i>0.9</i>.
+  <br><br>
+  iv. <i>Budget increments</i> - this number represents the <!-- Carina to explain-->. Here, the default value is set to <i>125</i>.
+  <br><br>
+  v. <i>Bugdte padding</i> - this number represents the <!-- Carina to explain-->. Here, the default value is set to <i>0.25</i>.
+</div>
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot107.png">
+
+<br>
+
+18\. Close the results panel.
+
+19\. In the **Explorer** window, hold *Shift* and click on both the **All costs, Equal**, and **All costs, Hierarchical**  scenarios to select them. Right-click and select **Add to Results** from the context menu to simultaneously add each scenario to the results.
+
+<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot108.png">
+
+<br>
+
+20\. Navigate to the **Charts** tab, and double-click on the first pre-configured chart: **Cost representation**. This chart displays three Cost Representations: *Base Solution Absolute Held*, *Cost-Optimized Solution Absolute Held*, and *Difference Absolute Held*. 
+
+The *Base Solution Absolute Held* tells us how many lakes have the associated feature before optimizing the cost of the solution.
+The *Cost-Optimized Solution Absolute Held* takes into consideration the cost-optimized solutions. In this case, the number of lakes associated with each feature has changed. For example, less lakes have protected area (PA) costs compared to the *Base Solution Absolute Held*. 
+The *Difference Absolute Held*  outlines the difference between the **All costs, Equal** and **All costs, Hierarchical** scenarios. Here, the Hierarchical optimized solution increased the cost of some layers (*i.e.*, RegulationLT, and Sanctuary). 
+
+<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot109.png">
+
+<img align="center" style="padding: 13px" width="900" src="assets/images/screenshot110.png">
+
+<br>
+
+21\. Next, double-click on the second pre-configured chart: **Feature representation**. This chart displays the proportion of each feature (*i.e.*, mean lake depth, and lake surface area) represented in each solution. 
+
+<img align="center" style="padding: 13px" width="900" src="assets/images/screenshot111.png">
+
+<br>
+
+22\. Next, double-click on the third pre-configured chart: **Number of selected planning units**. This chart displays the number of planning units in each solution. Here, each scenario contains *226* lakes.
+
+<img align="center" style="padding: 13px" width="900" src="assets/images/screenshot112.png">
+
+<br>
+
+23\. Navigate to the **Maps** tab, and double-click on the first pre-configured map: **Solution**. This map displays the lakes that were selected (green) in each solution. Looking closely, you'll notice that lakes selected in the **No costs** solution, were not selected in the **All costs, Equal** or **All costs, Hierarchical** solution(s).
+
+<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot115.png">
+
+<img align="center" style="padding: 13px" width="1000" src="assets/images/screenshot113.png">
+
+<br>
+
+24\. Finally, double-click on the second pre-configured map: **Solution comparison**. This map is only computed for the multi-cost scenarios (the **No costs** scenario was removed from results). The *Base only* maps display which lakes were selectes when not optimizing for cost, whereas the *Cost-optimized only* maps show which lakes were picked when optimized for cost under equal or hierarchical prioritization methods. The *Consensus* maps display which lakes were picked in both the no cost, and optimized cost scenarios.
+
+<img align="center" style="padding: 13px" width="1000" src="assets/images/screenshot114.png">
+
+<br>
