@@ -48,7 +48,6 @@ d. When done, click <b>OK</b>.
 A new library has been created based on the selected template, and SyncroSim will have automatically opened and displayed it in the *Explorer* window.
 
 <img align="center" style="padding: 13px" width="800" src="assets/images/screenshot34.png">
-<!-- When time allows, update to window shows fully (i.e., S icon and library name) !-->
 
 3\.	Double-click on the library name, **Tabular Formulation Example**, to open the library properties window. You may also right-click on the library name and select **Open** from the context menu.
 
@@ -84,8 +83,7 @@ Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroS
 
 10\.	Navigate to the **Pipeline** datasheet. Pipeline stages call on a transformer (*i.e.*, script) which takes the inputs from SyncroSim, runs a model, and returns the results to SyncroSim. Under the *Stage* column, note that a single pipeline stage is set called *Base Prioritization*.
 
-<img align="center" style="padding: 13px" width="800" src="assets/images/screenshot14-2.png">
-<!-- Update this screenshot. It should show the Pipeline datasheet under the Initial problem scenario properties, not the Definitions !-->
+<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot14-2.png">
 
 11\. Navigate to the **Prioritizr** tab, and expand the **Base Prioritization > Data** nodes. 
 
@@ -103,7 +101,6 @@ Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroS
 
 <div class=indentation>
   <div class=indentation>
-    <!-- Update screenshots from i-iii, as the first column should not show (X). And for iii, order species column so it starts on 10, corresponding to id=10 displayed on spec_dat !-->
     i. <i>Planning Units</i> – a data table of the different planning units in Washington (USA), where each planning unit is associated with a specific ID and cost value. In this example, there are 1,751 planning units.
     <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot40-2.png">
     <br><br>

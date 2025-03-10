@@ -48,7 +48,6 @@ d. When done, click <b>OK</b>.
 A new library has been created based on the selected template, and SyncroSim will have automatically opened and displayed it in the *Explorer* window.
 
 <img align="center" style="padding: 13px" width="800" src="assets/images/screenshot55.png">
-<!-- When time allows, update to window shows fully (i.e., S icon and library name) !-->
 
 3\.	Double-click on the library name, **Climate Refugia Prioritization (Muskoka, Ontario)**, to open the library properties window. You may also right-click on the library name and select **Open** from the context menu.
 
@@ -208,12 +207,13 @@ The *Climate Refugia Prioritization (Muskoka, Ontario)* template library already
   b. Click on the <b>Solution</b> column to reorder the table's contents in decreasing order. <i>Solution</i> values equal to 1 represent the planning units that were selected by the solution.
 </div>
 
-<!-- Add screenshot of step 2b !-->
+<img align="center" style="padding: 13px" width="450" src="assets/images/screenshot70-2.png">
 
 3\. Close the scenario properties tab, and from the *Explorer* window, collapse the scenario node by clicking on the downward facing arrow beside the **Equal weight** scenario.
 
 4\. Navigate to the **Maps** tab, and double-click on the first pre-configured map: **Solution**. This map displays a visual representation of the tabular result you just inspected, showing the lakes that were selected in the solution to the conservation planning problem. 
-<!-- Add screenshot !-->
+
+<img align="center" style="padding: 13px" width="450" src="assets/images/screenshot70-3.png">
 
 5\. Close the results panels.
 
@@ -233,18 +233,17 @@ Now, you will review the additional scenarios, which are equal to the *Equal wei
   b. <i>Weights</i> – a data table outlining the weight of feature. From Step 1.c.ii, recall that features 1 and 2 represent the species presence features <i>LakeTrout</i> and <i>BrookTrout</i>. Here, both species presence variables have a weight of 1, and all lake property variables have a weight of 0. In essence, this means that in this scenario, only the species presence features will be considered in the prioritization process.
 </div>
 
-<!-- Add screenshot to illustrate csv !-->
+<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot71-3.png">
 
 8\. In the *Explorer* window, select the pre-configured scenario **Lake properties weights** and double-click it to open its properties.
 
 9\. Navigate to the **Prioritizr** tab, expand the **Advanced** node, and open the **Feature weights** datasheet to note the input *Weights*. Here, both species presence variables have a weight of 0, and all lake property variables have a weight of 1. In essence, this means that in this scenario, only the lake property features will be considered in the prioritization process.
 
-<!-- Add screenshot to illustrate csv !-->
+<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot71-4.png">
 
 10\. In the *Explorer* window, select scenarios **Species presence weight** and **Lake properties weights**, right-click and select **Add to Results** from the context menu.
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot71-2.png">
-<!-- Update so it shows both scenarios at once !-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot71-5.png">
 
 11\. Navigate to the **Charts** tab, and double-click on the first pre-configured chart: **Feature representation**. This chart shows the effect of the feature weights on the proportion of each feature secured within the solution. Note that feature representation for the species presences features (i.e., *BrookTrout* and *LakeTrout*) are generally higher under the *Species presence weight* scenario, and the lake property features (i.e., *EpiBent*, *MeanDepth* and *SurfArea*) are generally higher under the *Lake properties weights* scenario.
 

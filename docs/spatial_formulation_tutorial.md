@@ -4,8 +4,6 @@ title: Tutorials
 permalink: /spatial_formulation
 ---
 
-<!-- Update template library from S3 with new target coverage chart !-->
-
 <style>
   .indentation {
     margin-left: 1rem;
@@ -50,7 +48,6 @@ d. When done, click <b>OK</b>.
 A new library has been created based on the selected template, and SyncroSim will have automatically opened and displayed it in the *Explorer* window. 
 
 <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot8.png">
-<!-- When time allows, update so window shows fully (i.e., S icon and library name) !-->
 
 3\.	Double-click on the library name, **Spatial Formulation Example**, to open the library properties window. You may also right-click on the library name and select **Open** from the context menu.
 
@@ -86,8 +83,7 @@ Now, you will review the inputs for the **Initial problem** scenario, which sets
 
 10\.	Navigate to the **Pipeline** datasheet. Pipeline stages call on a transformer (*i.e.*, script) which takes the inputs from SyncroSim, runs a model, and returns the results to SyncroSim. Under the *Stage* column, note that a single pipeline stage is set, called *Base Prioritization*.
 
-<img align="center" style="padding: 13px" width="800" src="assets/images/screenshot14-2.png">
-<!-- Update this screenshot. It should show the Pipeline datasheet unher the Initial problem scenario properties, not the Definitions !-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot14-2.png">
 
 11\. Navigate to the **Prioritizr** tab, and expand the **Base Prioritization > Data** nodes. 
 
@@ -184,12 +180,14 @@ Now, you will review the inputs for the **Initial problem** scenario, which sets
 The *Spatial Formulation Example* template library already contains the results for each scenario. Before exploring additional scenarios, you will view the main result for the **Initial problem** scenario. 
 
 1\. In the *Explorer* window, expand the **Initial Problem > Results** nodes to reveal the **Inital Problem** results scenario. This scenario contains the run results, timestamped, and a copy of all input parameters.
-<!-- Add screenshot !-->  
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot21-3.png">
 
 2\. Collapse the scenario node by clicking on the downward facing arrow beside the scenario name.
 
 3\. Navigate to the **Maps** tab, and double click on the pre-configured **Solution** map. The *Solution* map shows in purple which planning units have been selected for prioritization given the input data and parameters. Although this solution helps meet the representation targets, it does not account for existing protected areas inside the study area.
-<!-- Add screenshot !-->
+
+<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot21-4.png">
 
 <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot21-2.png">
 
@@ -207,7 +205,7 @@ Now, you will review the additional scenarios and explore how they differ from t
 
 7\. Navigate to the **Prioritizr** tab, expand the **Base Prioritization > Data** node, and open the **Input Format** datasheet. Notice that this information cannot be edited (<i>i.e.</i>, greyed out) and the *"Inherit values from '[9] Initial Problem'"* checkbox in the bottom left corner is marked. This indicates that values within this datasheet are derived from the **Initial Problem** result scenario acting as a dependency.
 
-<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot22-2.png">
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot22-2.png">
 
 8\.  Navigate to the **Prioritizr** tab, expand the **Parameters > Advanced > Constraints** nodes, and open the **Locked In** datasheet to review the following inputs:
 
@@ -239,7 +237,7 @@ Yet, some places in the study area are not available for protection (*e.g.*, due
 
 13\.  Navigate to the **Prioritizr** tab, expand the **Base Prioritization > Data** nodes, and open the **Input Format** datasheet. Notice that this information cannot be edited (i.e., greyed out) and the *“Inherit values from ‘[10] Add locked in constraints’”* checkbox in the bottom left corner is marked. This indicates that values within this datasheet are derived from the **Add locked in constraints** result scenario acting as a dependency.
 
-<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot24-2.png">
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot24-2.png">
 
 14\.  Navigate to the **Prioritizr** tab, expand the **Parameters > Advanced > Constraints** nodes, and open the **Locked Out** datasheet to review the following inputs:
 
@@ -271,7 +269,7 @@ However, the planning units selected from the solution are fairly fragmented. Th
 
 19\.  Navigate to the **Prioritizr** tab, expand the **Base Prioritization > Data** nodes, and open the **Input Format** datasheet. Notice that this information cannot be edited (i.e., greyed out) and the *“Inherit values from ‘[11] Add locked in constraints’”* checkbox in the bottom left corner is marked. This indicates that values within this datasheet are derived from the **Add locked out constraints** result scenario acting as a dependency.
 
-<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot26-2.png">
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot26-2.png">
 
 20\.  Navigate to the **Prioritizr** tab, expand the **Parameters > Advanced > Penalties** nodes, and open the **Boundary** datasheet to review the following inputs:
 
