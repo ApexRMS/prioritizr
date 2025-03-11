@@ -69,7 +69,7 @@ Next, you will review the target feature data for the conservation prioritizatio
 
 7\. From the *Explorer* window, right-click on **Definitions** and select **Open** from the context menu. 
 
-8\. Under the **Prioritizr** tab, select the **Features** datasheet, which describes the variables that will be taken into account in the prioritization process. In this library, note that the feature data corresponds to different bird species. 
+8\. Under the **Prioritizr** tab, select the **Features** datasheet, which lists the variables that will be taken into account in the prioritization process. In this library, note that the feature data corresponds to different bird species. 
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot13.png">
 
@@ -84,11 +84,12 @@ Now, you will review the inputs for the **Initial problem** scenario, which sets
 10\.	Navigate to the **Pipeline** datasheet. Pipeline stages call on a transformer (*i.e.*, script) which takes the inputs from SyncroSim, runs a model, and returns the results to SyncroSim. Under the *Stage* column, note that a single pipeline stage is set, called *Base Prioritization*.
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot14-2.png">
+<!---	This screenshot is of another library and scenario; update so it matches here !-->
 
 11\. Navigate to the **Prioritizr** tab, and expand the **Base Prioritization > Data** nodes. 
 
 <div class=indentation>
-  a. Open the <b>Input Format</b> datasheet and note that <i>Data Type</i> is set to <i>Spatial</i> in order to setup a spatial formulation of a conservation problem.
+  a. Open the <b>Input Format</b> datasheet and note that <i>Data Type</i> is set to <i>Spatial</i> in order to setup a spatial formulation of the conservation problem.
 </div>
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot15.png">
@@ -163,7 +164,7 @@ Now, you will review the inputs for the **Initial problem** scenario, which sets
 
 <div class=indentation>
   <div class=indentation>
-    i. <i>Number summary</i> – calculates the number of planning units selected within a solution to the conservation planning problem.
+    i. <i>Number summary</i> – calculates the number of planning units selected in the solution to the conservation planning problem.
     <br><br>
     ii. <i>Cost summary</i> – calculates the total cost of the solution to the conservation planning problem.
     <br><br>
@@ -186,8 +187,6 @@ The *Spatial Formulation Example* template library already contains the results 
 2\. Collapse the scenario node by clicking on the downward facing arrow beside the scenario name.
 
 3\. Navigate to the **Maps** tab, and double click on the pre-configured **Solution** map. The *Solution* map shows in purple which planning units have been selected for prioritization given the input data and parameters. Although this solution helps meet the representation targets, it does not account for existing protected areas inside the study area.
-
-<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot21-4.png">
 
 <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot21-2.png">
 
@@ -297,8 +296,6 @@ In addition to spatial representation of the solution, **prioritizr** also produ
 
 23\. Navigate to the **Charts** tab, and double-click on the first pre-configured chart: **Number of planning units**. Note that the number of planning units increases (i.e., fragmentation), until we add the boundary penalty.
 
-<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot28.png">
-
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot29.png">
 
 24\. Next, double-click on the second pre-configured chart: **Solution cost**. Here, the solution cost is equal across scenarios since the budget was set at $8,748.4910.
@@ -311,7 +308,7 @@ In addition to spatial representation of the solution, **prioritizr** also produ
 
 <br>
 
-This tutorial demonstrated how **prioritizr** can be used to build spatial formulations of conservation problems. Next, to create and solve a tabular conservation problem, see the next tutorial <a href="/tabular_formulation">Tabular formulation example with prioritizr SyncroSim</a>. 
+This tutorial demonstrated how **prioritizr** can be used to build spatial formulations of conservation problems. Next, to create and solve a tabular conservation problem, see the next tutorial <a href="/tabular_formulation">Tabular conservation prioritization with prioritizr SyncroSim</a>. 
 
 
 <br><br><br>

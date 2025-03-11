@@ -15,13 +15,13 @@ To get started working with **prioritizr** SyncroSim for building and solving co
 
 ## **Installing SyncroSim**
 
-Running **prioritizr** requires that SyncroSim be installed on your computer. Download the latest version of SyncroSim [here](https://syncrosim.com/download/){:target="_blank"} and follow the installation prompts. For more on SyncroSim, please refer to the SyncroSim Docs for an [overview](https://docs.syncrosim.com/getting_started/overview.html){:target="_blank"} and a [quickstart tutorial](https://docs.syncrosim.com/getting_started/quickstart.html){:target="_blank"}.
+Running **prioritizr** requires that **SyncroSim** be installed on your computer. Download the latest version of SyncroSim [here](https://syncrosim.com/download/){:target="_blank"} and follow the installation prompts. For more on SyncroSim, please refer to the SyncroSim Docs for an [overview](https://docs.syncrosim.com/getting_started/overview.html){:target="_blank"} and a [quickstart tutorial](https://docs.syncrosim.com/getting_started/quickstart.html){:target="_blank"}.
 
 <br>
 
 ## **Installing the prioritizr SyncroSim package**
 
-1\. Open SyncroSim Studio.
+1\. Open **SyncroSim Studio**.
 
 2\. Navigate to **File > Local Packages**.
 
@@ -35,7 +35,7 @@ Running **prioritizr** requires that SyncroSim be installed on your computer. Do
 
 <!--Once prioritizr is on the server --- Add image here of red box around checkbox beside prioritizr package name, and OK button-->
 
-5\. The **prioritizr** SyncroSim package uses Conda to manage the package dependencies. Upon installing the package, you will be prompted to install Conda if it is not already installed on your computer. Then, you will be prompted to create or update the Conda environment for **prioritzr**. Click **Yes**.
+5\. The **prioritizr** SyncroSim package uses Conda to manage the package dependencies. Upon installing the package, you will be prompted to install Conda (if it is not already installed on your computer). Then, you will be prompted to create or update the Conda environment for **prioritzr**. Click **Yes**.
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot4.png">
 
@@ -48,11 +48,11 @@ Running **prioritizr** requires that SyncroSim be installed on your computer. Do
 ## **Next steps**
 
 Once the requirements have been installed, the following tutorials will cover the basics of **prioritizr** SyncroSim for building and solving conservation planning problems: 
-1. <a href="./tutorials/spatial_formulation_tutorial">Spatial formulation with prioritizr SyncroSim<a>
-2. <a href="./tutorials/tabular_formulation_tutorial">Tabular formulation with prioritizr SyncroSim</a>
-3. <a href="./tutorials/climate_refugia_prioritization_tutorial">Climate Refugia Prioritization with prioritizr SyncroSim</a>
-<!-- Update list with new tutorial(s) when all tutorials are done (next week) -->
+1. <a href="./tutorials/spatial_formulation_tutorial">Spatial conservation prioritization with prioritizr SyncroSim<a>
+2. <a href="./tutorials/tabular_formulation_tutorial">Tabular conservation prioritization with prioritizr SyncroSim</a>
+3. <a href="./tutorials/climate_refugia_prioritization_tutorial">Climate refugia prioritization with prioritizr SyncroSim</a>
+4. <a href="./tutorials/multicost_prioritization">Multi-cost prioritization with prioritizr SyncroSim</a>
 
-<!-- Add an image of prioritizr output maps/charts. Could you propose some options for us to choose together? -->
+<img align="center" style="padding: 13px" width="900" src="assets/images/screenshot23-3.png">
 
 <br><br><br>

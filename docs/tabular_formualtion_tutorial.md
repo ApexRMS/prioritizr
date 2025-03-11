@@ -12,7 +12,7 @@ permalink: /tabular_formulation
   }
 </style>
 
-## **Tabular formulation example with prioritizr SyncroSim**
+## **Tabular conservation prioritization with prioritizr SyncroSim**
 
 This tutorial provides an overview of working with **prioritizr** in SyncroSim Studio to create and solve a tabular conservation problem. Here, you will review a pre-configured library that uses data derived from the prioritizr R package [documentation](https://prioritizr.net){:target="_blank"}. It covers the following steps:
 
@@ -69,13 +69,13 @@ Next, you will review the target feature data for the conservation prioritizatio
 
 7\. From the *Explorer* window, right-click on **Definitions** and select **Open** from the context menu. 
 
-8\. Under the **Prioritizr** tab, select the **Features** datasheet, which describes the variables that will be taken into account in the prioritization process. 
+8\. Under the **Prioritizr** tab, select the **Features** datasheet, which lists the variables that will be taken into account in the prioritization process. 
 
 <img align="center" style="padding: 13px" width="400" src="assets/images/screenshot38.png">
 
 <br>
 
-Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroSim, scenarios contain the model inputs and outputs associated with a model run.
+Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroSim, scenarios contains the model inputs and outputs associated with a model run.
 
 9\.	In the *Explorer* window, select the pre-configured scenario **Budget $500,000** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
 
@@ -88,7 +88,7 @@ Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroS
 11\. Navigate to the **Prioritizr** tab, and expand the **Base Prioritization > Data** nodes. 
 
 <div class=indentation>
-  a. Open the <b>Input Format</b> datasheet and note that <i>Data Type</i> is set to <i>Tabular</i> in order to setup a tabular formulation of a conservation problem.
+  a. Open the <b>Input Format</b> datasheet and note that <i>Data Type</i> is set to <i>Tabular</i> in order to setup a tabular formulation of the conservation problem.
 </div>
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot40.png">
@@ -102,13 +102,16 @@ Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroS
 <div class=indentation>
   <div class=indentation>
     i. <i>Planning Units</i> – a data table of the different planning units in Washington (USA), where each planning unit is associated with a specific ID and cost value. In this example, there are 1,751 planning units.
-    <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot40-2.png">
+    <br>
+    <img align="center" style="padding: 13px" width="400" src="assets/images/screenshot40-2.png">
     <br><br>
     ii. <i>Features</i> – a data table listing the feature variables. These are listed under the column <i>name</i>, with an associated ID. The other columns displayed here are optional fields and not used in this example.
+    <br>
       <img align="center" style="padding: 13px" width="400" src="assets/images/screenshot40-3.png">
     <br><br>
-    iii. <i>Planning units vs. Features</i> – a data table listing for each planning unit, the value associated with each feature variable.
-      <img align="center" style="padding: 13px" width="400" src="assets/images/screenshot40-4.png">
+    iii. <i>Planning units vs. Features</i> – a data table listing for each planning unit (under the <i>pu</i> column), the value associated with each feature variable (under the <i>species</i> column).
+    <br>
+    <img align="center" style="padding: 13px" width="300" src="assets/images/screenshot40-4.png">
     <br><br>
   </div>
 </div>
@@ -210,11 +213,7 @@ Now you will review the additional scenario and explore how it differs from the 
 
 <img align="center" style="padding: 13px" width="450" src="assets/images/screenshot49-2.png">
 
-7\. Navigate to the **Charts** tab, and double-click on the first pre-configured chart: **Cost of the Solution**.
-
-<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot51.png">
-
-Here, note the difference in solution cost based on the budget set in each scenario.
+7\. Navigate to the **Charts** tab, and double-click on the pre-configured **Cost of the Solution** chart. Here, note the difference in solution cost based on the budget set in each scenario.
 
 <img align="center" style="padding: 13px" width="800" src="assets/images/screenshot53.png">
 
