@@ -83,7 +83,7 @@ Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroS
 
 10\.	Navigate to the **Pipeline** datasheet. Pipeline stages call on a transformer (*i.e.*, script) which takes the inputs from SyncroSim, runs a model, and returns the results to SyncroSim. Under the *Stage* column, note that a single pipeline stage is set called *Base Prioritization*.
 
-<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot14-2.png">
+<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot39-2.png">
 
 11\. Navigate to the **Prioritizr** tab, and expand the **Base Prioritization > Data** nodes. 
 
