@@ -105,8 +105,12 @@ Now you will review the inputs for the **Equal weight** scenario, which provides
 
 <div class=indentation>
   c. Open the <b>Tabular Inputs</b> datasheet, and review the following inputs:
-  <!-- Add screenshot !-->
   <br>
+
+  <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot62-5.png">
+
+  <br>
+
   <div class=indentation>
     i. <i>Planning Units</i> – a data table of the different lakes of interest in Muskoka, Ontario. Each lake has an unique ID. A <i>cost</i> column is also provided and set to <i>1</i> for all lakes.
     <br>
@@ -124,7 +128,6 @@ Now you will review the inputs for the **Equal weight** scenario, which provides
       <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot63.png">
   </div>
 </div>
-
 
 
 12\. Expand the **Parameters** node. 
@@ -211,13 +214,13 @@ The *Climate Refugia Prioritization (Muskoka, Ontario)* template library already
   b. Click on the <b>Solution</b> column to reorder the table's contents in decreasing order. <i>Solution</i> values equal to 1 represent the planning units that were selected by the solution.
 </div>
 
-<img align="center" style="padding: 13px" width="450" src="assets/images/screenshot70-2.png">
+<img align="center" style="padding: 13px" width="650" src="assets/images/screenshot70-2.png">
 
 3\. Close the scenario properties tab, and from the *Explorer* window, collapse the scenario node by clicking on the downward facing arrow beside the **Equal weight** scenario.
 
 4\. Navigate to the **Maps** tab, and double-click on the first pre-configured map: **Solution**. This map displays a visual representation of the tabular result you just inspected, showing the lakes that were selected in the solution to the conservation planning problem. 
 
-<img align="center" style="padding: 13px" width="450" src="assets/images/screenshot70-3.png">
+<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot70-3.png">
 
 5\. Close the results panels.
 
@@ -267,6 +270,6 @@ Now, you will review the additional scenarios, which are equal to the *Equal wei
 
 <br>
 
-This tutorial demonstrated how **prioritizr** can be used to build tabular formulations of conservation problems, with a spatial visualization of the results, and covered how to add feature weights to control the relative importance of features in the prioritization. Next, to explore how to further customize a conservation problem with multiple cost layers, see the next tutorial <a href="/multicost_prioritization">Multi-cost prioritization with prioritizr SyncroSim</a>. 
+This tutorial demonstrated how **prioritizr** can be used to build tabular formulations of conservation problems, with a spatial visualization of the results, and covered how to add feature weights to control the relative importance of features in the prioritization. Next, to explore how to further customize a conservation problem with multiple cost layers, see the next tutorial <a href="/multicost_prioritization">Multi-Cost Prioritization with prioritizr SyncroSim</a>. 
 
 <br><br><br>

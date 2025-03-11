@@ -12,8 +12,6 @@ permalink: /multicost_prioritization
   }
 </style>
 
-<!-- Update library name so "cost" is also title case !-->
-
 ## **Multi-cost prioritization with prioritizr SyncroSim**
 
 This tutorial provides an overview of working with **prioritizr** in SyncroSim Studio to demonstrate how to integrate multiple cost-layers into a lake conservation problem. It covers the following steps:
@@ -37,7 +35,7 @@ In SyncroSim, a library is a file with extension *.ssim* that stores all the mod
   a. From the list of packages, select <b>prioritizr</b>. 
   <!-- Add screenshots of this step !--> 
   <br><br>
-  b. From the list of template libraries, select the <b>Multi-cost Lake Prioritization (Ontario, Canada)</b> template library.
+  b. From the list of template libraries, select the <b>Multi-Cost Lake Prioritization (Ontario, Canada)</b> template library.
   <!-- Add screenshots of this step !--> 
   <br><br>
   c. If desired, you may edit the <i>File name</i>, and change the <i>Folder</i> by clicking on the <b>Browse</b> button.
@@ -50,14 +48,12 @@ In SyncroSim, a library is a file with extension *.ssim* that stores all the mod
 A new library has been created based on the selected template, and SyncroSim will have automatically opened and displayed it in the *Explorer* window.
 
 <img align="center" style="padding: 13px" width="800" src="assets/images/screenshot79.png">
-<!-- When time allows, update to window shows fully (i.e., S icon and library name) !-->
 
 3\.	Double-click on the library name, **Multi-Cost Lake Prioritization (Ontario, Canada)**, to open the library properties window. You may also right-click on the library name and select **Open** from the context menu.
 
 <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot80.png">
 
 4\.	The **Summary** datasheet contains the metadata for the library.
-<!-- Update with new library name !-->
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot81.png">
 
@@ -91,7 +87,7 @@ Now you will review the inputs for the **No costs** scenario, which provides a b
 
 11\.	Navigate to the **Pipeline** datasheet. Pipeline stages call on a transformer (*i.e.*, script) which takes the inputs from SyncroSim, runs a model, and returns the results to SyncroSim. Under the *Stage* column, note that a single pipeline stage is set, called *Base Prioritization*.
 
-<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot86.png">
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot86.png">
 
 12\. Navigate to the **Prioritizr** tab, and expand the **Base Prioritization > Data** nodes. 
 
@@ -114,7 +110,11 @@ Now you will review the inputs for the **No costs** scenario, which provides a b
 <div class=indentation>
   c. Open the <b>Tabular Inputs</b> datasheet, and review the following inputs:
   <br>
-  <!-- Add screenshot !-->
+
+  <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot88-2.png">
+
+  <br>
+
   <div class=indentation>
     i. <i>Planning Units</i> – a data table of the different lakes of interest in Ontario, Canada. Each lake has an unique ID. A cost column, here called <i>PA_target</i>, is also provided and set to <i>1</i> for all lakes.
     <br>
@@ -130,7 +130,7 @@ Now you will review the inputs for the **No costs** scenario, which provides a b
     <br>
     iv. <i>Cost column</i> – corresponds to the column in the <i>Plannin Units</i> input representing the cost variable.
     <br>
-    <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot92.png">
+    <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot92.png">
   </div>
 </div>
 
@@ -214,16 +214,17 @@ Now, you will review the additional scenarios and explore how they differ from t
 
 4\. In the *Explorer* window, expand the **All costs, Equal > Dependencies** and **All costs, Hierarchical > Dependencies** nodes to reveal the **No costs** scenario dependency.
 
-<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot100.png">
-<!-- Update so it shows both scenarios !-->
+<img align="center" style="padding: 13px" width="300" src="assets/images/screenshot100.png">
 
 5\. Select the pre-configured scenario **All costs, Equal** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
 
 6\. In the **Summary** datasheet, note the *Description* that says that this scenario "integrates five cost layers into the prioritization process, treating all cost layers with equal importance". 
-<!-- Add screenshot !-->
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot100-2.png">
 
 7\. Open the **Pipeline** datasheet and note that the *“Inherit values from ‘[1] No costs’”* checkbox in the bottom left corner is not marked, and new pipeline stage is set, called *Multi-Cost Prioritization*.
-<!-- Add screenshot !-->
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot100-3.png">
 
 8\. Navigate to the **Prioritizr** tab, expand the **Base Prioritization > Data** nodes, and open the **Input Format** datasheet. Notice that this information cannot be edited (*i.e.*, greyed out) and the *“Inherit values from ‘[2] No costs’”* checkbox in the bottom left corner is marked. This indicates that values within this datasheet and others are derived from the **No costs** result scenario acting as a dependency.
   
@@ -237,7 +238,6 @@ Now, you will review the additional scenarios and explore how they differ from t
 </div>
 
 <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot102-2.png">
-<!-- Update to show the variability between columns instead of all 1's !-->
 
 10\. Next, open the **Parameters** datasheet and note that *Prioritization method* is set to *Equal*. This specifies how the cost variables will be integrated into the prioritization process; In this case, meaning that minimizing cost is treated with equal importance across all cost variables. Default values are provided for the additional parameters.
 
@@ -246,7 +246,8 @@ Now, you will review the additional scenarios and explore how they differ from t
 11\. Select the pre-configured scenario **All costs, Hierarchical** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
 
 12\. In the **Summary** datasheet, note the *Description* that says that this scenario "integrates five cost layers into the prioritization process based on the following hierarchy of cost-reduction importance, from most to least important: protected area, lakeshore capacity, sanctuary, Brook Trout regulation, Lake Trout regulation".
-<!-- Add screenshot !-->
+
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot103-2.png">
 
 13\. Navigate to the **Prioritizr** tab, expand the **Multi-Cost Prioritization** node, and open the **Parameters** datasheet to note that *Prioritization method* is set to *Hierarchical*. All other input and parameters are identical to the **All costs, Equal** scenario.
 
