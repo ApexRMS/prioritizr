@@ -9,13 +9,27 @@ permalink: /getting_started
 To get started working with **prioritizr** SyncroSim for building and solving conservation planning problems, begin by:
 
 1. <a href="#installing-syncrosim">Installing SyncroSim</a>
-2. <a href="#installing-the-prioritizr-syncrosim-package">Installing the **prioritizr** SyncroSim package</a>
+2. <a href="#installing-R-package-dependencies">Installing R package dependencies</a>
+3. <a href="#installing-the-prioritizr-syncrosim-package">Installing the **prioritizr** SyncroSim package</a>
 
 <br>
 
 ## **Installing SyncroSim**
 
 Running **prioritizr** requires that **SyncroSim** be installed on your computer. Download the latest version of SyncroSim [here](https://syncrosim.com/download/){:target="_blank"} and follow the installation prompts. For more on SyncroSim, please refer to the SyncroSim Docs for an [overview](https://docs.syncrosim.com/getting_started/overview.html){:target="_blank"} and a [quickstart tutorial](https://docs.syncrosim.com/getting_started/quickstart.html){:target="_blank"}.
+
+<br>
+
+## **Installing R package dependencies**
+
+Running **prioritizr** requires the following R packages be installed globally in your computer:
+- prioritizr 8.0.4
+- Rsymphony 0.1-33
+- rsyncrosim 2.0.0
+- stringr 1.4.1
+- terra 1.7-29
+- tidyr 1.2.1
+- dplyr 1.1.1 
 
 <br>
 
