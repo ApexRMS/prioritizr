@@ -35,7 +35,7 @@ In SyncroSim, a library is a file with extension *.ssim* that stores all the mod
   a. From the list of packages, select <b>prioritizr</b>. 
   <!-- Add screenshots of this step !--> 
   <br><br>
-  b. From the list of template libraries, select the <b>Multi-Cost Lake Prioritization (Ontario, Canada)</b> template library.
+  b. From the list of template libraries, select the <b>Multi-Cost Prioritization (Ontario, Canada)</b> template library.
   <!-- Add screenshots of this step !--> 
   <br><br>
   c. If desired, you may edit the <i>File name</i>, and change the <i>Folder</i> by clicking on the <b>Browse</b> button.
@@ -49,7 +49,7 @@ A new library has been created based on the selected template, and SyncroSim wil
 
 <img align="center" style="padding: 13px" width="800" src="assets/images/screenshot79.png">
 
-3\.	Double-click on the library name, **Multi-Cost Lake Prioritization (Ontario, Canada)**, to open the library properties window. You may also right-click on the library name and select **Open** from the context menu.
+3\.	Double-click on the library name, **Multi-Cost Prioritization (Ontario, Canada)**, to open the library properties window. You may also right-click on the library name and select **Open** from the context menu.
 
 <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot80.png">
 
@@ -196,7 +196,7 @@ Now you will review the inputs for the **No costs** scenario, which provides a b
 
 <p id="step-2"> <h3><b>Step 2. Visualizing and comparing results across scenarios</b></h3> </p>
 
-The **Multi-Cost Lake Prioritization (Ontario, Canada)** template library already contains the results for each scenario. Before exploring additional scenarios, you will view the main results for the **No costs** scenario.
+The **Multi-Cost Prioritization (Ontario, Canada)** template library already contains the results for each scenario. Before exploring additional scenarios, you will view the main results for the **No costs** scenario.
 
 1\. Navigate to the **Maps** tab, and double click on the pre-configured **Solution** map. The *Solution* map shows which planning units have been selected for prioritization given the input data and parameters.
 
