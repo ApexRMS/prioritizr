@@ -57,9 +57,9 @@ A new library has been created based on the selected template, and SyncroSim wil
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot36.png">
 
-5\.	Next, navigate to the **System** tab, **Options** node, **General** datasheet, and mark the checkbox for <i>Use conda</i>.
+5\.	Next, navigate to the **System** tab, **Options** node, **General** datasheet, and make sure <b>Use conda</b> is disabled.
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot37.png">
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot37-2.png">
 
 6\.	Close the library properties window.
 
