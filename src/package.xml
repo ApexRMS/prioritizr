@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<package name="prioritizr" displayName="Prioritizr" description="Systematic conservation planning" version="2.2.0">
+<package name="prioritizr" displayName="Prioritizr" description="Systematic conservation planning" version="2.2.1">
   
   <dataSheet name="projectFeatures" displayName="Features" displayMember="Name" dataScope="Project">
     <column name="Name" dataType="String" />

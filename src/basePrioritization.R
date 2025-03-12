@@ -16,47 +16,14 @@ library(stringr)
 library(terra)
 library(tidyr)
 library(dplyr)
+library(prioritizr)
+library(Rsymphony)
 
 # Load environment, library, project & scenario
 e <- ssimEnvironment()
 myLibrary <- ssimLibrary()
 myProject <- rsyncrosim::project()
 myScenario <- scenario()
-
-# Open Conda configuration options
-condaDatasheet <- datasheet(myLibrary, name = "core_Option")
-
-# Install missing packages when using Conda
-if(isTRUE(condaDatasheet$UseConda)){
-  
-  # Path to R session package library
-  packagePath <- e$PackageDirectory
-  syncrosimPath <- str_remove(packagePath, fixed("\\Packages")) %>%
-    str_remove(fixed("\\prioritizr"))
-  rLibraryPath <- file.path(syncrosimPath, "Conda", "envs", "prioritizr", 
-                            "prioritizrEnv-v2", "lib", "R", "library")
-  
-  # Check which packages to install
-  packagesToCheck <- c("prioritizr", "symphony", "Rsymphony")
-  packagesToInstall <- packagesToCheck[!(packagesToCheck %in% 
-                      installed.packages(lib.loc = rLibraryPath)[,"Package"])]
-  # Install missing packages
-  if(length(packagesToInstall) != 0){
-    install.packages(packagesToInstall,
-                     dependencies = TRUE,
-                     lib = rLibraryPath,
-                     repos = "https://mirror.rcg.sfu.ca/mirror/CRAN/")
-  }
-  
-  # Load additional packages
-  .libPaths(rLibraryPath)
-  library(prioritizr)
-  library(Rsymphony)
-} else {
-  # Load additional packages
-  library(prioritizr)
-  library(Rsymphony)
-}
 
 # Data directory
 dataDir <- e$DataDirectory
