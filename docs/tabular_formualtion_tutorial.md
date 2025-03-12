@@ -33,10 +33,12 @@ In SyncroSim, a library is a file with extension *.ssim* that stores all the mod
 
 <div class=indentation>
 a. From the list of packages, select <b>prioritizr</b>. 
-<!-- Add screenshots of this step !--> 
+<br><br>
+<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot7-2.png">
 <br><br>
 b. From the list of template libraries, select the <b>Tabular Formulation Example</b>.
-<!-- Add screenshots of this step !--> 
+<br><br>
+<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot7-4.png">
 <br><br>
 c.  If desired, you may edit the <i>File name</i>, and change the <i>Folder</i> by clicking on the <b>Browse</b> button. 
 <br><br>
