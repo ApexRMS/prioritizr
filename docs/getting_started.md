@@ -22,8 +22,9 @@ Running **prioritizr** requires that **SyncroSim** be installed on your computer
 
 ## **Installing R package dependencies**
 
-Running **prioritizr** requires the following R packages be installed globally in your computer:
+Running **prioritizr** requires the following R packages be installed in your computer:
 - prioritizr 8.0.4
+- symphony 0.1.1
 - Rsymphony 0.1-33
 - rsyncrosim 2.0.0
 - stringr 1.4.1
