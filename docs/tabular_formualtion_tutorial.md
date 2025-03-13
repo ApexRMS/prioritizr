@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Tutorials
-permalink: /tabular_formulation
+permalink: tutorials/tabular_formulation
 ---
 
 <style>
@@ -232,6 +232,6 @@ Now you will review the additional scenario and explore how it differs from the 
 
 <br>
 
-This tutorial demonstrated how **prioritizr** can be used to build tabular formulations of conservation problems. Next, to explore how to further customize a conservation problem with feature weights, see the next tutorial <a href="/climate_refugia_prioritization">Climate refugia prioritization with prioritizr SyncroSim</a>. 
+This tutorial demonstrated how **prioritizr** can be used to build tabular formulations of conservation problems. Next, to explore how to further customize a conservation problem with feature weights, see the next tutorial <a href="tutorials/climate_refugia_prioritization">Climate refugia prioritization with prioritizr SyncroSim</a>. 
 
 <br><br><br>

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Tutorials
-permalink: /multicost_prioritization
+permalink: tutorials/multicost_prioritization
 ---
 
 <style>

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Tutorials
-permalink: /climate_refugia_prioritization
+permalink: tutorials/climate_refugia_prioritization
 ---
 
 <style>
@@ -275,6 +275,6 @@ Now, you will review the additional scenarios, which are equal to the *Equal wei
 
 <br>
 
-This tutorial demonstrated how **prioritizr** can be used to build tabular formulations of conservation problems, with a spatial visualization of the results, and covered how to add feature weights to control the relative importance of features in the prioritization. Next, to explore how to further customize a conservation problem with multiple cost layers, see the next tutorial <a href="/multicost_prioritization">Multi-Cost Prioritization with prioritizr SyncroSim</a>. 
+This tutorial demonstrated how **prioritizr** can be used to build tabular formulations of conservation problems, with a spatial visualization of the results, and covered how to add feature weights to control the relative importance of features in the prioritization. Next, to explore how to further customize a conservation problem with multiple cost layers, see the next tutorial <a href="tutorials/multicost_prioritization">Multi-Cost Prioritization with prioritizr SyncroSim</a>. 
 
 <br><br><br>
