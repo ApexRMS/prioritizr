@@ -48,7 +48,7 @@ Running **prioritizr** requires the following R packages be installed in your co
 
 4\. A new window will open listing the packages available to install from the Package Server. To install **prioritizr**, click the checkbox beside the package name and select **OK**. 
 
-<!--Once prioritizr is on the server --- Add image here of red box around checkbox beside prioritizr package name, and OK button-->
+<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot3.png">
 
 5\. The **prioritizr** SyncroSim package uses Conda to manage the package dependencies. Upon installing the package, you will be prompted to install Conda (if it is not already installed on your computer). Then, you will be prompted to create or update the Conda environment for **prioritzr**. Click **Yes**.
 

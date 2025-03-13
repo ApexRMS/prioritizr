@@ -252,7 +252,6 @@ Now, you will review the additional scenarios, which are equal to the *Equal wei
 9\. Navigate to the **Prioritizr** tab, expand the **Advanced** node, and open the **Feature weights** datasheet to note the input *Weights*. Here, both species presence variables now have a weight of 0, and all lake property variables have the same weight of 1. In essence, this means that in this scenario, only the lake property features will be considered in the prioritization process.
 
 <img align="center" style="padding: 13px" width="200" src="assets/images/screenshot71-4.png">
-<!-- Update screenshot !-->
 
 10\. In the *Explorer* window, select scenarios **Species presence weight** and **Lake properties weights**, right-click and select **Add to Results** from the context menu.
 

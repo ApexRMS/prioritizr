@@ -112,8 +112,7 @@ Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroS
     <br><br>
     ii. <i>Features</i> – a data table listing the feature variables. These are listed under the column <i>name</i>, with an associated ID. The other columns displayed here are optional fields and not used in this example.
     <br>
-      <img align="center" style="padding: 13px" width="400" src="assets/images/screenshot40-3.png">
-      <!-- Wrong screenshot !-->
+      <img align="center" style="padding: 13px" width="300" src="assets/images/screenshot40-3.png">
     <br><br>
     iii. <i>Planning units vs. Features</i> – a data table listing, for each planning unit (under the <i>pu</i> column), the value (under the <i>amount</i> column) associated with each feature variable (under the <i>species</i> column).
     <br>

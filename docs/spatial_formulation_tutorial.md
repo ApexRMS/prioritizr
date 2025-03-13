@@ -221,7 +221,7 @@ Now, you will review the additional scenarios and explore how they differ from t
   ii. <i>Data</i> – contains the spatial data (i.e., raster) specifying the locations of the areas to be locked in (e.g., protected areas).
   </div>
 
-<!-- Add existing protected areas screenshor from prioritizr.net !-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot23-4.png">
 
 9\. In the *Explorer* window, right-click on the **Add locked in constraints** scenario, and select **Add to Results** from the context menu. 
 
@@ -255,7 +255,7 @@ Yet, some places in the study area are not available for protection (e.g., due t
   ii. <i>Data</i> – contains the spatial data (i.e., raster) specifying the locations of the areas to be locked out (e.g., areas not available for protection).
   </div>
 
-<!-- Add areas not available for protection screenshot from prioritizr.net !-->
+<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot25-4.png">
 
 15\.  In the **Explorer** window, right-click on the **Add locked out constraints** scenario, and select **Add to Results** from the context menu.
 
