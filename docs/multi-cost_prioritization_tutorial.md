@@ -319,6 +319,6 @@ Now, you will review the additional scenarios and explore how they differ from t
 
 <br>
 
-This tutorial demonstrated how **prioritizr** can be used to build tabular formulations of conservation problems, with a spatial visualization of the results, and covered how to account for multiple cost layers in the prioritization process. To explore more with **prioritizr**, see the [tutorials](https://apexrms.github.io/prioritizr/tutorials) page</a>. 
+This tutorial demonstrated how **prioritizr** can be used to build tabular formulations of conservation problems, with a spatial visualization of the results, and covered how to account for multiple cost layers in the prioritization process. To explore more with **prioritizr**, see the [tutorials](https://apexrms.github.io/prioritizr/tutorials.html) page</a>. 
 
 <br><br><br>
