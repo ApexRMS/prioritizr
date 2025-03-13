@@ -29,16 +29,16 @@ In SyncroSim, a library is a file with extension *.ssim* that stores all the mod
 
 2\. Select **File > New > From Online Template...**.
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot7.png">
+<img align="center" style="padding: 13px" width="500" src="./images/screenshot7.png">
 
 <div class=indentation>
 a. From the list of packages, select <b>prioritizr</b>. 
 <br><br>
-<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot7-2.png">
+<img align="center" style="padding: 13px" width="600" src="./images/screenshot7-2.png">
 <br><br>
 b. From the list of template libraries, select <b>Climate Refugia Prioritization (Muskoka, Ontario)</b>.
 <br><br>
-<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot7-5.png">
+<img align="center" style="padding: 13px" width="600" src="./images/screenshot7-5.png">
 <br><br>
 c. If desired, you may edit the <i>File name</i>, and change the <i>Folder</i> by clicking on the <b>Browse</b> button. 
 <br><br>
@@ -49,19 +49,19 @@ d. When done, click <b>OK</b>.
 
 A new library has been created based on the selected template, and SyncroSim will have automatically opened and displayed it in the *Explorer* window.
 
-<img align="center" style="padding: 13px" width="800" src="assets/images/screenshot55.png">
+<img align="center" style="padding: 13px" width="800" src="./images/screenshot55.png">
 
 3\.	Double-click on the library name, **Climate Refugia Prioritization (Muskoka, Ontario)**, to open the library properties window. You may also right-click on the library name and select **Open** from the context menu.
 
-<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot56.png">
+<img align="center" style="padding: 13px" width="600" src="./images/screenshot56.png">
 
 4\.	The **Summary** datasheet contains the metadata for the library.
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot57.png">
+<img align="center" style="padding: 13px" width="500" src="./images/screenshot57.png">
 
 5\.	Next, navigate to the **Systems** tab, **Options** node, **General** datasheet, and make sure **Use conda** is disabled.
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot58-2.png">
+<img align="center" style="padding: 13px" width="500" src="./images/screenshot58-2.png">
 
 6\.	Close the library properties window.
 
@@ -73,7 +73,7 @@ Next, you will review the target feature data for the conservation prioritizatio
 
 8\. Under the **Prioritizr** tab, select the **Features** datasheet, which lists the variables that will be taken into account in the prioritization process. Here, the feature data corresponds to three lake property variables (*i.e.*, Epi-benthic Habitat, Mean Depth, and Surface Area) and two species occurence records (*i.e.*, for Brook Trout and Lake Trout). This datasheet was automatically populated once the first scenario was run.
 
-<img align="center" style="padding: 13px" width="350" src="assets/images/screenshot59.png">
+<img align="center" style="padding: 13px" width="350" src="./images/screenshot59.png">
 
 <br>
 
@@ -81,11 +81,11 @@ Now you will review the inputs for the **Equal weight** scenario, which provides
 
 9\.	In the *Explorer* window, select the pre-configured scenario **Equal weight** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot60.png">
+<img align="center" style="padding: 13px" width="500" src="./images/screenshot60.png">
 
 10\.	Navigate to the **Pipeline** datasheet. Pipeline stages call on a transformer (*i.e.*, script) which takes the inputs from SyncroSim, runs a model, and returns the results to SyncroSim. Under the *Stage* column, note that a single pipeline stage is set called *Base Prioritization*.
 
-<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot60-2.png">
+<img align="center" style="padding: 13px" width="600" src="./images/screenshot60-2.png">
 
 11\. Navigate to the **Prioritizr** tab and expand the **Base Prioritization > Data** nodes. 
 
@@ -96,7 +96,7 @@ Now you will review the inputs for the **Equal weight** scenario, which provides
   </div>
 </div>
 
-<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot61.png">
+<img align="center" style="padding: 13px" width="400" src="./images/screenshot61.png">
 
 <div class=indentation>
   b. Open the <b>Spatial Inputs</b> datasheet, and review the following input:
@@ -106,31 +106,31 @@ Now you will review the inputs for the **Equal weight** scenario, which provides
   </div>
 </div>
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot62.png">
+<img align="center" style="padding: 13px" width="500" src="./images/screenshot62.png">
 
 <div class=indentation>
   c. Open the <b>Tabular Inputs</b> datasheet, and review the following inputs:
   <br>
 
-  <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot62-5.png">
+  <img align="center" style="padding: 13px" width="600" src="./images/screenshot62-5.png">
 
   <br>
 
   <div class=indentation>
     i. <i>Planning Units</i> – a data table of the different lakes of interest in Muskoka, Ontario. Each lake has an unique ID. A <i>cost</i> column is also provided and set to <i>1</i> for all lakes.
     <br>
-    <img align="center" style="padding: 13px" width="200" src="assets/images/screenshot62-2.png">
+    <img align="center" style="padding: 13px" width="200" src="./images/screenshot62-2.png">
     <br><br>
     ii. <i>Features</i> – a data table listing the feature variables. These are listed under the column <i>name</i>, with an associated ID. 
     <br>
-    <img align="center" style="padding: 13px" width="200" src="assets/images/screenshot62-3.png">
+    <img align="center" style="padding: 13px" width="200" src="./images/screenshot62-3.png">
     <br><br>
     iii. <i>Planning units vs. Features</i> – a data table listing for each lake (under the <i>pu</i> column), the value (under the <i>amount</i> column) associated with each feature variable (under the <i>species</i> column).
     <br>
-      <img align="center" style="padding: 13px" width="300" src="assets/images/screenshot62-4.png">
+      <img align="center" style="padding: 13px" width="300" src="./images/screenshot62-4.png">
     <br><br>
     iv. <i>Cost column</i> – corresponds to the column in the <i>Planning units</i> input representing the cost variable.
-      <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot63.png">
+      <img align="center" style="padding: 13px" width="600" src="./images/screenshot63.png">
   </div>
 </div>
 
@@ -147,7 +147,7 @@ Now you will review the inputs for the **Equal weight** scenario, which provides
   </div>
 </div>
 
-<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot64.png">
+<img align="center" style="padding: 13px" width="400" src="./images/screenshot64.png">
 
 <div class=indentation>
   b. Open the <b>Target</b> datasheet and review the following inputs:
@@ -159,7 +159,7 @@ Now you will review the inputs for the **Equal weight** scenario, which provides
   </div>
 </div>
 
-<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot65.png">
+<img align="center" style="padding: 13px" width="400" src="./images/screenshot65.png">
 
 <div class=indentation>
   c. Open the <b>Decision Types</b> datasheet and review the following input:
@@ -169,7 +169,7 @@ Now you will review the inputs for the **Equal weight** scenario, which provides
   </div>
 </div>
 
-<img align="center" style="padding: 13px" width="450" src="assets/images/screenshot66.png">
+<img align="center" style="padding: 13px" width="450" src="./images/screenshot66.png">
 
 <div class=indentation>
   d. Open the <b>Solver</b> datasheet and review the following inputs:
@@ -181,7 +181,7 @@ Now you will review the inputs for the **Equal weight** scenario, which provides
   </div>
 </div>
 
-<img align="center" style="padding: 13px" width="400" src="assets/images/screenshot67.png">
+<img align="center" style="padding: 13px" width="400" src="./images/screenshot67.png">
 
 13\. Expand the **Output Options** node and open the **Performance** datasheet to review the following inputs set to *Yes*:
 
@@ -191,7 +191,7 @@ Now you will review the inputs for the **Equal weight** scenario, which provides
     ii. <i>Feature representation summary</i> – calculates how well features are represented by the solution to the conservation planning problem.
   </div>
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot68.png">
+<img align="center" style="padding: 13px" width="500" src="./images/screenshot68.png">
 
 14\. Open the **Importance** datasheet to review the following inputs set to *Yes*:
 
@@ -199,7 +199,7 @@ Now you will review the inputs for the **Equal weight** scenario, which provides
     i. <i>Replacement cost</i> – calculates the importance scores for the lakes selected in the solution.
   </div>
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot69.png">
+<img align="center" style="padding: 13px" width="500" src="./images/screenshot69.png">
 
 <br>
 
@@ -211,7 +211,7 @@ The *Climate Refugia Prioritization (Muskoka, Ontario)* template library already
 
 2\. Double-click on the **Equal weight** result scenario to open its properties. You may also right-click it and select **Open** from the context menu.
 
-<img align="center" style="padding: 13px" width="450" src="assets/images/screenshot70.png">
+<img align="center" style="padding: 13px" width="450" src="./images/screenshot70.png">
 
 <div class=indentation>
   a. Navigate to the <b>Prioritizr</b> tab, expand the <b>Results > Tabular</b> nodes, and open the <b>Solution</b>> datasheet to analyse the tabular results table of the solution. 
@@ -219,13 +219,13 @@ The *Climate Refugia Prioritization (Muskoka, Ontario)* template library already
   b. Click on the <b>Solution</b> column to reorder the table's contents in decreasing order. <i>Solution</i> values equal to 1 represent the planning units that were selected by the solution.
 </div>
 
-<img align="center" style="padding: 13px" width="650" src="assets/images/screenshot70-2.png">
+<img align="center" style="padding: 13px" width="650" src="./images/screenshot70-2.png">
 
 3\. Close the scenario properties tab, and from the *Explorer* window, collapse the scenario node by clicking on the downward facing arrow beside the **Equal weight** scenario.
 
 4\. Navigate to the **Maps** tab, and double-click on the pre-configured **Solution** map. This map displays a visual representation of the tabular result you just inspected, showing the lakes that were selected in the solution to the conservation planning problem. 
 
-<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot70-3.png">
+<img align="center" style="padding: 13px" width="600" src="./images/screenshot70-3.png">
 
 5\. Close the results panels.
 
@@ -237,7 +237,7 @@ Now, you will review the additional scenarios, which are equal to the *Equal wei
 
 7\. Navigate to the **Prioritizr** tab, expand the **Advanced** node, and open the **Feature weights** datasheet to review the following inputs: 
 
-<img align="center" style="padding: 13px" width="600" src="assets/images/screenshot71.png">
+<img align="center" style="padding: 13px" width="600" src="./images/screenshot71.png">
 
 <div class=indentation>
   a. <i>Add feature weights</i> – is set to <i>Yes</i> to add feature weights to the conservation planning problem.
@@ -245,33 +245,33 @@ Now, you will review the additional scenarios, which are equal to the *Equal wei
   b. <i>Weights</i> – a data table outlining the weight of feature. From Step 1.c.ii, recall that features 1 and 2 represent the species presence features <i>LakeTrout</i> and <i>BrookTrout</i>. Here, both species presence variables have the same weight of 1, and all lake property variables have a weight of 0. In essence, this means that in this scenario, only the species presence features will be considered in the prioritization process, and will be treated with equal importance.
 </div>
 
-<img align="center" style="padding: 13px" width="200" src="assets/images/screenshot71-3.png">
+<img align="center" style="padding: 13px" width="200" src="./images/screenshot71-3.png">
 
 8\. In the *Explorer* window, select the pre-configured scenario **Lake properties weights** and double-click it to open its properties.
 
 9\. Navigate to the **Prioritizr** tab, expand the **Advanced** node, and open the **Feature weights** datasheet to note the input *Weights*. Here, both species presence variables now have a weight of 0, and all lake property variables have the same weight of 1. In essence, this means that in this scenario, only the lake property features will be considered in the prioritization process.
 
-<img align="center" style="padding: 13px" width="200" src="assets/images/screenshot71-4.png">
+<img align="center" style="padding: 13px" width="200" src="./images/screenshot71-4.png">
 
 10\. In the *Explorer* window, select scenarios **Species presence weight** and **Lake properties weights**, right-click and select **Add to Results** from the context menu.
 
-<img align="center" style="padding: 13px" width="500" src="assets/images/screenshot71-5.png">
+<img align="center" style="padding: 13px" width="500" src="./images/screenshot71-5.png">
 
 11\. Navigate to the **Charts** tab, and double-click on the pre-configured **Number of planning units** chart. This chart displays the total number of planning units in the solution per scenario. In this example, 5 lakes were selected in the solution, showing the budget was met in all three scenarios.
 
-<img align="center" style="padding: 13px" width="800" src="assets/images/screenshot75.png">
+<img align="center" style="padding: 13px" width="800" src="./images/screenshot75.png">
 
 12\. Next,  double-click on the pre-configured **Feature representation** chart. This chart shows the effect of the feature weights on the proportion of each feature secured within the solution. Note that feature representation for the species presences features (i.e., *BrookTrout* and *LakeTrout*) are generally higher under the *Species presence weight* scenario, and the lake property features (i.e., *EpiBent*, *MeanDepth* and *SurfArea*) are generally higher under the *Lake properties weights* scenario.
 
-<img align="center" style="padding: 13px" width="800" src="assets/images/screenshot74.png">
+<img align="center" style="padding: 13px" width="800" src="./images/screenshot74.png">
 
 13\. Next, navigate to the **Maps** tab, and double-click on the pre-configured **Solution** map. This map displays the lakes that were selected in the solution under each scenario. Note that some lakes were selected in every scenario. 
 
-<img align="center" style="padding: 13px" width="1000" src="assets/images/screenshot78.png">
+<img align="center" style="padding: 13px" width="1000" src="./images/screenshot78.png">
 
 15\. Finally, double-click on the pre-configured **Replacement importance** map. This map displays the importance scores for each lake selected in the solution based on the replacement cost method. Note that the lakes that were always selected also tended to have higher scores.
 
-<img align="center" style="padding: 13px" width="1000" src="assets/images/screenshot77.png">
+<img align="center" style="padding: 13px" width="1000" src="./images/screenshot77.png">
 
 <br>
 
