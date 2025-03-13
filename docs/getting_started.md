@@ -23,14 +23,14 @@ Running **prioritizr** requires that **SyncroSim** be installed on your computer
 ## **Installing R package dependencies**
 
 Running **prioritizr** requires the following R packages be installed in your computer:
-- prioritizr 8.0.4
-- symphony 0.1.1
-- Rsymphony 0.1-33
-- rsyncrosim 2.0.0
-- stringr 1.4.1
-- terra 1.7-29
-- tidyr 1.2.1
-- dplyr 1.1.1 
+- prioritizr [8.0.4](https://cran.r-project.org/src/contrib/Archive/prioritizr/prioritizr_8.0.4.tar.gz)
+- symphony [0.1.1](https://cran.r-project.org/src/contrib/symphony_0.1.1.tar.gz)
+- Rsymphony [0.1-33](https://cran.r-project.org/src/contrib/Rsymphony_0.1-33.tar.gz)
+- rsyncrosim [2.0.1](https://cran.r-project.org/src/contrib/rsyncrosim_2.0.1.tar.gz)
+- stringr [1.4.1](https://cran.r-project.org/src/contrib/Archive/stringr/stringr_1.4.1.tar.gz)
+- terra [1.7-29](https://cran.r-project.org/src/contrib/Archive/terra/terra_1.7-29.tar.gz)
+- tidyr [1.2.1](https://cran.r-project.org/src/contrib/Archive/tidyr/tidyr_1.2.1.tar.gz)
+- dplyr [1.1.1](https://cran.r-project.org/src/contrib/Archive/dplyr/dplyr_1.1.1.tar.gz) 
 
 <br>
 

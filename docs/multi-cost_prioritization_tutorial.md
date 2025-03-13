@@ -71,17 +71,17 @@ Next, you will review the target feature data for the conservation prioritizatio
 
 7\. From the *Explorer* window, right-click on **Definitions** and select **Open** from the context menu.
 
-8\. Under the **Prioritizr** tab, select the **Features** datasheet, which lists the variables that will be taken into account in the prioritization process. Here, the feature data corresponds to two lake property variables: *MeanDepth* and *SurfaceArea*.
+8\. Under the **Prioritizr** tab, select the **Features** datasheet, which lists the variables that will be taken into account in the prioritization process. Here, the feature data corresponds to two lake property variables: *MeanDepth* and *SurfaceArea*. This datasheet was automatically populated once the first scenario was run.
 
 <img align="center" style="padding: 13px" width="400" src="assets/images/screenshot83.png">
 
-9\. Next, open the **Cost variables** datasheet, which lists the cost variables that will be taken into account in the prioritization process. Here, all are binary variables that represent whether a lake (*i.e.*, planning unit) has a protection cost (1) or not (0).
+9\. Next, open the **Cost variables** datasheet, which lists the cost variables that will be taken into account in the prioritization process. Here, all are binary variables that represent whether a lake (*i.e.*, planning unit) has a protection cost (1) or not (0). This datasheet was also automatically populated, but once the first multi-cost prioritization scenario was run.
 
 <img align="center" style="padding: 13px" width="400" src="assets/images/screenshot84.png">
 
 <br>
 
-Now you will review the inputs for the **No costs** scenario, which provides a baseline where *no* costs are considered in the prioritization. In SyncroSim, each scenario contains the model inputs and outputs associated with a model run.
+Now you will review the inputs for the **No costs** scenario, which provides a baseline where *no* costs are considered in the prioritization. This scenario is required, as it provides a baseline from which the multi-cost optimization builds. In SyncroSim, each scenario contains the model inputs associated with a model run.
 
 10\.	In the *Explorer* window, select the pre-configured scenario **No costs** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
 
@@ -91,26 +91,29 @@ Now you will review the inputs for the **No costs** scenario, which provides a b
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot86.png">
 
-12\. Navigate to the **Prioritizr** tab, and expand the **Base Prioritization > Data** nodes. 
+12\. Navigate to the **Prioritizr** tab and expand the **Base Prioritization > Data** nodes. 
 
 <div class=indentation>
-  a. Open the <b>Input Format</b> datasheet and notice that <i>Data Type</i> is set to <i>Tabular</i> in order to generate a tabular formulation of the conservation problem.
+  a.  Open the <b>Input Format</b> datasheet and review the following inputs:
+  <div class=indentation>
+    i. <i>Data Type</i> – set to <i>Tabular</i> in order to setup a tabular formulation of the conservation problem. This means that csv files are provided as input.
+  </div>
 </div>
 
 <img align="center" style="padding: 13px" width="450" src="assets/images/screenshot87.png">
 
 <div class=indentation>
-  b. Open the <b>Spatial Inputs</b> datasheet, and review the following input:
+  b. Open the <b>Spatial Inputs</b> datasheet and review the following input:
   <br>
   <div class=indentation>
-    i. <i>Planning Units</i> – a raster of the different lakes of interest in Ontario, Canada.
+    i. <i>Planning Units</i> – a raster of the different lakes of interest in Ontario, Canada. While the problem has a tabular formulation, a raster may be provided to generate a map of the solution.
   </div>
 </div>
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot88.png">
 
 <div class=indentation>
-  c. Open the <b>Tabular Inputs</b> datasheet, and review the following inputs:
+  c. Open the <b>Tabular Inputs</b> datasheet and review the following inputs:
   <br>
 
   <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot88-2.png">
@@ -126,11 +129,11 @@ Now you will review the inputs for the **No costs** scenario, which provides a b
     <br>
       <img align="center" style="padding: 13px" width="250" src="assets/images/screenshot90.png">
     <br>
-    iii. <i>Planning units vs. Features</i> – a data table listing for each lake (under the <i>pu</i> column), the value associated with each feature variable (under the <i>species</i> column).
+    iii. <i>Planning units vs. Features</i> – a data table listing for each lake (under the <i>pu</i> column), the value (under the <i>amount</i> column) associated with each feature variable (under the <i>species</i> column).
     <br>
       <img align="center" style="padding: 13px" width="300" src="assets/images/screenshot91.png">
     <br>
-    iv. <i>Cost column</i> – corresponds to the column in the <i>Plannin Units</i> input representing the cost variable.
+    iv. <i>Cost column</i> – corresponds to the column in the <i>Planning units</i> input representing the cost variable.
     <br>
     <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot92.png">
   </div>
@@ -139,7 +142,7 @@ Now you will review the inputs for the **No costs** scenario, which provides a b
 13\. Expand the **Parameters** node. 
 
 <div class=indentation>
-  a. Open the <b>Objective</b> datasheet, and review the following inputs:
+  a. Open the <b>Objective</b> datasheet and review the following inputs:
   <br>
   <div class=indentation>
     i. <i>Function</i> – this input sets the objective of the conservation planning problem. In this example, it is set to <i>Minimum shortfall</i> which aims to minimize the fraction of each target that remains unmet for as many features as possible while staying within a fixed budget.
@@ -151,7 +154,7 @@ Now you will review the inputs for the **No costs** scenario, which provides a b
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot93.png">
 
 <div class=indentation>
-  b. Open the <b>Target</b> datasheet, and review the following inputs:
+  b. Open the <b>Target</b> datasheet and review the following inputs:
   <br>
   <div class=indentation>
     i. <i>Function</i> – is set to <i>Relative</i> so that the target may be defined as a proportion (between 0 and 1) of the desired level of feature representation in the study area.
@@ -163,7 +166,7 @@ Now you will review the inputs for the **No costs** scenario, which provides a b
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot94.png">
 
 <div class=indentation>
-  c. Open the <b>Decision Types</b> datasheet, and review the following input:
+  c. Open the <b>Decision Types</b> datasheet and review the following input:
   <br>
   <div class=indentation>
     i. <i>Function</i> – the decision type is set to <i>Binary</i>, so that planning units are either selected or not for prioritization (<i>i.e.</i>, to prioritize or not prioritize a lake). 
@@ -173,7 +176,7 @@ Now you will review the inputs for the **No costs** scenario, which provides a b
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot95.png">
 
 <div class=indentation>
-  d. Open the <b>Solver</b> datasheet, and review the following inputs:
+  d. Open the <b>Solver</b> datasheet and review the following inputs:
   <br>
   <div class=indentation>
     i. <i>Function</i> – is set to <i>Default</i>. This specifies that the best solver currently available in your computer should be used to solve the conservation planning problem. 
@@ -187,9 +190,9 @@ Now you will review the inputs for the **No costs** scenario, which provides a b
 14\. Expand the **Output Options** node and open the **Performance** datasheet to review the following inputs set to *Yes*:
 
   <div class=indentation>
-    i. <i>Number Summary</i> – calculates the number of lakes selected within the solution to the conservation planning problem.
+    i. <i>Number Summary</i> – calculates the number of lakes selected in the solution to the conservation planning problem.
     <br><br>
-    ii. <i>Feature representation summary</i> – calculates how well features (<i>i.e.</i>, lake depth and surface area) are represented by the solution to the conservation planning problem. 
+    ii. <i>Feature representation summary</i> – calculates how well features are represented by the solution to the conservation planning problem. 
   </div>
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot97.png">
@@ -235,13 +238,25 @@ Now, you will review the additional scenarios and explore how they differ from t
 9\. Expand the **Multi-Cost Prioritization** node and open the **Data** datasheet to review the following input:
 
 <div class=indentation>
-  i. <i>Cost-layers</i> – a data table showing lakes (<i>i.e.</i>, planning units) along the rows and cost variables along the columns, where 1 represents cost and 0 represents no cost.
+  i. <i>Cost-layers</i> – a data table showing lakes (<i>i.e.</i>, planning units) along the rows and cost variables along the columns, where 1 represents cost and 0 represents no cost. Here, the data table was reordered to illustrate the variability across the cost variables.
   <br>
 </div>
 
 <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot102-2.png">
 
-10\. Next, open the **Parameters** datasheet and note that *Prioritization method* is set to *Equal*. This specifies how the cost variables will be integrated into the prioritization process; In this case, meaning that minimizing cost is treated with equal importance across all cost variables. Default values are provided for the additional parameters.
+10\. Next, open the **Parameters** datasheet and review the following inputs:
+
+<div class=indentation>
+  i. <i>Prioritization method</i> – set to <i>Equal</i>. This specifies how the cost variables will be integrated into the prioritization process; In this case, meaning that minimizing cost is treated with equal importance across all cost variables.
+  <br><br>
+  ii. <i>Initial optimality gap</i> – set to <i>0.9</i>. Used to calculate the target for the cost-optimized solution, based on how well the objective was achieved in the baseline solution. Values closer to 1 result in solutions that tend to sacrifice feature representation for less costly solutions.
+  <br><br>
+  iii. <i>Cost optimality gap</i> – Default value was automatically populated, but parameter is not relevant for the equal cost-optimization method.
+  <br><br>
+  iv. <i>Budget increments</i> – Default value was automatically populated, but parameter is not relevant for the equal cost-optimization method.
+  <br><br>
+  v. <i>Budget padding</i> – Default value was automatically populated, but parameter is not relevant for the equal cost-optimization method.
+</div>
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot103.png">
 
@@ -251,7 +266,20 @@ Now, you will review the additional scenarios and explore how they differ from t
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot103-2.png">
 
-13\. Navigate to the **Prioritizr** tab, expand the **Multi-Cost Prioritization** node, and open the **Parameters** datasheet to note that *Prioritization method* is set to *Hierarchical*. All other input and parameters are identical to the **All costs, Equal** scenario.
+13\. Navigate to the **Prioritizr** tab, expand the **Multi-Cost Prioritization** node, open the **Parameters** datasheet and review the following inputs:
+
+<div class=indentation>
+  i. <i>Prioritization method</i> – set to <i>Hierarchical</i>. This specifies how the cost variables will be integrated into the prioritization process; In this case, meaning that minimizing cost follows a hierarchy of cost-reduction importance, from most to least important, and according to the order of cost variables in the <i>Cost-layers</i> input.
+  <br><br>
+  ii. <i>Initial optimality gap</i> – set to <i>0.9</i>. Used to calculate the target for the cost-optimized solution, based on how well the objective was achieved in the baseline solution. Values closer to 1 result in solutions that tend to sacrifice feature representation for less costly solutions.
+  <br><br>
+  iii. <i>Cost optimality gap</i> – set to <i>0.9</i>. Used to calculate a constraint on the cost of the cost-optimized solution, according to the previously optimized cost layers. Values closer to 1 result in accepting greater differences in costs between layers.
+  <br><br>
+  iv. <i>Budget increments</i> – set to <i>125</i>. Defines the length of the vector of budget increments, which are used to iteratively find the budget under which a feasible solution can be found, while ensuring the solution does not cost "too much". Higher values will take longer to run, but may be able to find a slightly more cost effective solution.
+  <br><br>
+  v. <i>Budget padding</i> – set to <i>0.25</i>. For each cost variable, it is used to calculate the budget increment values, based on the cost of the solution with only the target cost variable. Represents a percentage increase in cost. Higher values will results in a larger range of budgets being attempted. 
+</div>
+
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot107.png">
 
@@ -285,7 +313,7 @@ Now, you will review the additional scenarios and explore how they differ from t
 
 <img align="center" style="padding: 13px" width="1000" src="assets/images/screenshot113.png">
 
-24\. Double-click on the pre-configured **Solution comparison** map. This map is only computed by the *Multi-Cost Prioritization* stage scenarios, so the *No costs* scenario was removed from results. The *Base only* maps display which lakes were only selected under the baseline scenario (*No cost*) and are identical between scenarios. The *Cost-optimized only* maps show which lakes were only selected when the solution was optimized for cost, under the equal or hierarchical prioritization methods. The *Consensus* maps display which lakes were selected in both the baseline and cost-optimized solutions.
+24\. Double-click on the pre-configured **Solution comparison** map. This map is only computed by the *Multi-Cost Prioritization* stage scenarios, so the *No costs* scenario was removed from results. The *Base only* maps display which lakes were only selected under the baseline scenario (*No cost*). The *Cost-optimized only* maps show which lakes were only selected when the solution was optimized for cost, under the equal or hierarchical prioritization methods. The *Consensus* maps display which lakes were selected in both the baseline and cost-optimized solutions.
 
 <img align="center" style="padding: 13px" width="1000" src="assets/images/screenshot114.png">
 

@@ -71,13 +71,13 @@ Next, you will review the target feature data for the conservation prioritizatio
 
 7\. From the *Explorer* window, right-click on **Definitions** and select **Open** from the context menu. 
 
-8\. Under the **Prioritizr** tab, select the **Features** datasheet, which lists the variables that will be taken into account in the prioritization process. 
+8\. Under the **Prioritizr** tab, select the **Features** datasheet, which lists the variables that will be taken into account in the prioritization process. This datasheet was automatically populated once the first scenario was run.
 
 <img align="center" style="padding: 13px" width="400" src="assets/images/screenshot38.png">
 
 <br>
 
-Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroSim, scenarios contains the model inputs and outputs associated with a model run.
+Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroSim, scenarios contains the model inputs associated with a model run.
 
 9\.	In the *Explorer* window, select the pre-configured scenario **Budget $500,000** and double-click it to open its properties. You may also right-click on the scenario name and select **Open** from the context menu.
 
@@ -87,10 +87,13 @@ Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroS
 
 <img align="center" style="padding: 13px" width="600" src="assets/images/screenshot39-2.png">
 
-11\. Navigate to the **Prioritizr** tab, and expand the **Base Prioritization > Data** nodes. 
+11\. Navigate to the **Prioritizr** tab and expand the **Base Prioritization > Data** nodes. 
 
 <div class=indentation>
-  a. Open the <b>Input Format</b> datasheet and note that <i>Data Type</i> is set to <i>Tabular</i> in order to setup a tabular formulation of the conservation problem.
+  a.  Open the <b>Input Format</b> datasheet and review the following inputs:
+  <div class=indentation>
+    i. <i>Data Type</i> – set to <i>Tabular</i> in order to setup a tabular formulation of the conservation problem. This means that csv files are provided as input.
+  </div>
 </div>
 
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot40.png">
@@ -103,15 +106,16 @@ Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroS
 
 <div class=indentation>
   <div class=indentation>
-    i. <i>Planning Units</i> – a data table of the different planning units in Washington (USA), where each planning unit is associated with a specific ID and cost value. In this example, there are 1,751 planning units.
+    i. <i>Planning Units</i> – a data table of the different planning units in Washington (USA), where each planning unit is associated with a specific ID and cost value. In this example, there are 1,751 planning units. The columns <i>status</i>, <i>xloc</i> and <i>yloc</i> are optional fields and not used in this analysis.
     <br>
     <img align="center" style="padding: 13px" width="400" src="assets/images/screenshot40-2.png">
     <br><br>
     ii. <i>Features</i> – a data table listing the feature variables. These are listed under the column <i>name</i>, with an associated ID. The other columns displayed here are optional fields and not used in this example.
     <br>
       <img align="center" style="padding: 13px" width="400" src="assets/images/screenshot40-3.png">
+      <!-- Wrong screenshot !-->
     <br><br>
-    iii. <i>Planning units vs. Features</i> – a data table listing for each planning unit (under the <i>pu</i> column), the value associated with each feature variable (under the <i>species</i> column).
+    iii. <i>Planning units vs. Features</i> – a data table listing, for each planning unit (under the <i>pu</i> column), the value (under the <i>amount</i> column) associated with each feature variable (under the <i>species</i> column).
     <br>
     <img align="center" style="padding: 13px" width="300" src="assets/images/screenshot40-4.png">
     <br><br>
@@ -121,7 +125,7 @@ Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroS
 12\. Expand the **Parameters** node. 
 
 <div class=indentation>
-  a. Open the <b>Objective</b> datasheet, and review the following inputs:
+  a. Open the <b>Objective</b> datasheet and review the following inputs:
   <br>
   <div class=indentation>
     i. <i>Function</i> – this input sets the prioritization objective for the conservation planning problem. In this example, it is set to <i>Minimum shortfall</i>, which aims to minimize the fraction of each target that remains unmet for as many features as possible while staying within a fixed budget.
@@ -133,7 +137,7 @@ Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroS
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot42.png">
 
 <div class=indentation>
-  b. Open the <b>Target</b> datasheet, and review the following inputs:
+  b. Open the <b>Target</b> datasheet and review the following inputs:
   <br>
   <div class=indentation>
     i. <i>Function</i> – is set to <i>Relative</i> so that the target may be defined as a proportion (between 0 and 1) of the desired level of feature representation in the study area.
@@ -146,7 +150,7 @@ Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroS
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot43.png">
 
 <div class=indentation>
-  c. Open the <b>Decision Types</b> datasheet, and review the following input:
+  c. Open the <b>Decision Types</b> datasheet and review the following input:
   <br>
   <div class=indentation>
     i. <i>Function</i> – the decision type is set to <i>Binary</i>, so that planning units are either selected or not for prioritization. 
@@ -156,7 +160,7 @@ Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroS
 <img align="center" style="padding: 13px" width="500" src="assets/images/screenshot44.png">
 
 <div class=indentation>
-  d. Open the <b>Solver</b> datasheet, and review the following inputs:
+  d. Open the <b>Solver</b> datasheet and review the following inputs:
   <br>
   <div class=indentation>
     i. <i>Function</i> – is set to <i>Default</i>. This specifies that the best solver currently available in your computer should be used to solve the conservation planning problem. 
@@ -170,7 +174,7 @@ Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroS
 13\. Expand the **Output Options** node and open the **Performance** datasheet to review the following inputs set to *Yes*:
 
   <div class=indentation>
-    i. <i>Number summary</i> – calculates the number of planning units selected within the solution to the conservation planning problem.
+    i. <i>Number summary</i> – calculates the number of planning units selected in the solution to the conservation planning problem.
     <br><br>
     ii. <i>Cost summary</i> – calculates the total cost of the solution to the conservation planning problem.
     <br><br>
@@ -187,7 +191,7 @@ Now, you will review the inputs for the **Budget $500,000** scenario. In SyncroS
 
 The *Tabular Formulation Example* template library already contains the results for each scenario. Before exploring the additional scenario, you will view the main result for the **Budget $500,000** scenario.
 
-1\. In the *Explorer* window, expand the **Budget $500,000 > Results** nodes to reveal the **Budget $500,000** results scenario. Double-click it to open its properties. You may also right-click on the result scenario name and select **Open** from the context menu.
+1\. In the *Explorer* window, expand the **Budget $500,000 > Results** nodes to reveal the **Budget $500,000** results scenario. This scenario contains the outputs of the model run, it is timestamped, and has a copy of all the input parameters. Double-click it to open its properties. You may also right-click on the result scenario name and select **Open** from the context menu.
 
 <img align="center" style="padding: 13px" width="450" src="assets/images/screenshot47.png">
 
@@ -215,20 +219,20 @@ Now you will review the additional scenario and explore how it differs from the 
 
 <img align="center" style="padding: 13px" width="450" src="assets/images/screenshot49-2.png">
 
-7\. Navigate to the **Charts** tab, and double-click on the pre-configured **Cost of the Solution** chart. Here, note the difference in solution cost based on the budget set in each scenario.
+7\. Navigate to the **Charts** tab, and double-click on the pre-configured **Cost of the solution** chart. Here, note the difference in solution cost matches the budget set in each scenario.
 
 <img align="center" style="padding: 13px" width="800" src="assets/images/screenshot53.png">
 
-8\. Next, double-click on the second pre-configured chart: **Number of selected planning units**. In this case, with a larger budget more planning units were covered by the solution.
+8\. Next, double-click on the pre-configured **Number of selected planning units** chart. In this case, with a larger budget more planning units were covered by the solution.
 
 <img align="center" style="padding: 13px" width="800" src="assets/images/screenshot52.png">
 
-9\. Now, double-click on the third pre-configured chart: **Representation**. The upper chart shows the proportion of each feature covered by the solutions under the different scenarios. In turn, the bottom chart shows the respective deviation from the target coverage of 20%. The results indicate that an even larger budget is needed for the 20% target to be met.
+9\. Now, double-click on the pre-configured **Representation** chart. The upper chart shows the proportion of each feature covered by the solution under the different scenarios. In turn, the bottom chart shows the respective deviation from the target coverage of 20%. The results indicate that an even larger budget is needed for the 20% target to be met.
 
 <img align="center" style="padding: 13px" width="900" src="assets/images/screenshot54.png">
 
 <br>
 
-This tutorial demonstrated how **prioritizr** can be used to build tabular formulations of conservation problems. Next, to explore how to further customize a conservation problem with penalties and weights, see the next tutorial <a href="/climate_refugia_prioritization">Climate refugia prioritization with prioritizr SyncroSim</a>. 
+This tutorial demonstrated how **prioritizr** can be used to build tabular formulations of conservation problems. Next, to explore how to further customize a conservation problem with feature weights, see the next tutorial <a href="/climate_refugia_prioritization">Climate refugia prioritization with prioritizr SyncroSim</a>. 
 
 <br><br><br>

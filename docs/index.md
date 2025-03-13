@@ -22,15 +22,23 @@ For details on model parameters and configurations, see the [prioritizr R refere
 
 ## Requirements
 
-This package requires SyncroSim [3.0.6 or higher](https://syncrosim.com/download){:target="_blank"}.
-
-Instructions for installing SyncroSim are provided on the [Getting Started](https://apexrms.github.io/prioritizr/getting_started.html) page.
+This package requires SyncroSim [3.0.6 or higher](https://syncrosim.com/download){:target="_blank"} and the following R packages:
+- prioritizr 8.0.4
+- symphony 0.1.1
+- Rsymphony 0.1-33
+- rsyncrosim 2.0.0
+- stringr 1.4.1
+- terra 1.7-29
+- tidyr 1.2.1
+- dplyr 1.1.1 
 
 <br>
 
-## Getting Started
+## Getting Started & Tutorials
 
-For a guided tutorial on **prioritizr**, including installation, set up, model run, and output visualization, see [Getting Started](https://apexrms.github.io/prioritizr/getting_started.html).
+Instructions for installing SyncroSim and other dependencies are provided on the [Getting Started](https://apexrms.github.io/prioritizr/getting_started.html) page.
+
+The guided [tutorials](https://apexrms.github.io/prioritizr/tutorials.html) include the basics of how to set up, run, and view the outputs of a systematic conservation planning analysis.
 
 <br>
 
@@ -44,7 +52,7 @@ prioritizr R documentation at [https://prioritizr.net](https://prioritizr.net){:
 
 <br>
 
-## Developers
+## Authors
 
 Carina Rauen Firkowski (Author, maintainer) <a href="https://orcid.org/0000-0003-0540-9529" target="_blank"><img align="middle" style="padding: 0.5px" width="17" src="assets/images/ORCID.png"></a>
 <br>
