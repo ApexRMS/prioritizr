@@ -63,10 +63,10 @@ Running **prioritizr** requires the following R packages be installed in your co
 ## **Next steps**
 
 Once the requirements have been installed, the following tutorials will cover the basics of **prioritizr** SyncroSim for building and solving conservation planning problems: 
-1. <a href="./spatial_formulation">Spatial conservation prioritization with prioritizr SyncroSim<a>
-2. <a href="./tabular_formulation">Tabular conservation prioritization with prioritizr SyncroSim</a>
-3. <a href="./climate_refugia_prioritization">Climate refugia prioritization with prioritizr SyncroSim</a>
-4. <a href="./multicost_prioritization">Multi-cost prioritization with prioritizr SyncroSim</a>
+1. <a href="./tutorials/spatial_formulation">Spatial conservation prioritization with prioritizr SyncroSim<a>
+2. <a href="./tutorials/tabular_formulation">Tabular conservation prioritization with prioritizr SyncroSim</a>
+3. <a href="./tutorials/climate_refugia_prioritization">Climate refugia prioritization with prioritizr SyncroSim</a>
+4. <a href="./tutorials/multicost_prioritization">Multi-cost prioritization with prioritizr SyncroSim</a>
 
 <img align="center" style="padding: 13px" width="900" src="assets/images/screenshot23-3.png">
 

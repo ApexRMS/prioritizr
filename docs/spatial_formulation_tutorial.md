@@ -317,7 +317,7 @@ In addition to spatial representation of the solution, **prioritizr** also produ
 
 <br>
 
-This tutorial demonstrated how **prioritizr** can be used to build spatial formulations of conservation problems. Next, to create and solve a tabular conservation problem, see the next tutorial <a href="tutorials/tabular_formulation">Tabular conservation prioritization with prioritizr SyncroSim</a>. 
+This tutorial demonstrated how **prioritizr** can be used to build spatial formulations of conservation problems. Next, to create and solve a tabular conservation problem, see the next tutorial <a href="tabular_formulation">Tabular conservation prioritization with prioritizr SyncroSim</a>. 
 
 
 <br><br><br>
