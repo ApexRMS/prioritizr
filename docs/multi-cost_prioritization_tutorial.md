@@ -14,7 +14,7 @@ permalink: tutorials/multicost_prioritization
 
 ## **Multi-cost prioritization with prioritizr SyncroSim**
 
-This tutorial provides an overview of working with **prioritizr** in SyncroSim Studio to demonstrate how to integrate multiple cost-layers into a lake conservation problem. It covers the following steps:
+This tutorial provides an overview of working with **prioritizr** in SyncroSim Studio to demonstrate how to integrate multiple cost-layers into a lake conservation problem. A special thank you to [Jeffrey Hanson](https://jeffrey-hanson.com/) for extensive and detailed support with the multi-cost methodology. This tutorial covers the following steps:
 
 1. <a href="#step-1">Creating a prioritizr SyncroSim library</a>
 2. <a href="#step-2">Visualizing and comparing results across scenarios</a>
