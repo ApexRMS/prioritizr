@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<package name="prioritizr" displayName="Prioritizr" description="Systematic conservation planning" version="2.2.1">
+<package 
+  name="prioritizr" displayName="Prioritizr" version="2.2.2"  
+  description="Systematic conservation planning" 
+  url="https://apexrms.github.io/prioritizr" 
+  minSyncroSimVersion="3.1.0">
   
   <dataSheet name="projectFeatures" displayName="Features" displayMember="Name" dataScope="Project">
     <column name="Name" dataType="String" />
@@ -237,7 +241,7 @@
   programName="RScript" 
   programArguments="basePrioritization.R" 
   condaEnv="prioritizrEnv.yml"
-  condaEnvVersion="1">
+  condaEnvVersion="2">
     <dataSheet name="problemFormat" type="Input" />
     <dataSheet name="objective" type="Both" />
     <dataSheet name="problemSpatial" type="Input" />
@@ -281,7 +285,7 @@
   programName="RScript" 
   programArguments="multicostPrioritization.R" 
   condaEnv="prioritizrEnv.yml"
-  condaEnvVersion="1">
+  condaEnvVersion="2">
     <dataSheet name="problemFormat" type="Input" />
     <dataSheet name="objective" type="Both" />
     <dataSheet name="problemSpatial" type="Input" />
