@@ -65,8 +65,7 @@ if(class(scenarioSolution) == "data.frame"){
       crs(pu_vis) <- NA
       puVis <- TRUE
     }
-  } 
-  if(is.na(problemSpatialDatasheet$x)){
+  } else {
     puVis <- FALSE
   }
   
