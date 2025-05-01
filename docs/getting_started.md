@@ -10,7 +10,7 @@ To get started working with **prioritizr** SyncroSim for building and solving co
 
 1. <a href="#installing-syncrosim">Installing SyncroSim</a>
 2. <a href="#installing-the-prioritizr-syncrosim-package">Installing the **prioritizr** SyncroSim package</a>
-3. <a href="#installing-R-package-dependencies">Installing R package dependencies</a>
+3. <a href="#installing-rtools">Installing Rtools</a>
 
 <br>
 
@@ -46,17 +46,49 @@ Running **prioritizr** requires that **SyncroSim** be installed on your computer
 
 <br>
 
-## **Installing R package dependencies**
+## **Installing Rtools**
 
-Opening an existing **prioritizr** SyncroSim library or creating a new library from scratch using SyncroSim Studio does not require any R package. However, to run any scenarios, **prioritizr** requires the following R packages be installed in your computer:
-- prioritizr [8.0.4](https://cran.r-project.org/src/contrib/Archive/prioritizr/prioritizr_8.0.4.tar.gz)
-- symphony [0.1.1](https://cran.r-project.org/src/contrib/symphony_0.1.1.tar.gz)
-- Rsymphony [0.1-33](https://cran.r-project.org/src/contrib/Rsymphony_0.1-33.tar.gz)
-- rsyncrosim [2.0.1](https://cran.r-project.org/src/contrib/rsyncrosim_2.0.1.tar.gz)
-- stringr [1.4.1](https://cran.r-project.org/src/contrib/Archive/stringr/stringr_1.4.1.tar.gz)
-- terra [1.7-29](https://cran.r-project.org/src/contrib/Archive/terra/terra_1.7-29.tar.gz)
-- tidyr [1.2.1](https://cran.r-project.org/src/contrib/Archive/tidyr/tidyr_1.2.1.tar.gz)
-- dplyr [1.1.1](https://cran.r-project.org/src/contrib/Archive/dplyr/dplyr_1.1.1.tar.gz) 
+1\. Download [Rtools 4.0](https://github.com/r-windows/rtools-installer/releases/download/2022-02-06/rtools40-x86_64.exe){:target="_blank"} and follow the **default** installation prompts.
+
+2\. Once the installation process is complete, you will need to add Rtools’ utilities to the PATH. To do so, create a text file and paste the following:
+
+```
+PATH="${RTOOLS40_HOME}\usr\bin;${PATH}"
+```
+
+3\. Name the text file **.Renviron** and save it in your home directory (*i.e.*, **Documents** folder). If you are unsure of your home directory, open an R terminal and run the command `Sys.getenv("HOME")` to check.
+
+4\. From the Windows toolbar, search for **View advanced system settings**.
+
+5\. Open the application and under the **Advanced** tab, click on **Environment Variables…**.
+
+6\. Under **System Variables**, double-click on **Path** to edit the environment variable.
+
+7\. Click on the **New** button and paste the following:
+
+```
+C:\rtools40\mingw64\bin
+```
+
+8\. If you have a newer version of Rtools installed, use the **Move Up** button to make sure the path to Rtools 4.0 is above the other versions so it will be used first.
+
+9\. Click **OK** three times to save and close the application.
+
+10\. Restart your computer for changes to take effect.
+
+11\. If you have R or RStudio installed on your computer, you can check if the installation process was successful by running the following command:
+
+```
+Sys.which("make")
+```
+
+12\. This command should return the path of the Rtools 4.0 installation.
+
+```
+"C:\\rtools40\\usr\\bin\\make.exe"
+```
+
+If the command above returns a different or an empty path, or if when running a prioritizr SyncroSim scenario it returns a "The installation of Rtools v4.0 is faulty" error message, please see this [forum post](https://community.syncrosim.com/forums/topic/troubleshooting-rtools-installation-for-prioritizr-2-2-2) for help troubleshooting.
 
 <br>
 

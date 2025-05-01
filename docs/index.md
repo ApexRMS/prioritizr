@@ -22,21 +22,11 @@ For details on model parameters and configurations, see the [prioritizr R refere
 
 ## Requirements
 
-This package requires SyncroSim [3.0.6 or higher](https://syncrosim.com/download){:target="_blank"} and the following R packages:
-- prioritizr 8.0.4
-- symphony 0.1.1
-- Rsymphony 0.1-33
-- rsyncrosim 2.0.0
-- stringr 1.4.1
-- terra 1.7-29
-- tidyr 1.2.1
-- dplyr 1.1.1 
+This package requires SyncroSim [3.1.0 or higher](https://syncrosim.com/download){:target="_blank"} and [Rtools 4.0](https://cran.r-project.org/bin/windows/Rtools/rtools40.html){:target="_blank"}. For more information on how to install the package requirements, see the [Getting started](https://apexrms.github.io/prioritizr/getting_started.html) page.
 
 <br>
 
-## Getting Started & Tutorials
-
-Instructions for installing SyncroSim and other dependencies are provided on the [Getting Started](https://apexrms.github.io/prioritizr/getting_started.html) page.
+## Tutorials
 
 The guided [tutorials](https://apexrms.github.io/prioritizr/tutorials.html) include the basics of how to set up, run, and view the outputs of a systematic conservation planning analysis.
 
