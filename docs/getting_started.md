@@ -16,7 +16,7 @@ To get started working with **prioritizr** SyncroSim for building and solving co
 
 ## **Installing SyncroSim**
 
-Running **prioritizr** requires that **SyncroSim** be installed on your computer. Download the latest version of SyncroSim [here](https://syncrosim.com/download/){:target="_blank"} and follow the installation prompts. For more on SyncroSim, please refer to the SyncroSim Docs for an [overview](https://docs.syncrosim.com/getting_started/overview.html){:target="_blank"} and a [quickstart tutorial](https://docs.syncrosim.com/getting_started/quickstart.html){:target="_blank"}.
+Running **prioritizr** requires that **SyncroSim** be installed on your computer. Download the latest version of SyncroSim for Windows [here](https://syncrosim.com/download/){:target="_blank"} and follow the installation prompts. For more on SyncroSim, please refer to the SyncroSim Docs for an [overview](https://docs.syncrosim.com/getting_started/overview.html){:target="_blank"} and a [quickstart tutorial](https://docs.syncrosim.com/getting_started/quickstart.html){:target="_blank"}.
 
 <br>
 
