@@ -54,7 +54,7 @@ if(isTRUE(performanceDatasheet$eval_n_summary)){
     n <- eval_n_summary(scenarioProblem, scenarioSolution[,"solution_1", 
                                                           drop = FALSE]) }
   # Save results
-  numberOutput <- as.data.frame(n)
+  numberOutput <- data.frame(n = n$n)
   saveDatasheet(ssimObject = myScenario, 
                 data = numberOutput, 
                 name = "prioritizr_numberOutput")
@@ -69,7 +69,7 @@ if(isTRUE(performanceDatasheet$eval_cost_summary)){
     cost <- eval_cost_summary(scenarioProblem, scenarioSolution[,"solution_1",
                                                                 drop = FALSE]) }
   # Save results
-  costOutput <- as.data.frame(cost)
+  costOutput <- data.frame(cost = cost$cost)
   saveDatasheet(ssimObject = myScenario, 
                 data = costOutput, 
                 name = "prioritizr_costOutput")
@@ -87,6 +87,9 @@ if(isTRUE(performanceDatasheet$eval_feature_representation_summary)){
   
   # Save results
   names(featureRepresentation)[2] <- "projectFeaturesId"
+  featureRepresentation$projectFeaturesId[
+    featureRepresentation$projectFeaturesId == 
+      featuresDatasheet$variableName] <- featuresDatasheet$Name
   featureRepresentationOutput <- as.data.frame(featureRepresentation)
   names(featureRepresentationOutput)[3:5] <- c("totalAmount", "absoluteHeld",
                                                "relativeHeld") 
@@ -106,6 +109,9 @@ if(isTRUE(performanceDatasheet$eval_target_coverage_summary)){
   
   # Save results
   names(targetCoverage)[1] <- "projectFeaturesId"
+  targetCoverage$projectFeaturesId[
+    targetCoverage$projectFeaturesId == 
+      featuresDatasheet$variableName] <- featuresDatasheet$Name
   targetCoverageOutput <- as.data.frame(targetCoverage)
   names(targetCoverageOutput)[3:9] <- c("totalAmount", "absoluteTarget", 
                                         "absoluteHeld", "absoluteShortfall",
@@ -123,10 +129,15 @@ if(isTRUE(performanceDatasheet$eval_boundary_summary)){
     temp_boundaryOutput <- eval_boundary_summary(scenarioProblem, 
                                                  scenarioSolution)
     # Save results
-    boundaryOutput <- as.data.frame(temp_boundaryOutput)
+    boundaryOutput <- data.frame(boundary = temp_boundaryOutput$boundary)
     saveDatasheet(ssimObject = myScenario, 
                   data = boundaryOutput, 
                   name = "prioritizr_boundaryOutput")
+  }
+  if(class(scenarioSolution) == "data.frame"){
+    updateRunLog("The output option for boundary lenght is not available for a 
+    tabular problem formulation.",
+                type = "warning")
   }
 }
 

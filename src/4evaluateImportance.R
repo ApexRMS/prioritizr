@@ -42,6 +42,17 @@ if(dim(importanceDatasheet)[1] != 0){
 
 # Evaluate importance ----------------------------------------------------------
 
+# Determine if there is spatial data for visualization
+if(dim(problemSpatialDatasheet)[1] != 0){
+  if(!is.na(problemSpatialDatasheet$x)){
+    pu_vis <- rast(file.path(problemSpatialDatasheet$x))
+    crs(pu_vis) <- NA
+    puVis <- TRUE
+  }
+} else {
+  puVis <- FALSE
+}
+
 # Calculate replacement cost scores
 if(isTRUE(importanceDatasheet$eval_replacement_importance)){
   if(class(scenarioSolution) != "data.frame"){
@@ -66,21 +77,12 @@ if(isTRUE(importanceDatasheet$eval_replacement_importance)){
       eval_replacement_importance(scenarioSolution[,"solution_1", 
                                                    drop = FALSE])
     # Save tabular results
-    replacementTabularOutput <- as.data.frame(replacementImportance)
+    replacementTabularOutput <- data.frame(
+      id = sim_pu$id,
+      rc = replacementImportance$rc)
     saveDatasheet(ssimObject = myScenario, 
                   data = replacementTabularOutput, 
                   name = "prioritizr_replacementTabularOutput")
-    
-    # Spatial data for visualization
-    if(dim(problemSpatialDatasheet)[1] != 0){
-      if(!is.na(problemSpatialDatasheet$x)){
-        pu_vis <- rast(file.path(problemSpatialDatasheet$x))
-        crs(pu_vis) <- NA
-        puVis <- TRUE
-      }
-    } else {
-      puVis <- FALSE
-    }
     
     # Save solution spatial visualization
     if(isTRUE(puVis)){
@@ -118,13 +120,41 @@ if(isTRUE(importanceDatasheet$eval_ferrier_importance)){
     
     ferrierScores <- eval_ferrier_importance(scenarioProblem, scenarioSolution)
     
-    # Save raster
-    ferrierFilename <- file.path(paste0(dataDir, "\\ferrierRaster.tif"))
-    writeRaster(ferrierScores[["total"]], filename = ferrierFilename,
-                overwrite = TRUE)
-    
-    # Save file path to datasheet
-    ferrierSpatialOutput <- data.frame(ferrierMethod = ferrierFilename)
+    # Define folder path
+    ferrierVisFilepath <- paste0(dataPath, "\\prioritizr_ferrierSpatialOutput")
+      
+    # Create directory if it does not exist
+    ifelse(!dir.exists(file.path(ferrierVisFilepath)), 
+           dir.create(file.path(ferrierVisFilepath)), FALSE)
+      
+    # Read datasheet
+    ferrierSpatialOutput <- data.frame(projectFeaturesId = as.character(),
+                                       ferrierMethod = as.character())
+      
+    # Loop across feature variables
+    for(j in 1:length(featuresDatasheet$variableName)){
+      
+      # Get feature ID
+      featureID <- featuresDatasheet$featureID[j]
+      
+      # Reclassify raster
+      rasterVis <- ferrierScores[[j]]
+      #plot(rasterVis)    
+      
+      # Define file path
+      rasterVisFilename <- file.path(paste0(
+        ferrierVisFilepath, paste0("\\ferrierScoreFeature", featureID, ".tif")))
+      
+      # Save file
+      writeRaster(rasterVis, filename = rasterVisFilename, overwrite = TRUE)
+      
+      # Add file path to datasheet
+      ferrierSpatialOutput[j,1] <- featuresDatasheet$Name[j] 
+      ferrierSpatialOutput[j,2] <- rasterVisFilename 
+      
+    }
+      
+    # Save datasheet
     saveDatasheet(ssimObject = myScenario, 
                   data = ferrierSpatialOutput, 
                   name = "prioritizr_ferrierSpatialOutput")
@@ -134,20 +164,68 @@ if(isTRUE(importanceDatasheet$eval_ferrier_importance)){
     ferrierScores <- eval_ferrier_importance(scenarioProblem, 
                                              scenarioSolution[,"solution_1",
                                                               drop = FALSE])
-    featureNames <- names(ferrierScores)
-    # Add planning unit id
+    # Add planning unit ID
     ferrierScores$id <- sim_pu$id
-    # Pivot data
-    ferrierScores <- ferrierScores %>%
-      pivot_longer(cols = featureNames,
-                   names_to = "projectFeaturesId",
-                   values_to = "scores")
+    
+    # Pivot long
+    numFeatures <- dim(ferrierScores)[2]-2
+    subsetData <- ferrierScores[,c(1:numFeatures, numFeatures+2)]
+    ferrierScoresLong <- subsetData %>%
+      pivot_longer(cols = 1:numFeatures,
+                   names_to = "projectFeaturesId", values_to = "scores")
     
     # Save results
-    ferrierTabularOutput <- as.data.frame(ferrierScores)
     saveDatasheet(ssimObject = myScenario, 
-                  data = ferrierTabularOutput, 
+                  data = ferrierScoresLong, 
                   name = "prioritizr_ferrierTabularOutput")
+    
+    # Save solution spatial visualization
+    if(isTRUE(puVis)){
+      
+      # Define folder path
+      ferrierVisFilepath <- paste0(dataPath, "\\prioritizr_ferrierSpatialOutput")
+      
+      # Create directory if it does not exist
+      ifelse(!dir.exists(file.path(ferrierVisFilepath)), 
+             dir.create(file.path(ferrierVisFilepath)), FALSE)
+      
+      # Read datasheet
+      ferrierSpatialOutput <- data.frame(projectFeaturesId = as.character(),
+                                         ferrierMethod = as.character())
+      
+      # Loop across feature variables
+      for(j in 1:length(featuresDatasheet$variableName)){
+        
+        # Get feature ID
+        featureID <- featuresDatasheet$featureID[j]
+        
+        # Subset Ferrier scores
+        subsetRaster <- ferrierScoresLong[ferrierScoresLong$projectFeaturesId == featuresDatasheet$Name[j],]
+        # Reclass table between planning unit id & solution
+        reclassTable <- matrix(c(subsetRaster$projectPUId,
+                                 subsetRaster$scores),
+                               byrow = FALSE, ncol = 2)
+        # Reclassify raster
+        rasterVis <- classify(pu_vis, reclassTable)
+        
+        # Define file path
+        rasterVisFilename <- file.path(paste0(
+          ferrierVisFilepath, paste0("\\ferrierScoreFeature", featureID, ".tif")))
+        
+        # Save file
+        writeRaster(rasterVis, filename = rasterVisFilename, overwrite = TRUE)
+        
+        # Add file path to datasheet
+        ferrierSpatialOutput[j,1] <- featuresDatasheet$Name[j] 
+        ferrierSpatialOutput[j,2] <- rasterVisFilename 
+        
+      }
+      
+      # Save datasheet
+      saveDatasheet(ssimObject = myScenario, 
+                    data = ferrierSpatialOutput, 
+                    name = "prioritizr_ferrierSpatialOutput")
+    }
   }
 }
 
@@ -175,10 +253,39 @@ if(isTRUE(importanceDatasheet$eval_rare_richness_importance)){
       scenarioProblem, scenarioSolution[,"solution_1", drop = FALSE])
     
     # Save results
-    rarityTabularOutput <- as.data.frame(rarityScores)
+    rarityTabularOutput <- data.frame(
+      id = sim_pu$id,
+      rwr = rarityScores$rwr)
     saveDatasheet(ssimObject = myScenario, 
                   data = rarityTabularOutput, 
                   name = "prioritizr_rarityTabularOutput")
+    
+    # Save solution spatial visualization
+    if(isTRUE(puVis)){
+      
+      # Reclass table between planning unit id & solution
+      reclassTable <- matrix(c(rarityTabularOutput$id,
+                               rarityTabularOutput$rwr),
+                             byrow = FALSE, ncol = 2)
+      # Reclassify raster
+      rarityVis <- classify(pu_vis, reclassTable)
+      
+      # Define file path
+      rarityFilepath <- paste0(
+        dataPath, "\\prioritizr_raritySpatialOutput")
+      rarityFilename <- file.path(paste0(rarityFilepath,
+                                         "\\rarityWeightedRichnessRaster.tif"))
+      # Create directory if it does not exist
+      ifelse(!dir.exists(file.path(rarityFilepath)), 
+             dir.create(file.path(rarityFilepath)), FALSE)
+      writeRaster(rarityVis, filename = rarityFilename, overwrite = TRUE)
+      # Save file path to datasheet
+      raritySpatialOutput <- data.frame(
+        rarityWeightedRichness = rarityFilename)
+      saveDatasheet(ssimObject = myScenario, 
+                    data = raritySpatialOutput, 
+                    name = "prioritizr_raritySpatialOutput")
+    }
   }
 }
 

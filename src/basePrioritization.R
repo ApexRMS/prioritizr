@@ -31,7 +31,8 @@ if(isTRUE(condaDatasheet$UseConda)){
   # Validate Rtools installation
   pathRtools <- Sys.which("make")
   if(pathRtools != "C:\\rtools40\\usr\\bin\\make.exe"){
-    stop("The installation of Rtools v4.0 is faulty. Please see https://apexrms.github.io/prioritizr/getting_started#troubleshooting-rtools-installation for help.")
+    stop("The installation of Rtools v4.0 is faulty. For help, please see
+    https://apexrms.github.io/prioritizr/getting_started#troubleshooting-rtools-installation.")
   }
     
 
@@ -84,6 +85,9 @@ ifelse(!dir.exists(file.path(dataDir)),
 # Scenario path
 dataPath <- paste(dataDir, paste0("Scenario-", scenarioId(myScenario)), sep="\\") 
 
+# Create directory if it does not exist
+ifelse(!dir.exists(file.path(dataPath)), 
+       dir.create(file.path(dataPath)), FALSE)
 
 
 # Model steps ------------------------------------------------------------------
