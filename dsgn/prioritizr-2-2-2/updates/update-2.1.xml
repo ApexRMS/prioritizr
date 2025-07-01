@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<update comment="Update to prioritizr 2.1 to update tree, fix package display name, separate cost representation, add evaluation and fix other minor bugs in multi-cost approach">
+
+    <!-- Remove column from datasheet -->
+    <action code="Exec" condition="TableExists" criteria="prioritizr_costLayersInput">
+        <item> ALTER TABLE prioritizr_costLayersInput DROP COLUMN costLayers </item>
+    </action>
+
+    <!-- Remove datasheet -->
+    <action code="DropTable" dropTableName="prioritizr_costRepresentationOutput" >
+	</action>
+
+</update>
