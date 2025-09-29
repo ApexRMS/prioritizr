@@ -45,6 +45,8 @@ costEqualDatasheet <- datasheet(myScenario,
                                 name = "prioritizr_costLayersEqualInput")
 costHrchyDatasheet <- datasheet(myScenario, 
                                 name = "prioritizr_costLayersHrchyInput")
+costWeightInputsDatasheet <- datasheet(myScenario, 
+                                       name = "prioritizr_costLayersWeightInput") 
 costDataDatasheet <- datasheet(myScenario, 
                                name = "prioritizr_costLayersData")
 costOrderDatasheet <- datasheet(myScenario, 
@@ -172,24 +174,26 @@ if(dim(costDatasheetExisting)[1] == 0){
   
   # If differences exist, update datasheet
   if(length(costDatasheetDifference) != 0){
-    costDatasheetDifference$Name <- costDatasheetDifference$variableName
-    costDatasheetDifference <- costDatasheetDifference[, c(1,3,2)]
-    featuresDatasheetUpdated <- rbind(costDatasheetExisting,
-                                      costDatasheetDifference)
+    costDatasheetNew <- data.frame(Name = costDatasheetDifference,
+                                   variableName = costDatasheetDifference)
+    #costDatasheetDifference$Name <- costDatasheetDifference$variableName
+    #costDatasheetDifference <- costDatasheetDifference[, c(1,3,2)]
+    costDatasheetUpdated <- rbind(costDatasheetExisting,
+                                  costDatasheetNew)
     saveDatasheet(ssimObject = myProject, 
-                  data = featuresDatasheetUpdated, 
-                  name = "prioritizr_projectFeatures")
+                  data = costDatasheetUpdated, 
+                  name = "prioritizr_projectCosts")
   }
   
-  # Update display names
-  costsDatasheet$Name[
-    costsDatasheet$variableName == costDatasheetExisting$variableName] <- 
-    costDatasheetExisting$Name 
-  
-  # Save cost layers to project scope
-  saveDatasheet(ssimObject = myProject, 
-                data = costsDatasheet[,-3], 
-                name = "prioritizr_projectCosts")
+  # # Update display names
+  # costsDatasheet$Name[
+  #   costsDatasheet$variableName == costDatasheetExisting$variableName] <- 
+  #   costDatasheetExisting$Name 
+  # 
+  # # Save cost layers to project scope
+  # saveDatasheet(ssimObject = myProject, 
+  #               data = costsDatasheet[,-3], 
+  #               name = "prioritizr_projectCosts")
 }
 
 # Tabular data
@@ -480,13 +484,12 @@ if(costMethodDatasheet$method == "Equal"){
     scenarioSolution <- try(solve(p1, force = TRUE, run_checks = FALSE), silent = TRUE)
     
     # If scenarioSolution is a feasible solution, then end loop
-    if (!inherits(scenarioSolution, "try-error")) break() 
+    if(!inherits(scenarioSolution, "try-error")) break() 
   }
-  # if (inherits(scenarioSolution)) {
-  #   stop(
-  #     "Could not find feasible multi-objective solution. Try increasing the parameter `Budget padding`."
-  #   )
-  # }
+  if(inherits(scenarioSolution, "try-error")) {
+    stop("Could not find feasible multi-objective solution. 
+         Try increasing the parameter `Budget padding`.")
+  }
   
   # Save raster
   if(class(scenarioSolution) != "data.frame"){
@@ -625,8 +628,12 @@ if(costMethodDatasheet$method == "Weighted"){
   t1$new_target <- t1$absoluteHeld * 
     (1 - costMethodDatasheet$initialOptimalityGap)
 
+  # Reorder weights
+  costWeightsDatasheet$costWeight <- 1 - costWeightsDatasheet$costWeight
+
   # Calculate weighted budgets
-  new_budgets <- costs * (1 + costWeightsDatasheet$costWeight*0.1)
+  new_budgets <- costs * (1 + costWeightsDatasheet$costWeight) * 
+    costWeightInputsDatasheet$budgetMultiplier
 
   # Generate problem with multiple cost weights
   p1 <-
@@ -654,12 +661,13 @@ if(costMethodDatasheet$method == "Weighted"){
   }
 
   # Solve problem
-  scenarioSolution <- try(solve(p1, force = TRUE, run_checks = FALSE), silent = TRUE)
+  scenarioSolution <- try(solve(p1, force = TRUE, run_checks = FALSE), 
+                          silent = TRUE)
     
   # If scenarioSolution is infeasible solution, return error
   if(inherits(scenarioSolution, "try-error")) {
     stop("Could not find feasible multi-cost solution. Try increasing the 
-    parameter `Budget padding`.")
+    parameter `Optimality gap`.")
   }
   
   # Save raster
