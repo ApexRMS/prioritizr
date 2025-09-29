@@ -72,7 +72,8 @@ if(isTRUE(importanceDatasheet$eval_replacement_importance)){
                   data = replacementSpatialOutput, 
                   name = "prioritizr_replacementSpatialOutput")
   }
-  if(class(scenarioSolution) == "data.frame"){
+  if(class(scenarioSolution) == "data.frame" &
+   sum(scenarioSolution$solution_1) != 0){
     replacementImportance <- scenarioProblem %>%
       eval_replacement_importance(scenarioSolution[,"solution_1", 
                                                    drop = FALSE])
@@ -159,7 +160,8 @@ if(isTRUE(importanceDatasheet$eval_ferrier_importance)){
                   data = ferrierSpatialOutput, 
                   name = "prioritizr_ferrierSpatialOutput")
   }
-  if(class(scenarioSolution) == "data.frame"){
+  if(class(scenarioSolution) == "data.frame" &
+   sum(scenarioSolution$solution_1) != 0){
     
     ferrierScores <- eval_ferrier_importance(scenarioProblem, 
                                              scenarioSolution[,"solution_1",
@@ -247,7 +249,8 @@ if(isTRUE(importanceDatasheet$eval_rare_richness_importance)){
                   data = raritySpatialOutput, 
                   name = "prioritizr_raritySpatialOutput")
   }
-  if(class(scenarioSolution) == "data.frame"){
+  if(class(scenarioSolution) == "data.frame" &
+   sum(scenarioSolution$solution_1) != 0){
     
     rarityScores <- eval_rare_richness_importance(
       scenarioProblem, scenarioSolution[,"solution_1", drop = FALSE])

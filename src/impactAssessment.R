@@ -96,16 +96,16 @@ if(altrScenarioTable$IsResult == "Yes"){
 # Identify impact assessment type
 basePipeline <- datasheet(baseScenario, name = "core_Pipeline")
 altrPipeline <- datasheet(altrScenario, name = "core_Pipeline", optional = TRUE)
-if(basePipeline$StageNameId[1] == "Base Prioritization" &
-   altrPipeline$StageNameId[1] == "Multi-Cost Prioritization"){
+if(any(basePipeline$StageNameId == "2 - Base Prioritization") &
+   any(altrPipeline$StageNameId == "3 - Multi-Cost Prioritization")){
   iaType <- "Cost-optimization"
 }
-if(basePipeline$StageNameId[1] == "Base Prioritization" &
-   altrPipeline$StageNameId[1] == "Base Prioritization"){
+if(any(basePipeline$StageNameId == "2 - Base Prioritization") &
+   any(altrPipeline$StageNameId == "2 - Base Prioritization")){
   iaType <- "Base comparison"
 }
-if(basePipeline$StageNameId[1] == "Multi-Cost Prioritization" &
-   altrPipeline$StageNameId[1] == "Multi-Cost Prioritization"){
+if(any(basePipeline$StageNameId == "3 - Multi-Cost Prioritization") &
+   any(altrPipeline$StageNameId == "3 - Multi-Cost Prioritization")){
   iaType <- "Multi-Cost comparison"
 }
 
@@ -266,8 +266,8 @@ altrReplaceDatasheet <- datasheet(
 if(dim(baseReplaceDatasheet)[1] != 0 & dim(altrReplaceDatasheet)[1] != 0){
   
   # Open raster files
-  baseRast <- rast(baseReplaceDatasheet$rarityWeightedRichness)
-  altrRast <- rast(altrReplaceDatasheet$rarityWeightedRichness)
+  baseRast <- rast(baseReplaceDatasheet$replacement)
+  altrRast <- rast(altrReplaceDatasheet$replacement)
   
   # Calculate difference
   diffVis <- altrRast - baseRast

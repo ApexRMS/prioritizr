@@ -41,15 +41,16 @@ if(length(inputDatasheet$tabularProblem) != 0){
     inputData <- read.csv(inputDatasheet$tabularProblem, header = TRUE)
     
     # Planning units
-    puData <- inputData[,1:3]
+    puData <- inputData[,c(1,3:4)]
+    names(puData) <- c("id", "Name", "cost")
     
     # Features
-    numberFeatures <- dim(inputData)[2]-3
+    numberFeatures <- dim(inputData)[2]-4
     featuresData <- data.frame(id = c(1:numberFeatures),
-                               name = names(inputData[,4:(numberFeatures+3)]))
+                               name = names(inputData[,5:(numberFeatures+4)]))
     
     # Planning units vs. Features
-    puVsFt <- inputData[,-2:-3] %>%
+    puVsFt <- inputData[,-2:-4] %>%
       pivot_longer(cols = 2:(numberFeatures+1),
                    names_to = "species", values_to = "amount")
     puVsFt$species[puVsFt$species == featuresData$name] <- featuresData$id
@@ -65,6 +66,40 @@ if(length(inputDatasheet$tabularProblem) != 0){
     saveDatasheet(ssimObject = myScenario, 
                   data = puVsFt, 
                   name = "prioritizr_problemTabularPUvsFeatures")
+    
+    # Project definition ----------------------------------------
+    
+    # Load existing planning units from project scope
+    puDatasheetExisting <- datasheet(myScenario,
+                                     name = "prioritizr_projectPU")
+    
+    # Project planning unit definition
+    projectPU <- inputData[,1:3]
+    names(projectPU) <- c("puID", "Name", "variableName")
+    
+    # If datasheet is empty
+    if(dim(puDatasheetExisting)[1] == 0){
+      
+      # Save
+      saveDatasheet(ssimObject = myProject, 
+                    data = projectPU, 
+                    name = "prioritizr_projectPU")
+    } else {
+      
+      # Calculate dissimilarities in planning unit ID and variable names  
+      puDatasheetDifference <- setdiff(projectPU[,c(1,3)], 
+                                       puDatasheetExisting[,c(1,3)])
+      
+      # Add extra rows to project datasheet
+      newRows <- projectPU[projectPU$puID == puDatasheetDifference$puID,]
+      projectPUnew <- rbind(puDatasheetExisting, newRows)
+      
+      # Save
+      saveDatasheet(ssimObject = myProject, 
+                    data = projectPUnew, 
+                    name = "prioritizr_projectPU")
+      
+    }
   }
 }
 

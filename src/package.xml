@@ -8,19 +8,19 @@
   
   <dataSheet name="projectFeatures" displayName="Features" displayMember="Name" dataScope="Project">
     <column name="featureID" displayName="Feature ID" dataType="Integer" validationType="WholeNumber" validationCondition="GreaterEqual" formula1="1" isReadOnly="True" />
-    <column name="Name" displayName="Feature Display Name" dataType="String" />
-    <column name="variableName" displayName="Feature Variable Name" dataType="String" isReadOnly="True" />
+    <column name="Name" displayName="Feature Name" dataType="String" />
+    <column name="variableName" displayName="Feature Variable" dataType="String" isReadOnly="True" />
   </dataSheet>
 
   <dataSheet name="projectCosts" displayName="Cost Variables" displayMember="Name" dataScope="Project">
-    <column name="Name" displayName="Cost Display Name" dataType="String" />
-    <column name="variableName" displayName="Cost Variable Name" dataType="String" isReadOnly="True" />
+    <column name="Name" displayName="Cost Name" dataType="String" />
+    <column name="variableName" displayName="Cost Variable" dataType="String" isReadOnly="True" />
   </dataSheet>
 
   <dataSheet name="projectPU" displayName="Planning Units" displayMember="Name" dataScope="Project">
     <column name="puID" displayName="Planning Unit ID" dataType="Integer" validationType="WholeNumber" validationCondition="GreaterEqual" formula1="1" isReadOnly="True" />
-    <column name="Name" displayName="Planning Unit Display Name" dataType="String" />
-    <column name="variableName" displayName="Planning Unit Variable Name" dataType="String" isReadOnly="True" />
+    <column name="Name" displayName="Planning Unit Name" dataType="String" />
+    <column name="variableName" displayName="Planning Unit Variable" dataType="String" isReadOnly="True" />
   </dataSheet>
 
   <dataSheet name="problemFormat" displayName="Input Format" isSingleRow="True">
@@ -58,7 +58,7 @@
 
    <dataSheet name="problemTabularFeatures" displayName="Features" isSingleRow="False">
     <column name="id" displayName="Feature ID" dataType="Integer" validationType="WholeNumber" validationCondition="GreaterEqual" formula1="1" />
-    <column name="name" displayName="Feature Variable Name" dataType="String" validationType="String" />
+    <column name="name" displayName="Feature Variable" dataType="String" validationType="String" />
   </dataSheet>
 
    <dataSheet name="problemTabularPUvsFeatures" displayName="Planning Units vs. Features" isSingleRow="False">
@@ -141,8 +141,9 @@
   </dataSheet>
 
   <dataSheet name="solver" displayName="Solver" isSingleRow="True">
-    <column name="solver" displayName="Function" dataType="String" validationType="List" formula1="1:Default|6:Rsymphony" defaultValue="6" />
-    <column name="gap" displayName="Gap" dataType="Double" validationType="Decimal" validationCondition="None" defaultValue="0" />
+    <column name="solver" displayName="Function" dataType="String" validationType="List" formula1="1:Default|6:Rsymphony" />
+    <column name="gap" displayName="Gap" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <record columns="solver|gap" values="1|0"/>
   </dataSheet>
 
   <dataSheet name="mapInputs" displayName="Map Inputs" isSingleRow="True">
@@ -152,6 +153,7 @@
     <column name="lockedIn" displayName="Locked in constraint" dataType="Boolean" />
     <column name="lockedOut" displayName="Locked out constraint" dataType="Boolean" />
     <column name="linearPenalty" displayName="Linear penalty" dataType="Boolean" />
+    <record columns="planningUnits|features|linearConstraint|lockedIn|lockedOut|linearPenalty" values="0|0|0|0|0|0"/>
   </dataSheet>
 
   <dataSheet name="evaluatePerformance" displayName="Performance" isSingleRow="True">
@@ -347,31 +349,39 @@
 
   <dataSheet name="costLayersMethod" displayName="Parameters" isSingleRow="True">
     <column name="method" displayName="Method" dataType="String" validationType="List" formula1="1:Hierarchical|2:Equal|3:Weighted" />
-    <column name="initialOptimalityGap" displayName="Optimality gap" dataType="Double" validationType="Decimal" validationCondition="None" defaultValue="0.2" />
+    <column name="initialOptimalityGap" displayName="Optimality gap" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <record columns="initialOptimalityGap" values="0.2"/>
   </dataSheet>
 
   <dataSheet name="costLayersEqualInput" displayName="Parameters" isSingleRow="True">
-    <column name="budgetIncrements" displayName="Budget increments" dataType="Integer" validationType="WholeNumber" validationCondition="None" defaultValue="125" />
-    <column name="budgetPadding" displayName="Budget padding" dataType="Double" validationType="Decimal" validationCondition="None" defaultValue="0.25" />
+    <column name="budgetIncrements" displayName="Budget increments" dataType="Integer" validationType="WholeNumber" validationCondition="None" />
+    <column name="budgetPadding" displayName="Budget padding" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <record columns="budgetIncrements|budgetPadding" values="125|0.25"/>
   </dataSheet>
 
   <dataSheet name="costLayersHrchyInput" displayName="Parameters" isSingleRow="True">
-    <column name="costOptimalityGap" displayName="Cost optimality gap" dataType="Double" validationType="Decimal" validationCondition="None" defaultValue="0.1" />
+    <column name="costOptimalityGap" displayName="Cost optimality gap" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <record columns="costOptimalityGap" values="0.1"/>
+  </dataSheet>
+
+  <dataSheet name="costLayersWeightInput" displayName="Parameters" isSingleRow="True">
+    <column name="budgetMultiplier" displayName="Budget multiplier" dataType="Double" validationType="Decimal" validationCondition="None" />
+    <record columns="budgetMultiplier" values="1"/>
   </dataSheet>
 
   <dataSheet name="costLayersData" displayName="Data" isSingleRow="False">
     <column name="id" displayName="Planning Unit ID" dataType="Integer" validationType="WholeNumber" validationCondition="GreaterEqual" formula1="1" />
-    <column name="costName" displayName="Cost Variable Name" dataType="String" />
+    <column name="costName" displayName="Cost Variable" dataType="String" />
     <column name="costAmount" displayName="Cost Amount" dataType="Double" />
   </dataSheet>
 
   <dataSheet name="costLayersOrder" displayName="Order" isSingleRow="False">
-    <column name="costName" displayName="Cost Variable Name" dataType="String" />
+    <column name="costName" displayName="Cost Variable" dataType="String" />
     <column name="costOrder" displayName="Cost Order" dataType="Integer" validationType="WholeNumber" validationCondition="GreaterEqual" formula1="1" />
   </dataSheet>
 
   <dataSheet name="costLayersWeight" displayName="Weights" isSingleRow="False">
-    <column name="costName" displayName="Cost Variable Name" dataType="String" />
+    <column name="costName" displayName="Cost Variable" dataType="String" />
     <column name="costWeight" displayName="Cost Weight" dataType="Double" />
   </dataSheet>
 
@@ -409,7 +419,7 @@
 
  <transformer 
   name="basePrioritization" 
-  displayName="1 - Base Prioritization"
+  displayName="2 - Base Prioritization"
   transformerSpecificOutput="False" 
   isRunnable="True" 
   programName="RScript" 
@@ -465,7 +475,7 @@
 
   <transformer 
   name="multicostPrioritization" 
-  displayName="2 - Multi-Cost Prioritization"
+  displayName="3 - Multi-Cost Prioritization"
   transformerSpecificOutput="False" 
   isRunnable="True" 
   programName="RScript" 
@@ -517,6 +527,7 @@
     <dataSheet name="costLayersData" type="Input" />
     <dataSheet name="costLayersEqualInput" type="Input" />
     <dataSheet name="costLayersHrchyInput" type="Input" />
+    <dataSheet name="costLayersWeightInput" type="Input" />
     <dataSheet name="costLayersOrder" type="Input" />
     <dataSheet name="costLayersWeight" type="Input" />
     <dataSheet name="evaluatePerformance" type="Input" />
@@ -646,6 +657,7 @@
         <item name="costLayersEqualInput" />
       </group>
       <group name="costParametersWeight" displayName="Weighted">
+        <item name="costLayersWeightInput" />
         <item name="costLayersWeight" />
       </group>
       <item name="costOutputOptions" />
@@ -760,7 +772,7 @@
       <item name="problemSpatialPU" displayName="Planning Units" dataSheet="puRasterOutput" column="pu" idRasterDatasheet="problemSpatial" idRasterColumn="x" idLookupDatasheet="projectPU" lookupIdColumn="puID" lookupNameColumn="Name" />
       <item name="problemSpatialFeatures" displayName="Features" dataSheet="featureRasterOutput" column="feature" filter="projectFeaturesId" idRasterDatasheet="problemSpatial" idRasterColumn="x" idLookupDatasheet="projectPU" lookupIdColumn="puID" lookupNameColumn="Name" />
       <group name="constraints" displayName="Constraints">
-        <item name="linearConstraintSpatial" displayName="Linear Constraint" dataSheet="inputRasterOutput" column="linearConstraintInput" idRasterDatasheet="problemSpatial" idRasterColumn="x" idLookupDatasheet="projectPU" lookupIdColumn="puID" lookupNameColumn="Name"/>
+        <item name="linearConstraintSpatial" displayName="Linear Constraint" dataSheet="inputRasterOutput" column="linearConstraintInput" idRasterDatasheet="problemSpatial" idRasterColumn="x" idLookupDatasheet="projectPU" lookupIdColumn="puID" lookupNameColumn="Name" />
         <item name="lockedInSpatial" displayName="Locked In" dataSheet="inputRasterOutput" column="lockedInInput" idRasterDatasheet="problemSpatial" idRasterColumn="x" idLookupDatasheet="projectPU" lookupIdColumn="puID" lookupNameColumn="Name" />
         <item name="lockedOutSpatial" displayName="Locked Out" dataSheet="inputRasterOutput" column="lockedOutInput" idRasterDatasheet="problemSpatial" idRasterColumn="x" idLookupDatasheet="projectPU" lookupIdColumn="puID" lookupNameColumn="Name" />
       </group>

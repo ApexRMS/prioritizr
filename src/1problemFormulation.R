@@ -83,6 +83,8 @@ if(dim(targetDatasheet)[1] == 0){
   saveDatasheet(ssimObject = myScenario, 
                 data = targetDatasheet, 
                 name = "prioritizr_targets")
+  updateRunLog("No inputs were provided for the Target datasheet, therefore default values were used.",
+               type = "warning")
 }
 if(dim(decisionDatasheet)[1] == 0){
   decisionDatasheet <- data.frame(addDecision = "Binary",
@@ -91,6 +93,8 @@ if(dim(decisionDatasheet)[1] == 0){
                 data = decisionDatasheet, 
                 name = "prioritizr_decisionTypes")
   names(decisionDatasheet)[2] <- "upper_limit"
+  updateRunLog("No inputs were provided for the Decision Types datasheet, therefore default values were used.",
+               type = "warning")
 }
 if(dim(solverDatasheet)[1] == 0){
   solverDatasheet <- data.frame(solver = "Default",
@@ -98,6 +102,8 @@ if(dim(solverDatasheet)[1] == 0){
   saveDatasheet(ssimObject = myScenario, 
                 data = solverDatasheet, 
                 name = "prioritizr_solver")
+  updateRunLog("No inputs were provided for the Solver datasheet, therefore default values were used.",
+               type = "warning")
 }
 
 
@@ -223,31 +229,32 @@ if(dim(puDatasheetExisting)[1] == 0 & problemFormatDatasheet$dataType == "Tabula
  saveDatasheet(ssimObject = myProject, 
                data = puDatasheet, 
                name = "prioritizr_projectPU")
-} #else {
-#   
-#   # Calculate dissimilarities in planning unit ID and variable names  
-#   puDatasheetDifference <- setdiff(puDatasheet, puDatasheetExisting)
-#   
-#   # If differences exist, update datasheet
-#   if(dim(puDatasheetDifference)[1] != 0){
-#     puDatasheetDifference$Name <- puDatasheetDifference$variableName
-#     puDatasheetDifference <- puDatasheetDifference[, c(1,3,2)]
-#     puDatasheetUpdated <- rbind(puDatasheetExisting,
-#                                       puDatasheetDifference)
-#     saveDatasheet(ssimObject = myProject, 
-#                   data = puDatasheetUpdated, 
-#                   name = "prioritizr_projectPU")
-#   }
-#   
-#   # Check for display name updates
-#   nameUpdates <- puDatasheetExisting$Name == 
-#     puDatasheetExisting$variableName
-#   featuresDatasheetSimilar <- intersect(puDatasheet[,c(1,3)],
-#                                         puDatasheetExisting[,c(1,3)])
-#   puDatasheet$Name[
-#     puDatasheet$variableName == puDatasheetExisting$variableName] <- 
-#     puDatasheetExisting$Name 
-# }
+} else {
+   
+   # Calculate dissimilarities in planning unit ID and variable names  
+   puDatasheetDifference <- setdiff(puDatasheet[,c(1,3)], 
+                                    puDatasheetExisting[,c(1,3)])
+   
+   # # If differences exist in ID or variable name exist, add to datasheet
+   # if(dim(puDatasheetDifference)[1] != 0){
+   #   puDatasheetDifference$Name <- puDatasheetDifference$variableName
+   #   puDatasheetDifference <- puDatasheetDifference[, c(1,3,2)]
+   #   puDatasheetUpdated <- rbind(puDatasheetExisting,
+   #                                     puDatasheetDifference)
+   #   saveDatasheet(ssimObject = myProject, 
+   #               data = puDatasheetUpdated, 
+   #                 name = "prioritizr_projectPU")
+   # }
+   
+   # Check for display name updates
+   nameUpdates <- puDatasheetExisting$Name == 
+     puDatasheetExisting$variableName
+   featuresDatasheetSimilar <- intersect(puDatasheet[,c(1,3)],
+                                         puDatasheetExisting[,c(1,3)])
+   puDatasheet$Name[
+     puDatasheet$variableName == puDatasheetExisting$variableName] <- 
+     puDatasheetExisting$Name 
+}
 
 
 # Define criteria --------------------------------------------------------------
