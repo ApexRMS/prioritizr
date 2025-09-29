@@ -54,7 +54,8 @@ if(dim(problemSpatialDatasheet)[1] != 0){
 }
 
 # Calculate replacement cost scores
-if(isTRUE(importanceDatasheet$eval_replacement_importance)){
+if(isTRUE(importanceDatasheet$eval_replacement_importance) &
+   sum(scenarioSolution$solution_1) != 0){
   if(class(scenarioSolution) != "data.frame"){
     
     replacementImportance <- scenarioProblem %>%
@@ -115,7 +116,8 @@ if(isTRUE(importanceDatasheet$eval_replacement_importance)){
 }
 
 # Calculate Ferrier scores and extract total score
-if(isTRUE(importanceDatasheet$eval_ferrier_importance)){
+if(isTRUE(importanceDatasheet$eval_ferrier_importance) &
+   sum(scenarioSolution$solution_1) != 0){
   if(class(scenarioSolution) != "data.frame"){
     
     ferrierScores <- eval_ferrier_importance(scenarioProblem, scenarioSolution)
@@ -230,7 +232,8 @@ if(isTRUE(importanceDatasheet$eval_ferrier_importance)){
 }
 
 # Calculate rarity weighted richness scores
-if(isTRUE(importanceDatasheet$eval_rare_richness_importance)){
+if(isTRUE(importanceDatasheet$eval_rare_richness_importance) &
+   sum(scenarioSolution$solution_1) != 0){
   if(class(scenarioSolution) != "data.frame"){
     
     rarityScores <- eval_rare_richness_importance(scenarioProblem, 
