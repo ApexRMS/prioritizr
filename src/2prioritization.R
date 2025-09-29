@@ -124,7 +124,7 @@ mapInputsDatasheet <- datasheet(myScenario,
                                 name = "prioritizr_mapInputs")
 
 # Enter if statement if any input needs mapping
-if(dim(mapInputsDatasheet)[1] !=0 & any(mapInputsDatasheet[1,])){
+if(dim(mapInputsDatasheet)[1] !=0 & any(mapInputsDatasheet[1,], na.rm = TRUE)){
   
   # For spatial data format
   if(problemFormatDatasheet$dataType == "Spatial"){
@@ -377,7 +377,7 @@ if(dim(mapInputsDatasheet)[1] !=0 & any(mapInputsDatasheet[1,])){
               inputVisFilepath, paste0("\\input", inputID-2, ".tif")))
             
             # Save file
-            #writeRaster(rasterVis, filename = rasterVisFilename, overwrite = TRUE)
+            writeRaster(rasterVis, filename = rasterVisFilename, overwrite = TRUE)
             
             # Add file path to datasheet
             inputRasterOutput[1,inputID-2] <- rasterVisFilename 
