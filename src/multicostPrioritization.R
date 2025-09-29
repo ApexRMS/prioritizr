@@ -132,7 +132,7 @@ if(dim(costWeightsDatasheet)[1] != 0){
   checkMatchWeights <- setdiff(costDataDatasheet$costName,
                                costWeightsDatasheet$costName)
   if(length(checkMatchWeights) != 0){
-    stop("Cost variable names do not match between Data and Hierarchical Order inputs.")
+    stop("Cost variable names do not match between Data and Weights inputs.")
   }
 }
 
