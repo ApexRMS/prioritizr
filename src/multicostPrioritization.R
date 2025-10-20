@@ -64,8 +64,6 @@ featureRepresentationOutput <- datasheet(myScenario,
                                          lookupsAsFactors = T)
 solutionTabularOutput <- datasheet(myScenario,
                                    name = "prioritizr_solutionTabularOutput")
-#problemFormulation <- datasheet(myScenario,
-#                                name = "prioritizr_problemFormulation")
 solutionObject <- datasheet(myScenario,
                             name = "prioritizr_solutionObject")
 performanceDatasheet <- datasheet(myScenario,
@@ -93,6 +91,11 @@ names(importanceDatasheet) <- c("eval_replacement_importance",
 
 
 # Validation -------------------------------------------------------------------
+
+# Check if attempting to use spatial data
+if(problemFormatDatasheet$dataType == "Spatial"){
+  stop("Multi-cost optimization currently only supports tabular formulation.")
+}
 
 # Check if feature representation was calculated
 if(dim(featureRepresentationOutput)[1] == 0){
@@ -185,15 +188,15 @@ if(dim(costDatasheetExisting)[1] == 0){
                   name = "prioritizr_projectCosts")
   }
   
-  # # Update display names
-  # costsDatasheet$Name[
-  #   costsDatasheet$variableName == costDatasheetExisting$variableName] <- 
-  #   costDatasheetExisting$Name 
-  # 
-  # # Save cost layers to project scope
-  # saveDatasheet(ssimObject = myProject, 
-  #               data = costsDatasheet[,-3], 
-  #               name = "prioritizr_projectCosts")
+  # Update display names
+  costsDatasheet$Name[
+   costsDatasheet$variableName == costDatasheetExisting$variableName] <- 
+   costDatasheetExisting$Name 
+  
+  # Save cost layers to project scope
+  saveDatasheet(ssimObject = myProject, 
+               data = costsDatasheet[,-3], 
+               name = "prioritizr_projectCosts")
 }
 
 # Tabular data
@@ -210,10 +213,14 @@ if(problemFormatDatasheet$dataType == "Tabular"){
   sim_features <- datasheet(myScenario, 
                             name = "prioritizr_problemTabularFeatures")
   # Set features' names
-  featuresDatasheet <- sim_features
-  names(featuresDatasheet)[1] <- "featureID"
-  names(featuresDatasheet)[2] <- "Name"
-  featuresDatasheet$variableName <- featuresDatasheet$Name
+  # featuresDatasheet <- sim_features
+  # names(featuresDatasheet)[1] <- "featureID"
+  # names(featuresDatasheet)[2] <- "Name"
+  # featuresDatasheet$variableName <- featuresDatasheet$Name
+   
+  # Load existing features from project scope
+  featuresDatasheet <- datasheet(myScenario,
+                                 name = "prioritizr_projectFeatures")
   
   # Planning units vs. Features
   rij <- datasheet(myScenario, 
