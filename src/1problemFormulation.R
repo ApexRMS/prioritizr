@@ -225,35 +225,37 @@ if(dim(featuresDatasheetExisting)[1] == 0){
 puDatasheetExisting <- datasheet(myScenario,
                                 name = "prioritizr_projectPU")
 # If datasheet is empty, save
-if(dim(puDatasheetExisting)[1] == 0 & problemFormatDatasheet$dataType == "Tabular"){
- saveDatasheet(ssimObject = myProject, 
-               data = puDatasheet, 
-               name = "prioritizr_projectPU")
-} else {
-   
-   # Calculate dissimilarities in planning unit ID and variable names  
-   puDatasheetDifference <- setdiff(puDatasheet[,c(1,3)], 
-                                    puDatasheetExisting[,c(1,3)])
-   
-   # # If differences exist in ID or variable name exist, add to datasheet
-   # if(dim(puDatasheetDifference)[1] != 0){
-   #   puDatasheetDifference$Name <- puDatasheetDifference$variableName
-   #   puDatasheetDifference <- puDatasheetDifference[, c(1,3,2)]
-   #   puDatasheetUpdated <- rbind(puDatasheetExisting,
-   #                                     puDatasheetDifference)
-   #   saveDatasheet(ssimObject = myProject, 
-   #               data = puDatasheetUpdated, 
-   #                 name = "prioritizr_projectPU")
-   # }
-   
-   # Check for display name updates
-   nameUpdates <- puDatasheetExisting$Name == 
-     puDatasheetExisting$variableName
-   featuresDatasheetSimilar <- intersect(puDatasheet[,c(1,3)],
-                                         puDatasheetExisting[,c(1,3)])
-   puDatasheet$Name[
-     puDatasheet$variableName == puDatasheetExisting$variableName] <- 
-     puDatasheetExisting$Name 
+if(problemFormatDatasheet$dataType == "Tabular"){
+  if(dim(puDatasheetExisting)[1] == 0){
+    saveDatasheet(ssimObject = myProject, 
+                  data = puDatasheet, 
+                  name = "prioritizr_projectPU")
+  } else {
+    
+    # Calculate dissimilarities in planning unit ID and variable names  
+    puDatasheetDifference <- setdiff(puDatasheet[,c(1,3)], 
+                                     puDatasheetExisting[,c(1,3)])
+    
+    # # If differences exist in ID or variable name exist, add to datasheet
+    # if(dim(puDatasheetDifference)[1] != 0){
+    #   puDatasheetDifference$Name <- puDatasheetDifference$variableName
+    #   puDatasheetDifference <- puDatasheetDifference[, c(1,3,2)]
+    #   puDatasheetUpdated <- rbind(puDatasheetExisting,
+    #                                     puDatasheetDifference)
+    #   saveDatasheet(ssimObject = myProject, 
+    #               data = puDatasheetUpdated, 
+    #                 name = "prioritizr_projectPU")
+    # }
+    
+    # Check for display name updates
+    nameUpdates <- puDatasheetExisting$Name == 
+      puDatasheetExisting$variableName
+    featuresDatasheetSimilar <- intersect(puDatasheet[,c(1,3)],
+                                          puDatasheetExisting[,c(1,3)])
+    puDatasheet$Name[
+      puDatasheet$variableName == puDatasheetExisting$variableName] <- 
+      puDatasheetExisting$Name 
+  } 
 }
 
 
