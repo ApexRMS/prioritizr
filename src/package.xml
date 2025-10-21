@@ -422,7 +422,7 @@
   displayName="2 - Base Prioritization"
   transformerSpecificOutput="False" 
   isRunnable="True" 
-  programName="RScript" 
+  programName="Rscript" 
   programArguments="basePrioritization.R" 
   condaEnv="prioritizrEnv.yml"
   condaEnvVersion="2">
@@ -478,7 +478,7 @@
   displayName="3 - Multi-Cost Prioritization"
   transformerSpecificOutput="False" 
   isRunnable="True" 
-  programName="RScript" 
+  programName="Rscript" 
   programArguments="multicostPrioritization.R" 
   condaEnv="prioritizrEnv.yml"
   condaEnvVersion="2">
@@ -542,7 +542,7 @@
   displayName="4 - Impact Assessment"
   transformerSpecificOutput="False" 
   isRunnable="True" 
-  programName="RScript" 
+  programName="Rscript" 
   programArguments="impactAssessment.R" 
   condaEnv="prioritizrEnv.yml"
   condaEnvVersion="2">
@@ -570,7 +570,7 @@
   displayName="1 - Data Formatting"
   transformerSpecificOutput="False" 
   isRunnable="True" 
-  programName="RScript" 
+  programName="Rscript" 
   programArguments="preProcessing.R" 
   condaEnv="prioritizrEnv.yml"
   condaEnvVersion="2">
