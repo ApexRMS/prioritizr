@@ -27,35 +27,26 @@ condaDatasheet <- datasheet(myLibrary, name = "core_Option")
 isWindows <- function() tolower(Sys.info()[["sysname"]]) == "windows"
 
 
-# Install missing packages when using Conda
-if (isTRUE(condaDatasheet$UseConda)) {
-  # Force binary install of packages
-  # options(install.packages.compile.from.source = "never")
-
-  # # Validate Rtools installation
-  # pathRtools <- Sys.which("make")
-  # if(pathRtools != "C:\\rtools40\\usr\\bin\\make.exe"){
-  #   stop("The installation of Rtools v4.0 is faulty. For help, please see
-  #   https://apexrms.github.io/prioritizr/getting_started#troubleshooting-rtools-installation.")
-  # }
-
+# Install missing packages when using Conda on Windows
+if (isTRUE(condaDatasheet$UseConda) && isWindows()) {
   # Update packages
   install.packages(
     "terra",
     repos = "http://cran.us.r-project.org",
-    type = ifelse(isWindows(), "binary", "source")
+    type = "binary"
   )
+  n
   update.packages(
     repos = 'http://cran.us.r-project.org',
     ask = FALSE,
     oldPkgs = "terra",
-    type = ifelse(isWindows(), "binary", "source")
+    type = "binary"
   )
   update.packages(
     repos = 'http://cran.us.r-project.org',
     ask = FALSE,
     oldPkgs = "sf",
-    type = ifelse(isWindows(), "binary", "source")
+    type = "binary"
   )
 
   # Check which packages to install
@@ -71,7 +62,7 @@ if (isTRUE(condaDatasheet$UseConda)) {
       install.packages(
         "sf",
         repos = "http://cran.us.r-project.org",
-        type = ifelse(isWindows(), "binary", "source")
+        type = "binary"
       )
     }
     if (packagesToInstall == "prioritizr") {
@@ -101,7 +92,11 @@ library(terra)
 library(tidyr)
 library(dplyr)
 library(prioritizr)
-library(Rsymphony)
+if (isWindows()) {
+  library(Rsymphony)
+} else {
+  library(lpsymphony)
+}
 
 # Data directory
 dataDir <- e$DataDirectory
