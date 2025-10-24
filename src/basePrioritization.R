@@ -35,7 +35,6 @@ if (isTRUE(condaDatasheet$UseConda) && isWindows()) {
     repos = "http://cran.us.r-project.org",
     type = "binary"
   )
-  n
   update.packages(
     repos = 'http://cran.us.r-project.org',
     ask = FALSE,
