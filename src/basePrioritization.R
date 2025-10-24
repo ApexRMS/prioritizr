@@ -30,11 +30,6 @@ isWindows <- function() tolower(Sys.info()[["sysname"]]) == "windows"
 # Install missing packages when using Conda on Windows
 if (isTRUE(condaDatasheet$UseConda) && isWindows()) {
   # Update packages
-  install.packages(
-    "terra",
-    repos = "http://cran.us.r-project.org",
-    type = "binary"
-  )
   update.packages(
     repos = 'http://cran.us.r-project.org',
     ask = FALSE,
