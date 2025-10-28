@@ -5,13 +5,14 @@
 ## This script runs all the steps in a prioritization problem, from problem
 ## formulation to solving and evaluating the solution.
 
-
-
 # Workspace --------------------------------------------------------------------
 
 # Load rsyncrosim packages
-library(rsyncrosim) ; progressBar(type = "message", 
-                                  message = "Validating environment and installing missing dependencies")
+library(rsyncrosim)
+progressBar(
+  type = "message",
+  message = "Validating environment and installing missing dependencies"
+)
 
 # Load environment, library, project & scenario
 e <- ssimEnvironment()
@@ -22,48 +23,22 @@ myScenario <- scenario()
 # Open Conda configuration options
 condaDatasheet <- datasheet(myLibrary, name = "core_Option")
 
-# Install missing packages when using Conda
-if(isTRUE(condaDatasheet$UseConda)){
-  
-  # Force binary install of packages
-  options(install.packages.compile.from.source = "never")
+# Check OS
+isWindows <- function() tolower(Sys.info()[["sysname"]]) == "windows"
 
-  # Validate Rtools installation
-  pathRtools <- Sys.which("make")
-  if(pathRtools != "C:\\rtools40\\usr\\bin\\make.exe"){
-    stop("The installation of Rtools v4.0 is faulty. For help, please see
-    https://apexrms.github.io/prioritizr/getting_started#troubleshooting-rtools-installation.")
-  }
-    
+packageDir <- (Sys.getenv("ssim_package_directory"))
+source(file.path(packageDir, "/installDependencies.R"))
 
-  # Update packahes
-  update.packages(repos='http://cran.us.r-project.org',
-                    ask = FALSE, oldPkgs = "terra", type = "binary")
-  update.packages(repos='http://cran.us.r-project.org', 
-                    ask = FALSE, oldPkgs = "sf", type = "binary")
-
-  # Check which packages to install
-  packagesToCheck <- c("sf","prioritizr", "symphony", "Rsymphony")
-  packagesToInstallList <- packagesToCheck[!(packagesToCheck %in% 
-                                               installed.packages()[,"Package"])]
-  
-  # Install missing packages
-  for(packagesToInstall in packagesToInstallList){
-    if(packagesToInstall == "sf"){
-      install.packages("sf", repos="http://cran.us.r-project.org", type = "binary")
-    }
-    if(packagesToInstall == "prioritizr"){
-      install.packages("https://cran.r-project.org/src/contrib/Archive/prioritizr/prioritizr_8.0.4.tar.gz", 
-                       repos = NULL, type = "source")
-    }
-    if(packagesToInstall == "symphony"){
-      install.packages("https://cran.r-project.org/src/contrib/symphony_0.1.1.tar.gz", 
-                       repos = NULL, type = "source")
-    }
-    if(packagesToInstall == "Rsymphony"){
-      install.packages("Rsymphony", repos="http://cran.us.r-project.org")
-    }
-  }
+# Install missing packages when using Conda on Windows
+if (isTRUE(condaDatasheet$UseConda) && isWindows()) {
+  # Update packages
+  update.packages(
+    repos = 'http://cran.us.r-project.org',
+    ask = FALSE,
+    oldPkgs = c("terra", "sf"),
+    type = "binary"
+  )
+  installDependencies()
 }
 
 # Load packages
@@ -73,21 +48,27 @@ library(terra)
 library(tidyr)
 library(dplyr)
 library(prioritizr)
-library(Rsymphony)
+if (isWindows()) {
+  library(Rsymphony)
+} else {
+  library(lpsymphony)
+}
 
 # Data directory
 dataDir <- e$DataDirectory
 
 # Create directory if it does not exist
-ifelse(!dir.exists(file.path(dataDir)), 
-       dir.create(file.path(dataDir)), FALSE)
+ifelse(!dir.exists(file.path(dataDir)), dir.create(file.path(dataDir)), FALSE)
 
 # Scenario path
-dataPath <- paste(dataDir, paste0("Scenario-", scenarioId(myScenario)), sep="\\") 
+dataPath <- paste(
+  dataDir,
+  paste0("Scenario-", scenarioId(myScenario)),
+  sep = "\\"
+)
 
 # Create directory if it does not exist
-ifelse(!dir.exists(file.path(dataPath)), 
-       dir.create(file.path(dataPath)), FALSE)
+ifelse(!dir.exists(file.path(dataPath)), dir.create(file.path(dataPath)), FALSE)
 
 
 # Model steps ------------------------------------------------------------------
@@ -105,7 +86,6 @@ source(file.path(e$PackageDirectory, "3evaluatePerformance.R"))
 source(file.path(e$PackageDirectory, "4evaluateImportance.R"))
 
 
-
 # Save intermediate files ------------------------------------------------------
 
 # Problem
@@ -114,9 +94,11 @@ problemFilename <- file.path(paste0(dataPath, "\\problemFormulation.rds"))
 saveRDS(scenarioProblem, file = problemFilename)
 # Save file path to datasheet
 problemOutput <- data.frame(problem = problemFilename)
-saveDatasheet(ssimObject = myScenario, 
-              data = problemOutput,
-              name = "prioritizr_problemFormulation")
+saveDatasheet(
+  ssimObject = myScenario,
+  data = problemOutput,
+  name = "prioritizr_problemFormulation"
+)
 
 # Solution
 # Write file
@@ -124,7 +106,8 @@ solutionObjectFilename <- file.path(paste0(dataPath, "\\solution.rds"))
 saveRDS(scenarioSolution, file = solutionObjectFilename)
 # Save file path to datasheet
 solutionOutput <- data.frame(solution = solutionObjectFilename)
-saveDatasheet(ssimObject = myScenario, 
-              data = solutionOutput, 
-              name = "prioritizr_solutionObject")
-
+saveDatasheet(
+  ssimObject = myScenario,
+  data = solutionOutput,
+  name = "prioritizr_solutionObject"
+)
