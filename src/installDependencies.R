@@ -110,6 +110,11 @@ get_conda_lib_path <- function() {
   # If in conda environment, the first path should be the conda env
   conda_path <- lib_paths[1]
 
+  # Clean the path: remove any trailing/leading quotes and normalize
+  # This fixes issues where .libPaths() returns paths with quotes
+  conda_path <- gsub("^['\"]|['\"]$", "", conda_path)  # Remove leading/trailing quotes
+  conda_path <- normalizePath(conda_path, winslash = "/", mustWork = FALSE)
+
   message(paste("Target library path:", conda_path))
   return(conda_path)
 }
