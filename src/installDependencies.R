@@ -25,9 +25,12 @@ check_rtools <- function() {
 }
 
 # Function to install Rtools programmatically
-install_rtools <- function() {
+install_rtools <- function(lib_path = NULL) {
   if (.Platform$OS.type != "windows") {
     stop("Rtools is only needed on Windows")
+  }
+  if (is.null(lib_path)) {
+    lib_path <- get_conda_lib_path()
   }
 
   message("Checking for Rtools...")
@@ -35,7 +38,7 @@ install_rtools <- function() {
   # First check if pkgbuild is installed
   if (!requireNamespace("pkgbuild", quietly = TRUE)) {
     message("Installing pkgbuild package...")
-    install.packages("pkgbuild", repos = "https://cran.r-project.org")
+    install.packages("pkgbuild", repos = "https://cran.r-project.org", lib = lib_path)
   }
 
   if (check_rtools()) {

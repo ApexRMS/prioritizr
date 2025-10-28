@@ -23,12 +23,11 @@ myScenario <- scenario()
 # Open Conda configuration options
 condaDatasheet <- datasheet(myLibrary, name = "core_Option")
 
-## Check OS
+# Check OS
 isWindows <- function() tolower(Sys.info()[["sysname"]]) == "windows"
 
 packageDir <- (Sys.getenv("ssim_package_directory"))
 source(file.path(packageDir, "/installDependencies.R"))
-
 
 # Install missing packages when using Conda on Windows
 if (isTRUE(condaDatasheet$UseConda) && isWindows()) {
