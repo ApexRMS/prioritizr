@@ -2,7 +2,7 @@ name: prioritizrEnv-2-2-2
 channels:
   - conda-forge
 dependencies:
-  - r-base
+  - r-base=4.1.*
   - r-terra
   - r-rsyncrosim
   - r-sf
