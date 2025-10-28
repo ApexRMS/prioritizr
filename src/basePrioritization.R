@@ -66,13 +66,6 @@ if (isTRUE(condaDatasheet$UseConda) && isWindows()) {
         type = "source"
       )
     }
-    if (packagesToInstall == "symphony") {
-      install.packages(
-        "https://cran.r-project.org/src/contrib/symphony_0.1.1.tar.gz",
-        repos = NULL,
-        type = "source"
-      )
-    }
     if (packagesToInstall == "Rsymphony") {
       install.packages("Rsymphony", repos = "http://cran.us.r-project.org")
     }
