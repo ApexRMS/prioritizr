@@ -26,6 +26,9 @@ condaDatasheet <- datasheet(myLibrary, name = "core_Option")
 ## Check OS
 isWindows <- function() tolower(Sys.info()[["sysname"]]) == "windows"
 
+packageDir <- (Sys.getenv("ssim_package_directory"))
+source(file.path(packageDir, "/installDependencies.R"))
+
 
 # Install missing packages when using Conda on Windows
 if (isTRUE(condaDatasheet$UseConda) && isWindows()) {
@@ -33,43 +36,10 @@ if (isTRUE(condaDatasheet$UseConda) && isWindows()) {
   update.packages(
     repos = 'http://cran.us.r-project.org',
     ask = FALSE,
-    oldPkgs = "terra",
+    oldPkgs = c("terra", "sf"),
     type = "binary"
   )
-  update.packages(
-    repos = 'http://cran.us.r-project.org',
-    ask = FALSE,
-    oldPkgs = "sf",
-    type = "binary"
-  )
-
-  # Check which packages to install
-  packagesToCheck <- c("sf", "prioritizr", "symphony", "Rsymphony")
-  packagesToInstallList <- packagesToCheck[
-    !(packagesToCheck %in%
-      installed.packages()[, "Package"])
-  ]
-
-  # Install missing packages
-  for (packagesToInstall in packagesToInstallList) {
-    if (packagesToInstall == "sf") {
-      install.packages(
-        "sf",
-        repos = "http://cran.us.r-project.org",
-        type = "binary"
-      )
-    }
-    if (packagesToInstall == "prioritizr") {
-      install.packages(
-        "https://cran.r-project.org/src/contrib/Archive/prioritizr/prioritizr_8.0.4.tar.gz",
-        repos = NULL,
-        type = "source"
-      )
-    }
-    if (packagesToInstall == "Rsymphony") {
-      install.packages("Rsymphony", repos = "http://cran.us.r-project.org")
-    }
-  }
+  installDependencies()
 }
 
 # Load packages
