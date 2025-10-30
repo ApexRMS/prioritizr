@@ -966,7 +966,7 @@ if (isTRUE(performanceDatasheet$eval_cost_summary)) {
         scenarioSolution[, "solution_1", drop = FALSE]
       )
     } else {
-      cost <- eval_n_summary(p1, scenarioSolution[, "solution_1", drop = FALSE])
+      cost <- eval_cost_summary(p1, scenarioSolution[, "solution_1", drop = FALSE])
     }
   }
   # Save results
@@ -1033,7 +1033,7 @@ if (isTRUE(performanceDatasheet$eval_target_coverage_summary)) {
         scenarioSolution[, "solution_1", drop = FALSE]
       )
     } else {
-      targetCoverage <- eval_n_summary(
+      targetCoverage <- eval_target_summary(
         p1,
         scenarioSolution[, "solution_1", drop = FALSE]
       )
