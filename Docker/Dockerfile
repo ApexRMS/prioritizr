@@ -40,8 +40,8 @@ COPY src/prioritizrEnv.yml /tmp/prioritizrEnv.yml
 RUN conda env create -f /tmp/prioritizrEnv.yml
 
 ## Activate the environment
-ENV CONDA_DEFAULT_ENV=prioritizrEnv-2-2-2
-ENV PATH="/root/miniconda3/envs/prioritizrEnv-2-2-2/bin:${PATH}"
+ENV CONDA_DEFAULT_ENV=prioritizrEnv-3-0-0
+ENV PATH="/root/miniconda3/envs/prioritizrEnv-3-0-0/bin:${PATH}"
 
 ## Install additional R packages that need source compilation
 ## These are installed via R because they need specific versions
