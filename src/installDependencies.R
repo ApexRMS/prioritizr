@@ -182,12 +182,18 @@ install_rsymphony <- function(lib_path = NULL) {
       }
     )
   } else {
-    # Linux/Mac: install from source
-    install.packages(
-      "Rsymphony",
-      repos = "https://cran.r-project.org",
-      type = "source",
-      lib = lib_path
+    if (!requireNamespace("BiocManager", quietly = TRUE)) {
+      install.packages(
+        "BiocManager",
+        repos = "https://cran.r-project.org",
+        lib = lib_path
+      )
+    }
+    BiocManager::install(
+      "lpsymphony",
+      lib = lib_path,
+      update = FALSE,
+      ask = FALSE
     )
   }
 
