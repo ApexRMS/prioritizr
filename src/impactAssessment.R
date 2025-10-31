@@ -501,7 +501,10 @@ if(iaType == "Cost-optimization"){
   # Calculate representation by base solution
   featureRepresentation <- eval_feature_representation_summary(
     p_cost, initialSolution[,"solution_1", drop = FALSE])
-  
+
+  # Arrange alphabetically
+  featureRepresentation <-  arrange(featureRepresentation, desc(feature))
+
   # Save results
   names(featureRepresentation)[2] <- c("projectCostsId")
   nameDiff <- setdiff(featureRepresentation$projectCostsId, costsDatasheet$Name)
