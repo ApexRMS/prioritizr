@@ -53,11 +53,11 @@ RUN Rscript -e "BiocManager::install('lpsymphony')"
 
 
 ## Add SyncroSim license files
-ADD Docker/ModelRunService_license_file.lic /home
+COPY Docker/ModelRunService_license_file.lic /home
 
 ## Add prioritzr for testing
-ADD Docker/prioritizr.ssimpkg /home
-ADD Docker/spatial-formulation.ssim.ssimbak /home
+COPY Docker/prioritizr.ssimpkg /home
+COPY Docker/spatial-formulation.ssim.ssimbak /home
 
 ## Run the app
 # CMD ["node", "main.js"]
