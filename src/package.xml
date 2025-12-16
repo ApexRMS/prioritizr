@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <package 
-  name="prioritizr" displayName="Prioritizr" version="3.0.0"  
+  name="prioritizr" displayName="Prioritizr" version="3.1.0"  
   description="Systematic conservation planning" 
   url="https://apexrms.github.io/prioritizr" 
   minSyncroSimVersion="3.1.0">
