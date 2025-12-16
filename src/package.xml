@@ -425,7 +425,7 @@
   programName="Rscript" 
   programArguments="basePrioritization.R" 
   condaEnv="prioritizrEnv.yml"
-  condaEnvVersion="3">
+  condaEnvVersion="4">
     <dataSheet name="problemFormat" type="Input" />
     <dataSheet name="objective" type="Both" />
     <dataSheet name="problemSpatial" type="Both" />
@@ -481,7 +481,7 @@
   programName="Rscript" 
   programArguments="multicostPrioritization.R" 
   condaEnv="prioritizrEnv.yml"
-  condaEnvVersion="3">
+  condaEnvVersion="4">
     <dataSheet name="problemFormat" type="Input" />
     <dataSheet name="objective" type="Both" />
     <dataSheet name="problemSpatial" type="Both" />
@@ -545,7 +545,7 @@
   programName="Rscript" 
   programArguments="impactAssessment.R" 
   condaEnv="prioritizrEnv.yml"
-  condaEnvVersion="3">
+  condaEnvVersion="4">
       <dataSheet name="problemSpatial" type="Input" />
       <dataSheet name="differenceScenarios" type="Input" />
       <dataSheet name="costProblemFormulation" type="Input" />
@@ -573,7 +573,7 @@
   programName="Rscript" 
   programArguments="preProcessing.R" 
   condaEnv="prioritizrEnv.yml"
-  condaEnvVersion="3">
+  condaEnvVersion="4">
       <dataSheet name="inputData" type="Input" />
       <dataSheet name="problemTabularPU" type="Output" />
       <dataSheet name="problemTabularFeatures" type="Output" />
