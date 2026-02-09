@@ -29,6 +29,32 @@ myScenario <- scenario()
 
 inputDatasheet <- datasheet(myScenario,
                             name = "prioritizr_inputData")
+optionsDatasheet <- datasheet(myScenario,
+                            name = "prioritizr_preprocessOptions")
+
+
+
+# Functions --------------------------------------------------------------------
+
+# Scale variables 
+scale_feature <- function(featureVector){
+  
+  # Get minimum and maximum value across all features
+  maxValue <- max(featureVector)
+  minValue <- min(featureVector)
+  
+  # Scale data from 0 to 1
+  scaled_feature <- (featureVector - minValue) / (maxValue - minValue)
+  
+  return(scaled_feature)
+}
+
+# Function to reverse scale
+reverse_scale <- function(featureVector) {
+  featureVector <- unlist(lapply(featureVector, function(x) 0 - x + 1))
+  return(featureVector)
+}
+
 
 
 # Format data ------------------------------------------------------------------
@@ -49,6 +75,29 @@ if(length(inputDatasheet$tabularProblem) != 0){
     featuresData <- data.frame(id = c(1:numberFeatures),
                                name = names(inputData[,5:(numberFeatures+4)]))
     
+    # Check if data should be scaled
+    if (isTRUE(optionsDatasheet$scaleData)) {
+      
+      # Scale features
+      for(i in 5:(numberFeatures+4)){
+        inputData[,i] <- scale_feature(inputData[,i, drop = TRUE])
+      }
+    }
+    
+    # Check is feature variables need to be inverted
+    if (!is.null(optionsDatasheet$invertData)) {
+      
+      # Open list of feature variables to invert
+      toInvert <- as.vector(
+        read.csv(optionsDatasheet$invertData, header = FALSE)[,1]
+        )
+      
+      # Reverse scale
+      for(i in toInvert){
+        inputData[,i] <- reverse_scale(inputData[,i, drop = TRUE])
+      }
+    }
+    
     # Planning units vs. Features
     puVsFt <- inputData[,-2:-4] %>%
       pivot_longer(cols = 2:(numberFeatures+1),
@@ -66,6 +115,7 @@ if(length(inputDatasheet$tabularProblem) != 0){
     saveDatasheet(ssimObject = myScenario, 
                   data = puVsFt, 
                   name = "prioritizr_problemTabularPUvsFeatures")
+    
     
     # Project definition ----------------------------------------
     
