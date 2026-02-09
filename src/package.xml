@@ -47,6 +47,12 @@
     <column name="costData" displayName="Multi-cost input" dataType="String" isExternalFile="True" />
   </dataSheet>
 
+  <dataSheet name="preprocessOptions" displayName="Options" isSingleRow="True">
+    <column name="scaleData" displayName="Scale features" dataType="Boolean" />
+    <column name="invertData" displayName="Features to invert" dataType="String" isExternalFile="True" />
+    <record columns="scaleData" values="-1"/>
+  </dataSheet>
+
   <dataSheet name="problemTabularPU" displayName="Planning Units" isSingleRow="False">
     <column name="id" displayName="Planning Unit ID" dataType="Integer" validationType="WholeNumber" validationCondition="GreaterEqual" formula1="1" />
     <column name="Name" displayName="Planning Unit Name" dataType="String" validationType="String" />
@@ -575,6 +581,7 @@
   condaEnv="prioritizrEnv.yml"
   condaEnvVersion="4">
       <dataSheet name="inputData" type="Input" />
+      <dataSheet name="preprocessOptions" type="Input" />
       <dataSheet name="problemTabularPU" type="Output" />
       <dataSheet name="problemTabularFeatures" type="Output" />
       <dataSheet name="problemTabularPUvsFeatures" type="Output" />
@@ -590,6 +597,7 @@
   <layout type="Scenario"> 
     <group name="Data0Formatting" displayName="Data Formatting">
       <item name="inputData" />
+      <item name="preprocessOptions" />
     </group >
     <group name="Base0Prioritization" displayName="Base Prioritization">
       <group name="Data" displayName="Data">
