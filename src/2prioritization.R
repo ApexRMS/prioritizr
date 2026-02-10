@@ -328,8 +328,6 @@ if(dim(mapInputsDatasheet)[1] !=0 & any(mapInputsDatasheet[1,], na.rm = TRUE)){
                   reclassTable <- as.matrix(
                     cbind(inputData$id, inputData[,featureName])
                     )
-                    cat("here")
-
           } else {
             # Subset rij table to get reclass table of planning unit ID to value
             reclassTable <- as.matrix(rij[rij$species == featureID,c(1,3)])
