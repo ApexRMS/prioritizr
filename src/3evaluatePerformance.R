@@ -92,7 +92,7 @@ if(isTRUE(performanceDatasheet$eval_feature_representation_summary)){
     # If input data was scaled and/or inverting, use original values.
     # Otherwise, use prioritizr function.
     if (isTRUE((optionsDatasheet$scaleData)) | 
-          !is.null(optionsDatasheet$invertData)) {
+          !is.na(optionsDatasheet$invertData)) {
       
       # Read data
       inputData <- read.csv(
@@ -169,7 +169,7 @@ if(isTRUE(performanceDatasheet$eval_target_coverage_summary)){
     # If input data was scaled and/or inverting, use original values.
     # Otherwise, use prioritizr function.
     if (isTRUE((optionsDatasheet$scaleData)) | 
-          !is.null(optionsDatasheet$invertData) & 
+          !is.na(optionsDatasheet$invertData) & 
           targetDatasheet$addTarget == "Relative") {
       
       # Read data
