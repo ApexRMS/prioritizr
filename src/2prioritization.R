@@ -119,6 +119,12 @@ if(class(scenarioSolution) == "data.frame"){
 
 # Save inputs ------------------------------------------------------------------
 
+# Load datasheets
+inputDatasheet <- datasheet(myScenario,
+                            name = "prioritizr_inputData")
+optionsDatasheet <- datasheet(myScenario,
+                            name = "prioritizr_preprocessOptions")
+
 # Check which inputs need mapping
 mapInputsDatasheet <- datasheet(myScenario,
                                 name = "prioritizr_mapInputs")
@@ -306,14 +312,33 @@ if(dim(mapInputsDatasheet)[1] !=0 & any(mapInputsDatasheet[1,], na.rm = TRUE)){
           
           # Get feature ID
           featureID <- featuresDatasheet$featureID[j]
+          featureName <- featuresDatasheet$variableName[j]
           
-          # Subset rij table to get reclass table of planning unit ID to value
-          reclassTable <- as.matrix(rij[rij$species == featureID,c(1,3)])
-          
+          # If input data was scaled and/or inverting, map original values.
+          # Otherwise, use rij matrix.
+          if (isTRUE((optionsDatasheet$scaleData)) | 
+                !is.null(optionsDatasheet$invertData)) {
+
+                  # Read data
+                  inputData <- read.csv(
+                    inputDatasheet$tabularProblem, header = TRUE
+                    )
+
+                  # Build reclass table of planning unit ID to value
+                  reclassTable <- as.matrix(
+                    cbind(inputData$id, inputData[,featureName])
+                    )
+                    cat("here")
+
+          } else {
+            # Subset rij table to get reclass table of planning unit ID to value
+            reclassTable <- as.matrix(rij[rij$species == featureID,c(1,3)])
+          }
+            
           # Reclassify raster
           rasterVis <- classify(pu_vis, reclassTable)
-          #plot(rasterVis)    
-          
+          #plot(rasterVis)  
+
           # Define file path
           rasterVisFilename <- file.path(paste0(
             featureVisFilepath, paste0("\\feature", featureID, ".tif")))
