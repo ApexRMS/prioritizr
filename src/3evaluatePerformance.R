@@ -168,8 +168,8 @@ if(isTRUE(performanceDatasheet$eval_target_coverage_summary)){
 
     # If input data was scaled and/or inverting, use original values.
     # Otherwise, use prioritizr function.
-    if (isTRUE((optionsDatasheet$scaleData)) | 
-          !is.na(optionsDatasheet$invertData) & 
+    if ((isTRUE((optionsDatasheet$scaleData)) | 
+          !is.na(optionsDatasheet$invertData)) & 
           targetDatasheet$addTarget == "Relative") {
       
       # Read data
