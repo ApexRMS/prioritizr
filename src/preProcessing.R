@@ -42,6 +42,13 @@ scale_feature <- function(featureVector){
   # Get minimum and maximum value across all features
   maxValue <- max(featureVector)
   minValue <- min(featureVector)
+
+  if (maxValue == minValue) {
+    return(rep(0, length(featureVector)))
+    updateRunLog("At least one feature variable had identical values across 
+    planning units. During the scaling process, all zero values were returned.",
+    type = "warning")
+  }
   
   # Scale data from 0 to 1
   scaled_feature <- (featureVector - minValue) / (maxValue - minValue)
@@ -82,20 +89,27 @@ if(length(inputDatasheet$tabularProblem) != 0){
       for(i in 5:(numberFeatures+4)){
         inputData[,i] <- scale_feature(inputData[,i, drop = TRUE])
       }
-    }
-    
-    # Check is feature variables need to be inverted
-    if (!is.null(optionsDatasheet$invertData)) {
+
+      # Check is feature variables also needs to be inverted
+      if (!is.na(optionsDatasheet$invertData)) {
       
-      # Open list of feature variables to invert
-      toInvert <- as.vector(
-        read.csv(optionsDatasheet$invertData, header = FALSE)[,1]
-        )
+        # Open list of feature variables to invert
+        toInvert <- as.vector(
+          read.csv(optionsDatasheet$invertData, header = FALSE)[,1]
+          )
       
-      # Reverse scale
-      for(i in toInvert){
-        inputData[,i] <- reverse_scale(inputData[,i, drop = TRUE])
+        # Reverse scale
+        for(invertName in toInvert){
+          inputData[,invertName] <- reverse_scale(inputData[,invertName, drop = TRUE])
+        }
       }
+    }
+
+    if (!isTRUE(optionsDatasheet$scaleData) & !is.na(optionsDatasheet$invertData)) {
+      updateRunLog(
+      "Feature variables can only be inverted if they are scaled first.",
+      type = "warning"
+      )
     }
     
     # Planning units vs. Features
