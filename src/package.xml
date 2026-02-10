@@ -477,6 +477,8 @@
     <dataSheet name="featureRasterOutput" type="Output" />
     <dataSheet name="inputRasterOutput" type="Output" />
     <dataSheet name="mapInputs" type="Input" />
+    <dataSheet name="inputData" type="Input" />
+    <dataSheet name="preprocessOptions" type="Input" />  
   </transformer>
 
   <transformer 
