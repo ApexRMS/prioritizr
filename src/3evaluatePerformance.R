@@ -169,7 +169,8 @@ if(isTRUE(performanceDatasheet$eval_target_coverage_summary)){
     # If input data was scaled and/or inverting, use original values.
     # Otherwise, use prioritizr function.
     if (isTRUE((optionsDatasheet$scaleData)) | 
-          !is.null(optionsDatasheet$invertData)) {
+          !is.null(optionsDatasheet$invertData) & 
+          targetDatasheet$addTarget == "Relative") {
       
       # Read data
       inputData <- read.csv(
@@ -179,68 +180,65 @@ if(isTRUE(performanceDatasheet$eval_target_coverage_summary)){
       # Get target
       targetDatasheet <- datasheet(myScenario, name = "prioritizr_targets")
 
-      if (targetDatasheet$addTarget == "Relative") {
+      # Create empty dataframe for results
+      targetCoverage <- data.frame(
+        feature = as.character(),
+        met = as.character(),
+        total_amount = as.numeric(),
+        absolute_target = as.numeric(),
+        absolute_held = as.numeric(),
+        absolute_shortfall = as.numeric(),
+        relative_target = as.numeric(),
+        relative_held = as.numeric(),
+        relative_shortfall = as.numeric()
+      )
 
-        # Create empty dataframe for results
-        targetCoverage <- data.frame(
-          feature = as.character(),
-          met = as.character(),
-          total_amount = as.numeric(),
-          absolute_target = as.numeric(),
-          absolute_held = as.numeric(),
-          absolute_shortfall = as.numeric(),
-          relative_target = as.numeric(),
-          relative_held = as.numeric(),
-          relative_shortfall = as.numeric()
-        )
+      for(j in 1:length(featuresDatasheet$variableName)){
 
-        for(j in 1:length(featuresDatasheet$variableName)){
-
-          # Get feature name
-          featureName <- featuresDatasheet$variableName[j]
-          # Get feature ID
-          featureID <- featuresDatasheet$featureID[j]
+        # Get feature name
+        featureName <- featuresDatasheet$variableName[j]
+        # Get feature ID
+        featureID <- featuresDatasheet$featureID[j]
           
-          # Get solution
-          solution <- scenarioSolution[,"solution_1", drop = FALSE]
+        # Get solution
+        solution <- scenarioSolution[,"solution_1", drop = FALSE]
 
-          # Total amount of each feature
-          totalFeature <- sum(inputData[,featureName])
-          # Target amount of each feature
-          targetFeature <- totalFeature * targetDatasheet$targets
-          # Amount of each feature held in the solution
-          heldFeature <- sum(inputData[solution$solution_1 == 1, featureName])
-          # Relative amount of each feature held in the solution
-          relativeHeld <- heldFeature / totalFeature
-          
-          # Target absolute shortfall
-          absoluteShortfall <- targetFeature - heldFeature
-          # Target relative shortfall
-          relativeShortfall <- targetDatasheet$targets - relativeHeld
+        # Total amount of each feature
+        totalFeature <- sum(inputData[,featureName])
+        # Target amount of each feature
+        targetFeature <- totalFeature * targetDatasheet$targets
+        # Amount of each feature held in the solution
+        heldFeature <- sum(inputData[solution$solution_1 == 1, featureName])
+        # Relative amount of each feature held in the solution
+        relativeHeld <- heldFeature / totalFeature
+        
+        # Target absolute shortfall
+        absoluteShortfall <- targetFeature - heldFeature
+        # Target relative shortfall
+        relativeShortfall <- targetDatasheet$targets - relativeHeld
                  
-          # Check if target was met or not
-          targetMet <- (heldFeature >= targetFeature)
+        # Check if target was met or not
+        targetMet <- (heldFeature >= targetFeature)
 
-          # Build dataframe
-          targetCoverageTemp <- data.frame(
-            feature = featureName,
-            met = targetMet,
-            total_amount = totalFeature,
-            absolute_target = targetFeature,
-            absolute_held = heldFeature,
-            absolute_shortfall = absoluteShortfall,
-            relative_target = targetDatasheet$targets,
-            relative_held = relativeHeld,
-            relative_shortfall = relativeShortfall
-          )
-                
-          # Combine dataframes
-          targetCoverage <- rbind(
-            targetCoverage,
-            targetCoverageTemp
-          )
-        }
-      }
+        # Build dataframe
+        targetCoverageTemp <- data.frame(
+          feature = featureName,
+          met = targetMet,
+          total_amount = totalFeature,
+          absolute_target = targetFeature,
+          absolute_held = heldFeature,
+          absolute_shortfall = absoluteShortfall,
+          relative_target = targetDatasheet$targets,
+          relative_held = relativeHeld,
+          relative_shortfall = relativeShortfall
+        )
+              
+        # Combine dataframes
+        targetCoverage <- rbind(
+          targetCoverage,
+          targetCoverageTemp
+        )
+      }      
     } else {
     targetCoverage <- eval_target_coverage_summary(
       scenarioProblem, scenarioSolution[,"solution_1", drop = FALSE]) 
