@@ -302,6 +302,11 @@ if(dim(mapInputsDatasheet)[1] !=0 & any(mapInputsDatasheet[1,], na.rm = TRUE)){
         ifelse(!dir.exists(file.path(featureVisFilepath)), 
                dir.create(file.path(featureVisFilepath)), FALSE)
         
+        # Read data
+        inputData <- read.csv(
+          inputDatasheet$tabularProblem, header = TRUE
+        )
+
         # Read datasheet
         featureRasterOutputDatasheet <- data.frame(
           projectFeaturesId = as.character(),
@@ -317,12 +322,7 @@ if(dim(mapInputsDatasheet)[1] !=0 & any(mapInputsDatasheet[1,], na.rm = TRUE)){
           # If input data was scaled and/or inverting, map original values.
           # Otherwise, use rij matrix.
           if (isTRUE((optionsDatasheet$scaleData)) | 
-                !is.null(optionsDatasheet$invertData)) {
-
-                  # Read data
-                  inputData <- read.csv(
-                    inputDatasheet$tabularProblem, header = TRUE
-                    )
+                !is.na(optionsDatasheet$invertData)) {
 
                   # Build reclass table of planning unit ID to value
                   reclassTable <- as.matrix(
