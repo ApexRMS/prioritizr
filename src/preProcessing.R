@@ -44,10 +44,10 @@ scale_feature <- function(featureVector){
   minValue <- min(featureVector)
 
   if (maxValue == minValue) {
-    return(rep(0, length(featureVector)))
     updateRunLog("At least one feature variable had identical values across 
     planning units. During the scaling process, all zero values were returned.",
     type = "warning")
+    return(rep(0, length(featureVector)))
   }
   
   # Scale data from 0 to 1
