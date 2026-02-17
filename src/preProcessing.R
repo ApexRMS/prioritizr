@@ -29,6 +29,39 @@ myScenario <- scenario()
 
 inputDatasheet <- datasheet(myScenario,
                             name = "prioritizr_inputData")
+optionsDatasheet <- datasheet(myScenario,
+                            name = "prioritizr_preprocessOptions")
+
+
+
+# Functions --------------------------------------------------------------------
+
+# Scale variables 
+scale_feature <- function(featureVector){
+  
+  # Get minimum and maximum value across all features
+  maxValue <- max(featureVector)
+  minValue <- min(featureVector)
+
+  if (maxValue == minValue) {
+    updateRunLog("At least one feature variable had identical values across 
+    planning units. During the scaling process, all zero values were returned.",
+    type = "warning")
+    return(rep(0, length(featureVector)))
+  }
+  
+  # Scale data from 0 to 1
+  scaled_feature <- (featureVector - minValue) / (maxValue - minValue)
+  
+  return(scaled_feature)
+}
+
+# Function to reverse scale
+reverse_scale <- function(featureVector) {
+  featureVector <- unlist(lapply(featureVector, function(x) 0 - x + 1))
+  return(featureVector)
+}
+
 
 
 # Format data ------------------------------------------------------------------
@@ -49,6 +82,36 @@ if(length(inputDatasheet$tabularProblem) != 0){
     featuresData <- data.frame(id = c(1:numberFeatures),
                                name = names(inputData[,5:(numberFeatures+4)]))
     
+    # Check if data should be scaled
+    if (isTRUE(optionsDatasheet$scaleData)) {
+      
+      # Scale features
+      for(i in 5:(numberFeatures+4)){
+        inputData[,i] <- scale_feature(inputData[,i, drop = TRUE])
+      }
+
+      # Check is feature variables also needs to be inverted
+      if (!is.na(optionsDatasheet$invertData)) {
+      
+        # Open list of feature variables to invert
+        toInvert <- as.vector(
+          read.csv(optionsDatasheet$invertData, header = FALSE)[,1]
+          )
+      
+        # Reverse scale
+        for(invertName in toInvert){
+          inputData[,invertName] <- reverse_scale(inputData[,invertName, drop = TRUE])
+        }
+      }
+    }
+
+    if (!isTRUE(optionsDatasheet$scaleData) & !is.na(optionsDatasheet$invertData)) {
+      updateRunLog(
+      "Feature variables can only be inverted if they are scaled first.",
+      type = "warning"
+      )
+    }
+    
     # Planning units vs. Features
     puVsFt <- inputData[,-2:-4] %>%
       pivot_longer(cols = 2:(numberFeatures+1),
@@ -66,6 +129,7 @@ if(length(inputDatasheet$tabularProblem) != 0){
     saveDatasheet(ssimObject = myScenario, 
                   data = puVsFt, 
                   name = "prioritizr_problemTabularPUvsFeatures")
+    
     
     # Project definition ----------------------------------------
     

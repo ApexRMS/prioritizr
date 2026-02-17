@@ -75,15 +75,74 @@ if(isTRUE(performanceDatasheet$eval_cost_summary)){
                 name = "prioritizr_costOutput")
 }
 
+# Load datasheets
+  inputDatasheet <- datasheet(myScenario,
+                              name = "prioritizr_inputData")
+  optionsDatasheet <- datasheet(myScenario,
+                                name = "prioritizr_preprocessOptions")
+
 # Calculate how well features are represented by a solution
 if(isTRUE(performanceDatasheet$eval_feature_representation_summary)){
-  
+
   if(class(scenarioSolution) != "data.frame"){
     featureRepresentation <- eval_feature_representation_summary(
       scenarioProblem, scenarioSolution) }
   if(class(scenarioSolution) == "data.frame"){
-    featureRepresentation <- eval_feature_representation_summary(
-      scenarioProblem, scenarioSolution[,"solution_1", drop = FALSE]) }
+    
+    # If input data was scaled and/or inverting, use original values.
+    # Otherwise, use prioritizr function.
+    if (isTRUE((optionsDatasheet$scaleData)) | 
+          !is.na(optionsDatasheet$invertData)) {
+      
+      # Read data
+      inputData <- read.csv(
+        inputDatasheet$tabularProblem, header = TRUE
+      )
+
+      # Create empty dataframe for results
+      featureRepresentation <- data.frame(
+        summary = as.character(),
+        feature = as.character(),
+        total_amount = as.numeric(),
+        absolute_held = as.numeric(),
+        relative_held = as.numeric()
+      )
+
+      for(j in 1:length(featuresDatasheet$variableName)){
+          
+        # Get feature ID
+        featureName <- featuresDatasheet$variableName[j]
+        
+        # Get solution
+        solution <- scenarioSolution[,"solution_1", drop = FALSE]
+
+        # Total amount of each feature
+        totalFeature <- sum(inputData[,featureName])
+        # Amount of each feature held in the solution
+        heldFeature <- sum(inputData[solution$solution_1 == 1, featureName])
+        # Relative amount
+        relativeFeature <- heldFeature/totalFeature
+
+        # Build dataframe
+        featureRepresentationTemp <- data.frame(
+          summary = "overall",
+          feature = featureName,
+          total_amount = totalFeature,
+          absolute_held = heldFeature,
+          relative_held = relativeFeature
+        )
+              
+        # Combine dataframes
+        featureRepresentation <- rbind(
+          featureRepresentation,
+          featureRepresentationTemp
+        )
+      }
+    } else {
+      featureRepresentation <- eval_feature_representation_summary(
+      scenarioProblem, scenarioSolution[,"solution_1", drop = FALSE])
+    }
+  }
   
   # Save results
   names(featureRepresentation)[2] <- "projectFeaturesId"
@@ -100,12 +159,91 @@ if(isTRUE(performanceDatasheet$eval_feature_representation_summary)){
 
 # Calculate how well the targets are met by the solution
 if(isTRUE(performanceDatasheet$eval_target_coverage_summary)){
+  
   if(class(scenarioSolution) != "data.frame"){
     targetCoverage <- eval_target_coverage_summary(scenarioProblem, 
                                                    scenarioSolution) }
+  
   if(class(scenarioSolution) == "data.frame"){
+
+    # If input data was scaled and/or inverting, use original values.
+    # Otherwise, use prioritizr function.
+    if ((isTRUE((optionsDatasheet$scaleData)) | 
+          !is.na(optionsDatasheet$invertData)) & 
+          targetDatasheet$addTarget == "Relative") {
+      
+      # Read data
+      inputData <- read.csv(
+        inputDatasheet$tabularProblem, header = TRUE
+      )
+
+      # Get target
+      targetDatasheet <- datasheet(myScenario, name = "prioritizr_targets")
+
+      # Create empty dataframe for results
+      targetCoverage <- data.frame(
+        feature = as.character(),
+        met = as.character(),
+        total_amount = as.numeric(),
+        absolute_target = as.numeric(),
+        absolute_held = as.numeric(),
+        absolute_shortfall = as.numeric(),
+        relative_target = as.numeric(),
+        relative_held = as.numeric(),
+        relative_shortfall = as.numeric()
+      )
+
+      for(j in 1:length(featuresDatasheet$variableName)){
+
+        # Get feature name
+        featureName <- featuresDatasheet$variableName[j]
+        # Get feature ID
+        featureID <- featuresDatasheet$featureID[j]
+          
+        # Get solution
+        solution <- scenarioSolution[,"solution_1", drop = FALSE]
+
+        # Total amount of each feature
+        totalFeature <- sum(inputData[,featureName])
+        # Target amount of each feature
+        targetFeature <- totalFeature * targetDatasheet$targets
+        # Amount of each feature held in the solution
+        heldFeature <- sum(inputData[solution$solution_1 == 1, featureName])
+        # Relative amount of each feature held in the solution
+        relativeHeld <- heldFeature / totalFeature
+        
+        # Target absolute shortfall
+        absoluteShortfall <- targetFeature - heldFeature
+        # Target relative shortfall
+        relativeShortfall <- targetDatasheet$targets - relativeHeld
+                 
+        # Check if target was met or not
+        targetMet <- (heldFeature >= targetFeature)
+
+        # Build dataframe
+        targetCoverageTemp <- data.frame(
+          feature = featureName,
+          met = targetMet,
+          total_amount = totalFeature,
+          absolute_target = targetFeature,
+          absolute_held = heldFeature,
+          absolute_shortfall = absoluteShortfall,
+          relative_target = targetDatasheet$targets,
+          relative_held = relativeHeld,
+          relative_shortfall = relativeShortfall
+        )
+              
+        # Combine dataframes
+        targetCoverage <- rbind(
+          targetCoverage,
+          targetCoverageTemp
+        )
+      }      
+    } else {
     targetCoverage <- eval_target_coverage_summary(
-      scenarioProblem, scenarioSolution[,"solution_1", drop = FALSE]) }
+      scenarioProblem, scenarioSolution[,"solution_1", drop = FALSE]) 
+    }
+  }
   
   # Save results
   names(targetCoverage)[1] <- "projectFeaturesId"
@@ -122,7 +260,7 @@ if(isTRUE(performanceDatasheet$eval_target_coverage_summary)){
                 name = "prioritizr_targetCoverageOutput") 
 }
 
-# Calculate solution the total exposed boundary length (perimeter)
+# Calculate the solution total exposed boundary length (perimeter)
 if(isTRUE(performanceDatasheet$eval_boundary_summary)){
   
   if(class(scenarioSolution) != "data.frame"){
