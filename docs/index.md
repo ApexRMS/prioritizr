@@ -44,15 +44,9 @@ prioritizr R documentation at [https://prioritizr.net](https://prioritizr.net){:
 
 ## Authors
 
-Carina Rauen Firkowski (Author, maintainer) <a href="https://orcid.org/0000-0003-0540-9529" target="_blank"><img align="middle" style="padding: 0.5px" width="17" src="assets/images/ORCID.png"></a>
-<br>
-Bronwyn Rayfield (Author) <a href="https://orcid.org/0000-0003-1768-1300" target="_blank"><img align="middle" style="padding: 0.5px" width="17" src="assets/images/ORCID.png"></a>
+ApexRMS (Author, maintainer) 
 <br>
 Dak de Kerckhove (Author)
-<br>
-Marie-Josée Fortin (Author) <a href="https://orcid.org/0000-0002-9935-1366" target="_blank"><img align="middle" style="padding: 0.5px" width="17" src="assets/images/ORCID.png"></a>
-<br>
-Colin Daniel (Author) <a href="https://orcid.org/0000-0001-7367-2041" target="_blank"><img align="middle" style="padding: 0.5px" width="17" src="assets/images/ORCID.png"></a>
 
 <br>
 
