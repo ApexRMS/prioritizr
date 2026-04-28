@@ -44,7 +44,7 @@ prioritizr R documentation at [https://prioritizr.net](https://prioritizr.net){:
 
 ## Authors
 
-[ApexRMS](https://apexrms.com/) (Author, maintainer)
+[ApexRMS](https://apexrms.com/){:target="_blank"} (Author, maintainer)
 <br>
 Dak de Kerckhove (Author)
 
